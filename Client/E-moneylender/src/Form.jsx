@@ -9,6 +9,13 @@ const Form = () => {
     const [loanAmount, setLoanAmount] = useState(0);
     const [totalAmount, setTotalAmount] = useState(0);
     const [monthlyInstalment, setMonthlyInstalment] = useState(0);
+    const [Image, setImage] = useState();
+    
+
+    const handlePhoto = (e)=>{
+        setImage(e.target.files[0]);
+        console.log(Image);
+    }
 
 
     const setValues = (amount) => {
@@ -24,7 +31,8 @@ const Form = () => {
     }
     const onSubmit = async (event)=>{
         event.preventDefault();
-        console.log(adhaar);
+        const formData = new FormData();
+
         try {
             const response = await axios.post("https://e-money-lender-back.vercel.app/client/add_client",{
                 name,
@@ -33,15 +41,16 @@ const Form = () => {
                 adhaar,
                 loanamount:loanAmount,
                 Instalment:monthlyInstalment,
-                remainingamount:totalAmount,})
+                remainingamount:totalAmount,
+                img:Image})
         } catch (error) {
             
         }
     }
 
     return (
-        <form onSubmit={onSubmit}>
-            <div className='form'>
+        <form onSubmit={onSubmit} encType='multipart/form-data'>
+            {/* <div className='form'> */}
                 <label htmlFor="name">Name</label> <input id='name' type="text" onChange={(e) => { setName(e.target.value) }} />
                 <br />
                 <label htmlFor="fathername">Father Name</label> <input id='fathername' type="text" onChange={(e) => { setFathersname(e.target.value) }} />
@@ -78,7 +87,12 @@ const Form = () => {
                 <br />
 
                 <label htmlFor="image">Upload Image</label>
-                <input type="file" name="image" id="image" />
+                <input 
+                type="file"
+                accept='.png, .jpg, .jpeg'
+                name="image" 
+                id="image" 
+                onChange={handlePhoto}/>
                 <br />
 
                 <label htmlFor="signature">Upload Signature</label>
@@ -86,7 +100,7 @@ const Form = () => {
                 <br />
 
 
-            </div>
+            {/* </div> */}
             <button type='submit' >save</button>
         </form>
     )
