@@ -8,6 +8,8 @@ const ClientSchema = new mongoose.Schema({
     loanamount:{type:Number,required:true,},
     Instalment:{type:Number,required:true,},
     remainingamount:{type:Number,required:true,},
+    img:{type:String,required:true}
+
 });
 
 export const ClientModel = mongoose.model("clients",ClientSchema)

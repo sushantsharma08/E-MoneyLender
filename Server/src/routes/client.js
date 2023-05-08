@@ -1,8 +1,11 @@
 import express from "express";
 import { ClientModel } from "../models/Client.js";
+import { Upload } from "../middleware/upload.js";
+
  const router = express.Router();
 
- router.post("/add_client",async(req,res)=>{
+ router.post("/add_client",Upload.single('img'),async(req,res)=>{
+    req.body.img = req.file.path
     const {
         name,
         fathername,
@@ -11,6 +14,7 @@ import { ClientModel } from "../models/Client.js";
         loanamount,
         Instalment,
         remainingamount,
+        img,
 } =req.body;
 
     const client = await ClientModel.findOne({adhaar});
@@ -24,12 +28,15 @@ import { ClientModel } from "../models/Client.js";
         fathername,
         gender,
         adhaar,
-        loanamount,
+        loanamount, 
         Instalment,
-        remainingamount
+        remainingamount,
+        img,
     })
 
-    await newClient.save(); 
+    await newClient.save()
+    .then(()=>res.json('user Added'))
+    .catch(err=>res.json(err)); 
 
  })
 
