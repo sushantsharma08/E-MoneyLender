@@ -26,7 +26,7 @@ const Form = () => {
         event.preventDefault();
         console.log(adhaar);
         try {
-            const response = await axios.post("http://localhost:3001/client/add_client",{
+            const response = await axios.post("https://e-money-lender-back.vercel.app/client/add_client",{
                 name,
                 fathername,
                 gender,
