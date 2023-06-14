@@ -13,8 +13,9 @@ const Form = () => {
     
 
     const handlePhoto = (e)=>{
-        setImage(e.target.files[0]);
+        setImage(e.target.files[0].name);
         console.log(Image);
+        console.log(e);
     }
 
 
@@ -49,7 +50,7 @@ const Form = () => {
     }
 
     return (
-        <form onSubmit={onSubmit} encType='multipart/form-data'>
+        <form action='/add_client' onSubmit={onSubmit} method="post" encType='multipart/form-data'>
             {/* <div className='form'> */}
                 <label htmlFor="name">Name</label> <input id='name' type="text" onChange={(e) => { setName(e.target.value) }} />
                 <br />
@@ -90,7 +91,7 @@ const Form = () => {
                 <input 
                 type="file"
                 accept='.png, .jpg, .jpeg'
-                name="image" 
+                name="img" 
                 id="image" 
                 onChange={handlePhoto}/>
                 <br />
@@ -101,7 +102,7 @@ const Form = () => {
 
 
             {/* </div> */}
-            <button type='submit' >save</button>
+            <input type='submit' value="save" />
         </form>
     )
 }
