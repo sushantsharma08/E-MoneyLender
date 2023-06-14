@@ -40,22 +40,29 @@ import { Upload } from "../middleware/upload.js";
     .then(()=>res.json('user Added'))
     .catch(err=>res.json(err)); 
 
+    res.send(`
+    <img src='${req.file.filename}' alt='image'/>
+`)
+
  })
 
  router.get("/image",async(req,res)=>{
 try {
-    const image1 = await ClientModel.findOne({img:"uploads\\1685824991894.jpg"
+    const image1 = await ClientModel.findOne({img:"uploads\\1686749304806.jpg"
 });
     const imageout = image1.img
-    // imageout.replace('\\','/')
+    // imageout.replace('uploads','/')
     console.log(imageout);
-    // res.json({
+    // res.send({
     //    fName: image1.fathername,
     //    image: image1.img
-
     // }
     // )
-    res.send(`<image src='/${imageout.replace('\\','/')}' alt='image'></image>`)
+    // res.setHeader('content-type', 'image/jpg')
+    // res.send(`
+    //         <img src='1686749304806' alt='image'/>
+    // `)
+    
 } catch (error) {
     res.json(error)
 }

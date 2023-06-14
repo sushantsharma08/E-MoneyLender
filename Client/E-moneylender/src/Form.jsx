@@ -45,7 +45,7 @@ const Form = () => {
                 remainingamount:totalAmount,
                 img:Image})
         } catch (error) {
-            
+            console.log(error);
         }
     }
 
