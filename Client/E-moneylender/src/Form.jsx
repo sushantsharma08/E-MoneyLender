@@ -46,17 +46,7 @@ const Form = () => {
         formData.append('img',Image,Image.name)
 
         try {
-            const response = await axios.post("http://localhost:3001/client/add_client", formData
-            // {
-            //     name,
-            //     fathername,
-            //     gender,
-            //     adhaar,
-            //     loanamount:loanAmount,
-            //     Instalment:monthlyInstalment,
-            //     remainingamount:totalAmount,
-            //     img:Image}
-                )
+            const response = await axios.post("https://e-money-lender-back.vercel.app/client/add_client", formData)
         } catch (error) {
             console.log(error);
         }
