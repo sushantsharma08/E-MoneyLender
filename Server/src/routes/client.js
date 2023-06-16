@@ -7,7 +7,8 @@ import { Upload } from "../middleware/upload.js";
  router.post("/add_client",Upload.single('img'),async(req,res)=>{
     console.log(req.file)
     console.log(req.body)
-    req.body.img = req.file.path
+    req.body.img = req.file.path;
+    var file= req.file;
     const {
         name,
         fathername,
@@ -37,31 +38,20 @@ import { Upload } from "../middleware/upload.js";
     })
 
     await newClient.save()
-    .then(()=>res.json('user Added'))
-    .catch(err=>res.json(err)); 
+    res.sendFile(`uploads/${file.filename}`, { root: '.' })
+    // .then(()=>res.json('user Added'))
+    // .catch(err=>res.json(err)); 
 
-    res.send(`
-    <img src='${req.file.filename}' alt='image'/>
-`)
+//     res.send(`
+//     <img src='${req.file.filename}' alt='image'/>
+// `)
 
  })
 
  router.get("/image",async(req,res)=>{
 try {
-    const image1 = await ClientModel.findOne({img:"uploads\\1686749304806.jpg"
-});
-    const imageout = image1.img
-    // imageout.replace('uploads','/')
-    console.log(imageout);
-    // res.send({
-    //    fName: image1.fathername,
-    //    image: image1.img
-    // }
-    // )
-    // res.setHeader('content-type', 'image/jpg')
-    // res.send(`
-    //         <img src='1686749304806' alt='image'/>
-    // `)
+    const image1 = await ClientModel.findOne({img:"uploads\\1686827846644.jpg"});
+res.sendFile('/uploads/1686827846644.jpg', { root: '.' })
     
 } catch (error) {
     res.json(error)
