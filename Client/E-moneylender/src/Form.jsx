@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from "axios";
 
 const Form = () => {
+
     const [name, setName] = useState();
     const [fathername, setFathersname] = useState();
     const [adhaar, setAdhaar] = useState(0);
@@ -9,12 +10,13 @@ const Form = () => {
     const [loanAmount, setLoanAmount] = useState(0);
     const [totalAmount, setTotalAmount] = useState(0);
     const [monthlyInstalment, setMonthlyInstalment] = useState(0);
-    const [Image, setImage] = useState();
+    const [Image, setImage] = useState("");
     
 
     const handlePhoto = (e)=>{
-        setImage(e.target.files[0].name);
+        setImage(e.target.files[0]);
         console.log(Image);
+        console.log(e.target.files[0]);
         console.log(e);
     }
 
@@ -32,18 +34,29 @@ const Form = () => {
     }
     const onSubmit = async (event)=>{
         event.preventDefault();
+        console.log(Image);
         const formData = new FormData();
+        formData.append('name',name)
+        formData.append('fathername',fathername)
+        formData.append('gender',gender)
+        formData.append('adhaar',adhaar)
+        formData.append('loanamount',loanAmount)
+        formData.append('Instalment',monthlyInstalment)
+        formData.append('remainingamount',totalAmount)
+        formData.append('img',Image,Image.name)
 
         try {
-            const response = await axios.post("https://e-money-lender-back.vercel.app/client/add_client",{
-                name,
-                fathername,
-                gender,
-                adhaar,
-                loanamount:loanAmount,
-                Instalment:monthlyInstalment,
-                remainingamount:totalAmount,
-                img:Image})
+            const response = await axios.post("http://localhost:3001/client/add_client", formData
+            // {
+            //     name,
+            //     fathername,
+            //     gender,
+            //     adhaar,
+            //     loanamount:loanAmount,
+            //     Instalment:monthlyInstalment,
+            //     remainingamount:totalAmount,
+            //     img:Image}
+                )
         } catch (error) {
             console.log(error);
         }

@@ -5,10 +5,11 @@ import { Upload } from "../middleware/upload.js";
  const router = express.Router();
 
  router.post("/add_client",Upload.single('img'),async(req,res)=>{
-    console.log(req.file)
+    console.log(req.body.img)
     console.log(req.body)
-    req.body.img = req.file.path;
-    var file= req.file;
+    req.body.img = req.file.filename;
+    // var file= req.file;
+    var file= req.body.img;
     const {
         name,
         fathername,
@@ -38,7 +39,7 @@ import { Upload } from "../middleware/upload.js";
     })
 
     await newClient.save()
-    res.sendFile(`uploads/${file.filename}`, { root: '.' })
+    res.sendFile(`uploads/${file}`, { root: '.' })
     // .then(()=>res.json('user Added'))
     // .catch(err=>res.json(err)); 
 
@@ -50,8 +51,8 @@ import { Upload } from "../middleware/upload.js";
 
  router.get("/image",async(req,res)=>{
 try {
-    const image1 = await ClientModel.findOne({img:"uploads\\1686827846644.jpg"});
-res.sendFile('/uploads/1686827846644.jpg', { root: '.' })
+    const user = await ClientModel.findOne({name:"sushant"});
+res.sendFile(`/${user.img}`, { root: '.' })
     
 } catch (error) {
     res.json(error)
