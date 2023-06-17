@@ -2,7 +2,9 @@
 import './App.css'
 import Form from './Form'
 import Image from './page/Image'
-import { BrowserRouter as Router, Routes, Route,Link } from "react-router-dom"
+import Navbar from './Components/Navbar'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import SearchClients from './page/SearchClients'
 
 function App() {
 
@@ -10,15 +12,11 @@ function App() {
     <div className="App">
       {/* <Form/> */}
       <Router>
-        <div>
-          <nav>
-          <Link className='li' to="/" >home</Link>
-          <Link className='li' to="/form" >form</Link>
-          </nav>
-        </div>
+        <Navbar />
         <Routes>
-          <Route path='/form' element={<Form/>} />
-          <Route path='/' element={<Image/>} />
+          <Route path='/' element={<Image />} />
+          <Route path='/form' element={<Form />} />
+          <Route path='/search' element={<SearchClients />} />
         </Routes>
       </Router>
     </div>

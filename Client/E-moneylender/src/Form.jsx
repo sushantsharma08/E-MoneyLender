@@ -11,9 +11,10 @@ const Form = () => {
     const [totalAmount, setTotalAmount] = useState(0);
     const [monthlyInstalment, setMonthlyInstalment] = useState(0);
     const [Image, setImage] = useState("");
-    
+    const [ApiImg, setApiImg] = useState();
 
-    const handlePhoto = (e)=>{
+
+    const handlePhoto = (e) => {
         setImage(e.target.files[0]);
         console.log(Image);
         console.log(e.target.files[0]);
@@ -32,29 +33,33 @@ const Form = () => {
         setMonthlyInstalment(emi);
         setTotalAmount(emi * 12)
     }
-    const onSubmit = async (event)=>{
+    const onSubmit = async (event) => {
         event.preventDefault();
         console.log(Image);
         const formData = new FormData();
-        formData.append('name',name)
-        formData.append('fathername',fathername)
-        formData.append('gender',gender)
-        formData.append('adhaar',adhaar)
-        formData.append('loanamount',loanAmount)
-        formData.append('Instalment',monthlyInstalment)
-        formData.append('remainingamount',totalAmount)
-        formData.append('img',Image,Image.name)
+        formData.append('name', name)
+        formData.append('fathername', fathername)
+        formData.append('gender', gender)
+        formData.append('adhaar', adhaar)
+        formData.append('loanamount', loanAmount)
+        formData.append('Instalment', monthlyInstalment)
+        formData.append('remainingamount', totalAmount)
+        formData.append('img', Image, Image.name)
 
         try {
-            const response = await axios.post("https://e-money-lender-back.vercel.app/client/add_client", formData)
+            // const url="https://e-money-lender-back.vercel.app/client/add_client"
+            const url="http://localhost:3001/client/add_client"
+            const response = await axios.post(url, formData);
+            setApiImg(`http://localhost:3001/client/image/${response.data}`)
+            console.log(response);
         } catch (error) {
             console.log(error);
         }
     }
 
     return (
-        <form action='/add_client' onSubmit={onSubmit} method="post" encType='multipart/form-data'>
-            {/* <div className='form'> */}
+        <div className='form'>
+            <form action='/add_client' onSubmit={onSubmit} method="post" encType='multipart/form-data'>
                 <label htmlFor="name">Name</label> <input id='name' type="text" onChange={(e) => { setName(e.target.value) }} />
                 <br />
                 <label htmlFor="fathername">Father Name</label> <input id='fathername' type="text" onChange={(e) => { setFathersname(e.target.value) }} />
@@ -70,7 +75,7 @@ const Form = () => {
                 <br />
 
                 <label htmlFor="adhaar">Adhaar Number</label>
-                <input type="number" name="AdhaarNumber" id="adhaar" onChange={(e)=>{setAdhaar(e.target.value)}} />
+                <input type="number" name="AdhaarNumber" id="adhaar" onChange={(e) => { setAdhaar(e.target.value) }} />
                 <br />
 
                 <label htmlFor="Amount">Loan Amount</label>
@@ -91,12 +96,12 @@ const Form = () => {
                 <br />
 
                 <label htmlFor="image">Upload Image</label>
-                <input 
-                type="file"
-                accept='.png, .jpg, .jpeg'
-                name="img" 
-                id="image" 
-                onChange={handlePhoto}/>
+                <input
+                    type="file"
+                    accept='.png, .jpg, .jpeg'
+                    name="img"
+                    id="image"
+                    onChange={handlePhoto} />
                 <br />
 
                 <label htmlFor="signature">Upload Signature</label>
@@ -104,9 +109,13 @@ const Form = () => {
                 <br />
 
 
-            {/* </div> */}
-            <input type='submit' value="save" />
-        </form>
+                <input type='submit' value="save" />
+            </form>
+
+            <div className="imageShow">
+                <img src={ApiImg} alt="" height="300px" width="250px" />
+            </div>
+        </div>
     )
 }
 
