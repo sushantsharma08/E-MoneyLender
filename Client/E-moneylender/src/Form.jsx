@@ -50,7 +50,8 @@ const Form = () => {
             const url="https://e-money-lender-back.vercel.app/client/add_client"
             // const url="http://localhost:3001/client/add_client"
             const response = await axios.post(url, formData);
-            setApiImg(`http://localhost:3001/client/image/${response.data}`)
+            // setApiImg(`http://localhost:3001/client/image/${response.data}`)
+            setApiImg(`https://e-money-lender-back.vercel.app/client/image/${response.data}`)
             console.log(response);
         } catch (error) {
             console.log(error);
