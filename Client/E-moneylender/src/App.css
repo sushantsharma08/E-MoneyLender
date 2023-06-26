@@ -1,3 +1,16 @@
 .li{
     margin-inline: 15px;
 }
+.tabledata{
+    margin-block: 3px;
+    margin-inline: 5px;
+    /* border: 1px solid black; */
+    min-width: 90px;
+}
+.userdatadiv{
+    display: flex;
+    flex-direction: column;
+}
+.userDetails{
+    border: 1px solid black;
+}

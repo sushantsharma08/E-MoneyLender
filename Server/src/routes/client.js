@@ -1,6 +1,7 @@
 import express from "express";
 import { ClientModel } from "../models/Client.js";
 import { Upload } from "../middleware/upload.js";
+import fs from "fs"
 
 const router = express.Router();
 
@@ -49,18 +50,26 @@ router.post("/add_client", Upload.single('img'), async (req, res) => {
 router.get("/image/:imagepath", async (req, res) => {
     try {
         const user = await ClientModel.findOne({ img: req.params.imagepath });
-        res.sendFile(`/uploads/${user.img}`, { root: '.' })
+
+        const load = fs.readFileSync(`/uploads/${user.img}`, { root: '.' })
+
+        res.sendFile(load);
+        // res.sendFile(`/uploads/${user.img}`, { root: '.' })
 
     } catch (error) {
         res.json(error)
     }
-    
-    
+
+
 })
 
-router.get("/", async (req,res)=>{
-    const users  = await ClientModel.find({});
-    res.send(users)
+router.get("/", async (req, res) => {
+    try {
+        const users = await ClientModel.find({});
+        res.json(users)
+    } catch (error) {
+        res.json(error)
+    }
 })
 
 export { router as ClientRouter }
