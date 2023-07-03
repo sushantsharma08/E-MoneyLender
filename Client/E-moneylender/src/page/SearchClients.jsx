@@ -54,7 +54,7 @@ const SearchClients = () => {
 
   return (
     <section id='client' >
-      <div style={{}}>
+      <div style={{display:"flex",alignItems:"center",justifyContent:"center"}}>
 
         <div className="userdatadiv">
           <table>
@@ -63,6 +63,7 @@ const SearchClients = () => {
                 <td className="tabledata index">Index</td>
                 <td className="tabledata">Name</td>
                 <td className="tabledata">Fathers Name</td>
+                <td className="tabledata">Adhaar No.</td>
                 <td className="tabledata">Loan amount</td  >
                 <td className="tabledata">Status</td>
               </tr>
@@ -72,7 +73,10 @@ const SearchClients = () => {
                 <tr key={index} onClick={() => searchUser(user.name)} className="userDetails" style={{ display: "flex", cursor: "pointer" }}>
                   <td className="tabledata index index_data">{index + 1}</td>
                   <td className="tabledata personal"><span className='name'>{user.name}</span><br /><span className='phone'><img src="/images/phone.png" alt="" width="12px" />{user?.phone}</span></td>
-                  <td className="tabledata FatherName personal2"><span>{user.fathername}</span><br /><span className="id"><img src="/images/id.png" alt="" width="20px" />{user.adhaar}</span></td>
+                  <td className="tabledata FatherName personal2"><span>{user.fathername}</span><br /></td>
+                  <td className="tabledata adhaar">
+                  <span className="id"> <img src="/images/id.png" alt="" width="20px" />{user.adhaar}</span>
+                  </td>
                   <td className="tabledata LoanDetails">
                     <span>
                       <b>{user.loanamount}</b>

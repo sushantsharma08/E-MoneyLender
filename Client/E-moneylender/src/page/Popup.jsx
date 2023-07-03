@@ -119,6 +119,7 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
                 </table>
                 <button className='instalmentDone' onClick={() => patchInstalment()}>{Data?.remainingamount > 0 ? `Instalment for month ${Data?.InstalmentsDone + 1} Done` : "Loan complete"}</button>
             </div>
+            {/* <button onClick={print}>print</button> */}
         </div>
     )
 }
