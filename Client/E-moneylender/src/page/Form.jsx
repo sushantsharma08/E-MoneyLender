@@ -90,7 +90,7 @@ const Form = () => {
                 <input type="number" disabled name="missed" id="missedamount" value={missedInstalment} />
                 <br />
 
-                <input type='submit' onClick={onSubmit} value="save" />
+                <button type='submit' onClick={onSubmit} value="save">save</button>
             </form>
         </div>
     )
