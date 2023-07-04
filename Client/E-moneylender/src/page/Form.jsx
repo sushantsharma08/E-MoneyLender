@@ -49,7 +49,7 @@ const Form = () => {
 
     return (
         <div className='form'>
-            <form action='/add_client' onSubmit={onSubmit} method="post" encType='multipart/form-data'>
+            <form action='/add_client' method="post" encType='multipart/form-data'>
 
                 <label htmlFor="name">Name</label> <input id='name' type="text" onChange={(e) => { setName(e.target.value.toLowerCase()) }} />
 
@@ -90,7 +90,7 @@ const Form = () => {
                 <input type="number" disabled name="missed" id="missedamount" value={missedInstalment} />
                 <br />
 
-                <input type='submit' value="save" />
+                <input type='submit' onClick={onSubmit} value="save" />
             </form>
         </div>
     )
