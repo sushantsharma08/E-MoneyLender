@@ -1,7 +1,6 @@
 
 import './App.css'
-import Form from './Form'
-import Image from './page/Image'
+import Form from './page/Form'
 import Navbar from './Components/Navbar'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import SearchClients from './page/SearchClients'
@@ -14,7 +13,6 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
-          <Route path='/' element={<Image />} />
           <Route path='/form' element={<Form />} />
           <Route path='/search' element={<SearchClients />} />
         </Routes>

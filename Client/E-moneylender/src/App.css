@@ -14,3 +14,22 @@
 .userDetails{
     border: 1px solid black;
 }
+.searchBar{
+    display:flex
+}
+.popup_forClientDetails{
+    border: 1px solid red;
+    height: 80vh;
+    min-width: 80vw ;
+    position:absolute;
+    top: 100px;
+    left: 10%;
+    background-color: rgb(68, 187, 181);
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+td{
+    min-width: 80px;
+    text-align: left;
+}
