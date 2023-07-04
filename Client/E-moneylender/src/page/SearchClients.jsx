@@ -51,7 +51,7 @@ const SearchClients = () => {
   }
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/client/`).then(async (res) => {
+    axios.get(`https://e-money-lender-back.vercel.app/client/`).then(async (res) => {
       setUsers(res.data);
       setUserList(res.data);
     })

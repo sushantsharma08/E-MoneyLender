@@ -29,8 +29,8 @@ const Form = () => {
     const onSubmit = async (event) => {
         event.preventDefault();
         try {
-            // const url="https://e-money-lender-back.vercel.app/client/add_client"
-            const url="http://localhost:3001/client/add_client"
+            const url="https://e-money-lender-back.vercel.app/client/add_client"
+            // const url="http://localhost:3001/client/add_client"
             const response = await axios.post(url, {
                 name,
                 fathername,
