@@ -1,0 +1,18 @@
+.table{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size:larger;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 700;
+    text-align: center;
+}
+.instalmentDone{
+    margin-top: 20px;
+    max-width: max-content;
+}
+table{
+    min-width: 400px;
+    /* color: rgba(217, 217, 217, 0.214); */
+}

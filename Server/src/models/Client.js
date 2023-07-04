@@ -7,9 +7,9 @@ const ClientSchema = new mongoose.Schema({
     adhaar: { type: Number, required: true, length: 12 },
     loanamount: { type: Number, required: true, },
     Instalment: { type: Number, required: true, },
+    InstalmentsDone:{type:Number,required:true},
     remainingamount: { type: Number, required: true, },
-    img: { type: String, required: true }
-
+    totalAmount:{ type: Number, required: true, }
 });
 
 export const ClientModel = mongoose.model("clients", ClientSchema)

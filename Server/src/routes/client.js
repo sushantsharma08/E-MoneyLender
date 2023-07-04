@@ -1,16 +1,8 @@
 import express from "express";
 import { ClientModel } from "../models/Client.js";
-import { Upload } from "../middleware/upload.js";
-import fs from "fs"
-
 const router = express.Router();
 
-router.post("/add_client", Upload.single('img'), async (req, res) => {
-    console.log(req.body.img)
-    console.log(req.body)
-    req.body.img = req.file.filename;
-    // var file= req.file;
-    var file = req.body.img;
+router.post("/add_client", async (req, res) => {
     const {
         name,
         fathername,
@@ -18,8 +10,9 @@ router.post("/add_client", Upload.single('img'), async (req, res) => {
         adhaar,
         loanamount,
         Instalment,
+        InstalmentsDone,
         remainingamount,
-        img,
+        totalAmount
     } = req.body;
 
     const client = await ClientModel.findOne({ adhaar });
@@ -35,32 +28,16 @@ router.post("/add_client", Upload.single('img'), async (req, res) => {
         adhaar,
         loanamount,
         Instalment,
+        InstalmentsDone,
         remainingamount,
-        img,
+        totalAmount
     })
 
     await newClient.save()
 
         // res.sendFile(`uploads/${file}`, { root: '.' })
-        .then(() => res.json(newClient.img))
+        .then(() => res.json({"message":'client added'}))
         .catch(err => res.json(err));
-})
-
-
-router.get("/image/:imagepath", async (req, res) => {
-    try {
-        const user = await ClientModel.findOne({ img: req.params.imagepath });
-
-        const load = fs.readFileSync(`/uploads/${user.img}`, { root: '.' })
-
-        res.sendFile(load);
-        // res.sendFile(`/uploads/${user.img}`, { root: '.' })
-
-    } catch (error) {
-        res.json(error)
-    }
-
-
 })
 
 router.get("/", async (req, res) => {
@@ -68,6 +45,25 @@ router.get("/", async (req, res) => {
         const users = await ClientModel.find({});
         res.json(users)
     } catch (error) {
+        res.json(error)
+    }
+})
+
+router.get("/searchbyname/:username", async (req, res) => {
+    try {
+        const userdata = await ClientModel.findOne({name:req.params.username});
+        res.json(userdata)
+    } catch (error) {
+        res.json(error)
+    }
+})
+
+router.patch("/instalmentDone/:username",async (req,res)=>{
+    const {InstalmentsDone,remainingamount}= req.body;
+    const user = await ClientModel.findOneAndUpdate({name:req.params.username},req.body)
+    try{
+        res.json(user)
+    }catch(error){
         res.json(error)
     }
 })
