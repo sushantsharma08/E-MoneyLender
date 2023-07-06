@@ -52,7 +52,7 @@ const Form = () => {
     return (
         <section className='form__mainsection'>
             <div className="image">
-                <img src="/images/lenderIcon.png" alt="" srcset="" />
+                <img src="/images/lenderIcon.png"/>
             </div>
             <div className='form'>
                 <form action='/add_client' method="post" encType='multipart/form-data'>

@@ -9,11 +9,11 @@
     height: 100vh;
 }
 .navbar{
-    padding: 10px;
-    padding-top: 20px;
-    border: 1px solid red;
+    border-bottom: 2px solid rgb(236, 225, 225);
+    padding: 20px;
     width: inherit;
-    font-size: large;
+    font-size: x-large;
+    background-color: blanchedalmond;
 }
 .Form__row{
     display: flex;
@@ -88,6 +88,9 @@ input[type=text],input[type=number],.gender{
 }
 .li{
     margin-inline: 15px;
+    color:cornflowerblue;
+    font-weight: 500;
+    text-decoration: none;
 }
 .tabledata{
     margin-block: 3px;
@@ -168,7 +171,10 @@ input[type=text],input[type=number],.gender{
     top: 110px;
 }
 .image img{
-    width: 650px;
+    width: 900px;
+}
+#client{
+    padding-top: 100px;
 }
 .personal{
     display: flex;
