@@ -3,16 +3,24 @@
 }
 .tabledata{
     margin-block: 3px;
-    margin-inline: 5px;
+    margin-inline: 0rem;
+    padding-inline: 0.3rem;
     /* border: 1px solid black; */
-    min-width: 90px;
+    min-width: 150px;
+    border-left: 1px solid rgba(128, 128, 128, 0.387);
 }
 .userdatadiv{
     display: flex;
     flex-direction: column;
+    margin-top: 100px;
+}
+.userDetailsHeader{
+    border: 2px solid black;
+    height:30px
 }
 .userDetails{
-    border: 1px solid black;
+    border: 1px solid rgba(0, 0, 0, 0.468);
+    height:70px
 }
 .searchBar{
     display:flex
@@ -32,4 +40,28 @@
 td{
     min-width: 80px;
     text-align: left;
+    margin-inline: 30px;
+}
+.LoanDetails{
+    display: flex;
+    flex-direction: column;
+    background-color: beige;
+}
+.index{
+    min-width:50px
+}
+.status{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.status span{
+    border:1px solid gray;padding-inline:9px;padding-block:4px;
+    border-radius:25px;
+    color:rgba(147, 209, 147, 0.359);
+}
+.form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

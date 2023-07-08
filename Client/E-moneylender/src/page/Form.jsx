@@ -51,46 +51,70 @@ const Form = () => {
         <div className='form'>
             <form action='/add_client' method="post" encType='multipart/form-data'>
 
-                <label htmlFor="name">Name</label> <input id='name' type="text" onChange={(e) => { setName(e.target.value.toLowerCase()) }} />
+                <div>
+                <label htmlFor="name">Name</label> <input id='name' type="text" onChange={(e) => { setName(e.target.value.toLowerCase().trim()) }} />
+                </div>
 
                 <br />
 
+                <div>
                 <label htmlFor="fathername">Father Name</label>
                 <input id='fathername' type="text" onChange={(e) => {setFathersname(e.target.value.toLowerCase())}} />
+                </div>
+
                 <br />
 
+                <div>
                 <label htmlFor="gender">Gender</label>
                 <select name="gender" id="gender" onClick={(e) => { setGender(e.target.value) }}>
                     <option value="" selected disabled>Select</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                 </select>
-
+                </div>
+                
                 <br />
 
+                <div>
                 <label htmlFor="adhaar">Adhaar Number</label>
                 <input type="number" name="AdhaarNumber" id="adhaar" onChange={(e) => { setAdhaar(e.target.value) }} />
+                </div>
+
                 <br />
 
+                <div>
                 <label htmlFor="Amount">Loan Amount</label>
                 <input type="number" name="loanamount" id="Amount" onChange={(e) => { setValues(e) }} />
+                </div>
 
                 <br />
 
+                <div>
                 <label htmlFor="monthlyinstalment">Monthly Installment</label>
                 <input type="number" disabled name="loanamount" id="Amountmonthlyinstalment" value={monthlyInstalment} />
                 @36% per month
+                </div>
+                
                 <br />
 
+                <div>
                 <label htmlFor="Amount">Total Amount</label>
                 <input type="number" disabled name="totalamount" id="totalAmount" value={totalAmount} />
+                </div>
+                
                 <br />
 
+                <div>
                 <label htmlFor="missedamount">If missed installment</label>
                 <input type="number" disabled name="missed" id="missedamount" value={missedInstalment} />
+                </div>
+
                 <br />
 
+                {/* <div> */}
                 <button type='submit' onClick={onSubmit} value="save">save</button>
+                {/* </div> */}
+
             </form>
         </div>
     )

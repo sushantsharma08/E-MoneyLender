@@ -1,95 +1,83 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Popup from './Popup';
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from '@tanstack/react-query'
 
+const queryClient = new QueryClient()
 
 const SearchClients = () => {
 
-  const [Users, setUsers] = useState()
-  const [SearchName, setSearchName] = useState()
-  const [showModal, setShowModal] = useState(false)
-  let [UserList, setUserList] = useState([])
+    // const [Users, setUsers] = useState()
+    const [SearchName, setSearchName] = useState()
+    const [showModal, setShowModal] = useState(false)
+    const [UserList, setUserList] = useState([])
 
+  const { isLoading, error, data } = useQuery({
+    queryKey: ['repoData'],
+    queryFn: () =>
+      fetch('https://e-money-lender-back.vercel.app/client/').then(
+        (res) => res.json(),
+      ),
+  });
 
-  const searchUserbyName = async (e) => {
-    setSearchName(e.target?.value);
-    // console.log(SearchName);
-    // axios.get(`http://localhost:3001/client/searchbyname/${SearchName}`).then(async (res) =>{
-    //   setUserList(res.data)
-    // })
+  if (isLoading) return     <section id='client' style={{position:"relative"}}>
+  <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+  <div className="userdatadiv"> 
+  <h2>Loading...</h2></div></div></section>
 
-    // console.log(...UserList);
+  if (error) return 'An error has occurred: ' + error.message
+  console.log(data);
 
-    setUserList([])
-    Users?.map(user => {
-      let name = user.name
-      console.log(UserList);
-      console.log(inArray(user, UserList));
-
-      if (name.includes(SearchName) && !inArray(user, UserList)) {
-
-        // setUserList(user)
-        console.log(name);
-        setUserList([...UserList, user])
-        // console.log(...UserList,UserList);
-      }
-    })
-
-  }
-
-  function inArray(user, UserList) {
-    var count = UserList.length;
-    for (var i = 0; i < count; i++) {
-      if (UserList[i] === user) { return true; }
-    }
-    return false;
-  }
+  // const searchUserbyName = async (e)=>{setSearchName(e.target?.value);}
 
   const searchUser = (e) => {
     setSearchName(e);
     setShowModal(true)
   }
 
-  useEffect(() => {
-    axios.get(`https://e-money-lender-back.vercel.app/client/`).then(async (res) => {
-      setUsers(res.data);
-      setUserList(res.data);
-    })
-  }, []);
-
   return (
     <section id='client' style={{position:"relative"}}>
       <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
 
-        <div className="searchBar">
+        {/* <div className="searchBar">
           <input type="text" onChange={e => searchUserbyName(e)} />
-          {/* <select name="users" id="userlist">
-          <option default disabled selected>select</option>
-          {UserList?.map((users,index)=>
-          {updatelist(users)}
-              // <option style={{display:users.name.includes(SearchName)?"block":"none"}}  value={users.name}>{users.name}</option>
-          // {if(users.includes(SearchName)){
-          // }}
-          )}
-        </select>  */}
-        </div>
-        <div className="userdatadiv" style={{ marginTop: "100px" }}>
+        </div> */}
+        <div className="userdatadiv">
           <table>
             <thead >
-              <tr className="userDetails" style={{ display: "flex" }}>
-                <td className="tabledata">index</td>
+              <tr className="userDetailsHeader" style={{ display: "flex",alignItems:"center" }}>
+                <td className="tabledata index">Index</td>
                 <td className="tabledata">Name</td>
                 <td className="tabledata">Fathers Name</td>
-                <td className="tabledata">Loan amount</td>
+                <td className="tabledata">Loan amount</td  >
+                <td>Status</td>
               </tr>
             </thead>
             <tbody>
-              {UserList?.map((user, index) =>
+              {data?.map((user, index) =>
                 <tr key={index} onClick={() => searchUser(user.name)} className="userDetails" style={{ display: "flex" }}>
-                  <td className="tabledata">{index + 1}</td>
-                  <td className="tabledata">{user.name}</td>
-                  <td className="tabledata">{user.fathername}</td>
-                  <td className="tabledata">{user.loanamount}</td>
+                  <td className="tabledata index">{index + 1}</td>
+                  <td className="tabledata name">{user.name}</td>
+                  <td className="tabledata FatherName">{user.fathername}</td>
+                  <td className="tabledata LoanDetails">
+                    <span>
+                    <b>{user.loanamount}</b>
+                    </span>
+                  <span style={{color:"red",alignSelf:"flex-end",marginRight:"0.3rem"}}>
+                    <i><u>Remaining</u></i>
+                    <br />
+                    <b>{user.remainingamount}</b></span></td>
+                    <td className="tabledata status" style={{color:user.remainingamount>0?"green":"red",textAlign:"center"}}>
+                      <span style={{
+                       backgroundColor:user.remainingamount>0?"rgba(147, 209, 147, 0.359)":"rgba(241, 170, 170, 0.753);",
+                      }}>
+                      {user.remainingamount>0?"Active":"Closed"}
+                      </span>
+                    </td>
                 </tr>
               )}
             </tbody>
@@ -97,7 +85,7 @@ const SearchClients = () => {
         </div>
 
       </div>
-      <Popup show={showModal}clientName={SearchName} />
+      <QueryClientProvider client={queryClient}><Popup show={showModal}clientName={SearchName} /></QueryClientProvider>
 
     </section>
   )
