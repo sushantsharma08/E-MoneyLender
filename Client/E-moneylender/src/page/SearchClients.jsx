@@ -48,8 +48,8 @@ const SearchClients = () => {
         </div> */}
         <div className="userdatadiv">
           <table>
-            <thead >
-              <tr className="userDetailsHeader" style={{ display: "flex",alignItems:"center" }}>
+            <thead style={{position:"sticky",top:"0px",backgroundColor:"burlywood",fontStyle:"oblique",fontWeight:"600"}}>
+              <tr className="userDetailsHeader" style={{ display: "flex",alignItems:"center", }}>
                 <td className="tabledata index">Index</td>
                 <td className="tabledata">Name</td>
                 <td className="tabledata">Fathers Name</td>
@@ -57,11 +57,11 @@ const SearchClients = () => {
                 <td>Status</td>
               </tr>
             </thead>
-            <tbody>
+            <tbody style={{overflow:"scroll"}}>
               {data?.map((user, index) =>
                 <tr key={index} onClick={() => searchUser(user.name)} className="userDetails" style={{ display: "flex" }}>
                   <td className="tabledata index">{index + 1}</td>
-                  <td className="tabledata name">{user.name}</td>
+                  <td className="tabledata personal "><span className='name'>{user.name}</span><br /><span className='phone'>{user.adhaar}</span></td>
                   <td className="tabledata FatherName">{user.fathername}</td>
                   <td className="tabledata LoanDetails">
                     <span>
@@ -75,7 +75,7 @@ const SearchClients = () => {
                       <span style={{
                        backgroundColor:user.remainingamount>0?"rgba(147, 209, 147, 0.359)":"rgba(241, 170, 170, 0.753);",
                       }}>
-                      {user.remainingamount>0?"Active":"Closed"}
+                      {user.remainingamount>0?"Active":<button>Close Account</button>}
                       </span>
                     </td>
                 </tr>

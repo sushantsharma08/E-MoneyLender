@@ -16,7 +16,8 @@
 }
 .userDetailsHeader{
     border: 2px solid black;
-    height:30px
+    height:50px;
+    font-size: larger;
 }
 .userDetails{
     border: 1px solid rgba(0, 0, 0, 0.468);
@@ -56,12 +57,22 @@ td{
     justify-content: center;
 }
 .status span{
-    border:1px solid gray;padding-inline:9px;padding-block:4px;
+    border:1px solid rgb(237, 232, 232);padding-inline:9px;padding-block:4px;
     border-radius:25px;
-    color:rgba(147, 209, 147, 0.359);
 }
 .form{
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.personal{
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(212, 231, 231);
+}
+.name{
+    font-weight: 600;
+}
+.phone{
+    align-self: flex-end;
 }
