@@ -54,13 +54,13 @@ const SearchClients = () => {
                 <td className="tabledata">Name</td>
                 <td className="tabledata">Fathers Name</td>
                 <td className="tabledata">Loan amount</td  >
-                <td>Status</td>
+                <td className="tabledata">Status</td>
               </tr>
             </thead>
             <tbody style={{overflow:"scroll"}}>
               {data?.map((user, index) =>
                 <tr key={index} onClick={() => searchUser(user.name)} className="userDetails" style={{ display: "flex" }}>
-                  <td className="tabledata index">{index + 1}</td>
+                  <td className="tabledata index index_data">{index + 1}</td>
                   <td className="tabledata personal "><span className='name'>{user.name}</span><br /><span className='phone'>{user.adhaar}</span></td>
                   <td className="tabledata FatherName">{user.fathername}</td>
                   <td className="tabledata LoanDetails">
