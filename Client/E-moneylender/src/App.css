@@ -13,7 +13,6 @@
     padding: 10px;
     border: 1px solid red;
     width: inherit;
-    margin-bottom: 100px;
     font-size: large;
 }
 .Form__row{
@@ -32,7 +31,7 @@
     padding-left: 20px;
     width:inherit;
     height: inherit;
-    background-color: rgb(153, 183, 239);
+    background-color: rgba(153, 183, 239, 0.307);
     font-size: larger;
 }
 .inputField{
@@ -48,7 +47,12 @@ input[type=text],input[type=number],.gender{
     outline: none;
     color: rgb(48, 2, 97);
     font-size: larger;
-    background-color: rgb(215, 222, 240);
+    background-color: rgba(215, 222, 240, 0.308);
+}
+.form__mainsection{
+    border: 2px solid violet;
+    width: inherit;
+    height: inherit;
 }
 .gender{
     display: flex;
@@ -127,6 +131,7 @@ input[type=text],input[type=number],.gender{
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 100px;
 }
 .personal{
     display: flex;

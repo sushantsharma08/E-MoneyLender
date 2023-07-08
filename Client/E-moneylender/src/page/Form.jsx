@@ -48,6 +48,10 @@ const Form = () => {
     }
 
     return (
+        <section className='form__mainsection'>
+            <div className="image">
+                <img src="../" alt="" srcset="" />
+            </div>
         <div className='form'>
             <form action='/add_client' method="post" encType='multipart/form-data'>
 
@@ -141,6 +145,7 @@ const Form = () => {
 
             </form>
         </div>
+        </section>
     )
 }
 

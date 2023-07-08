@@ -70,8 +70,8 @@ const SearchClients = () => {
               {data?.map((user, index) =>
                 <tr  key={index} onClick={() => searchUser(user.name)} className="userDetails" style={{ display: "flex",cursor:"pointer" }}>
                   <td className="tabledata index index_data">{index + 1}</td>
-                  <td className="tabledata personal"><span className='name'>{user.name}</span><br /><span className='phone'><img src="../../public/images/phone.png" alt="" width="12px" />{user.adhaar}</span></td>
-                  <td className="tabledata FatherName personal2"><span>{user.fathername}</span><br /><span className="id"><img src="../../public/images/id.png" alt="" width="20px" />{user.adhaar}</span></td>
+                  <td className="tabledata personal"><span className='name'>{user.name}</span><br /><span className='phone'><img src="./public/images/phone.png" alt="" width="12px" />{user.adhaar}</span></td>
+                  <td className="tabledata FatherName personal2"><span>{user.fathername}</span><br /><span className="id"><img src="./public/images/id.png" alt="" width="20px" />{user.adhaar}</span></td>
                   <td className="tabledata LoanDetails">
                     <span>
                       <b>{user.loanamount}</b>
