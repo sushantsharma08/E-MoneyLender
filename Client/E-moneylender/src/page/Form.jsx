@@ -11,6 +11,7 @@ const Form = () => {
     const [monthlyInstalment, setMonthlyInstalment] = useState(0);
     const [missedInstalment, setMissedInstalment] = useState(0);
     const [totalAmount, setTotalAmount] = useState(0);
+    const [phone,setPhone]=useState(0);
 
 
     const setValues = (amount) => {
@@ -35,6 +36,7 @@ const Form = () => {
                 name,
                 fathername,
                 gender: gender,
+                phone,
                 adhaar: adhaar,
                 loanamount: loanAmount,
                 Instalment: monthlyInstalment,
@@ -50,101 +52,106 @@ const Form = () => {
     return (
         <section className='form__mainsection'>
             <div className="image">
-                <img src="../" alt="" srcset="" />
+                <img src="./public/images/lenderIcon.png" alt="" srcset="" />
             </div>
-        <div className='form'>
-            <form action='/add_client' method="post" encType='multipart/form-data'>
+            <div className='form'>
+                <form action='/add_client' method="post" encType='multipart/form-data'>
 
-                <div className="Form__row">
-                    <label className='label' htmlFor="name">Name</label>
-                    <div className='inputField'>
-                        <input id='name' type="text" onChange={(e) => { setName(e.target.value.toLowerCase().trim()) }} />
+                    <div className="Form__row">
+                        <label className='label' htmlFor="name">Name</label>
+                        <div className='inputField'>
+                            <input id='name' type="text" onChange={(e) => { setName(e.target.value.toLowerCase().trim()) }} />
+                        </div>
                     </div>
-                </div>
 
 
-                <div className="Form__row">
-                    <label className='label' htmlFor="fathername">Father Name</label>
-                    <div className='inputField'>
-                        <input id='fathername' type="text" onChange={(e) => { setFathersname(e.target.value.toLowerCase()) }} />
+                    <div className="Form__row">
+                        <label className='label' htmlFor="fathername">Father Name</label>
+                        <div className='inputField'>
+                            <input id='fathername' type="text" onChange={(e) => { setFathersname(e.target.value.toLowerCase()) }} />
+                        </div>
                     </div>
-                </div>
 
 
-                <div className="Form__row">
-                    <label className='label' htmlFor="gender">Gender</label>
-                    <div className='inputField'>
-                        <span className="gender" >
-                            <input
-                            onClick={(e) => { setGender(e.target.value) }}
-                            style={{ height: "20px" }}
-                            type="radio" name="gender" value="male" id="Gender_male" />
-                            <label htmlFor="Gender_male">male</label>
-                        </span>
-                        <span className="gender">
-                            <input
-                            onClick={(e) => { setGender(e.target.value) }}
-                            style={{ height: "20px" }}
-                            type="radio" name="gender" id="Gender_female" value="female" />
-                            <label htmlFor="Gender_female">Female</label>
-                        </span>
-                    </div>
-                    {/* <select name="gender" id="gender" onClick={(e) => { setGender(e.target.value) }}>
+                    <div className="Form__row">
+                        <label className='label' htmlFor="gender">Gender</label>
+                        <div className='inputField'>
+                            <span className="gender" >
+                                <input
+                                    onClick={(e) => { setGender(e.target.value) }}
+                                    style={{ height: "20px" }}
+                                    type="radio" name="gender" value="male" id="Gender_male" />
+                                <label htmlFor="Gender_male">Male</label>
+                            </span>
+                            <span className="gender">
+                                <input
+                                    onClick={(e) => { setGender(e.target.value) }}
+                                    style={{ height: "20px" }}
+                                    type="radio" name="gender" id="Gender_female" value="female" />
+                                <label htmlFor="Gender_female">Female</label>
+                            </span>
+                        </div>
+                        {/* <select name="gender" id="gender" onClick={(e) => { setGender(e.target.value) }}>
                     <option value="" selected disabled>Select</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                 </select> */}
-                </div>
-
-
-                <div className="Form__row">
-                    <label className='label' htmlFor="adhaar">Adhaar Number</label>
-                    <div className='inputField'>
-                        <input type="number" name="AdhaarNumber" id="adhaar" onChange={(e) => { setAdhaar(e.target.value) }} />
-                    </div>
-                </div>
-
-
-                <div className="Form__row">
-                    <label className='label' htmlFor="Amount">Loan Amount</label>
-                    <div className='inputField'>
-                        <input type="number" name="loanamount" id="Amount" onChange={(e) => { setValues(e) }} />
-                    </div>
-                </div>
-
-
-                <div className="Form__row">
-                    <label className='label' htmlFor="monthlyinstalment">Monthly Installment</label>
-                    <div className='inputField'>
-                        <input type="number" disabled name="loanamount" id="monthlyinstalment" value={monthlyInstalment} />
                     </div>
 
-                    {/* @36% per month */}
-                </div>
 
-                <div className="Form__row">
-                    <label className='label' htmlFor="totalAmount">Total Amount</label>
-                    <div className='inputField'>
-                        <input type="number" disabled name="totalamount" id="totalAmount" value={totalAmount} />
+                    <div className="Form__row">
+                        <label className='label' htmlFor="phone">Phone Number</label>
+                        <div className='inputField'>
+                            <input type="number" name="phone" id="phone" onChange={(e) => { setPhone(e.target.value) }} />
+                        </div>
                     </div>
-                </div>
 
-
-                <div className="Form__row">
-                    <label className='label'htmlFor="missedamount">If missed installment</label>
-                    <div className='inputField'>
-                        <input type="number" disabled name="missed" id="missedamount" value={missedInstalment} />
+                    <div className="Form__row">
+                        <label className='label' htmlFor="adhaar">Adhaar Number</label>
+                        <div className='inputField'>
+                            <input type="number" name="AdhaarNumber" id="adhaar" onChange={(e) => { setAdhaar(e.target.value) }} />
+                        </div>
                     </div>
-                </div>
 
-                <br />
 
-                {/* <div> */}
-                <button type='submit' onClick={onSubmit} value="save">save</button>
-                {/* </div> */}
+                    <div className="Form__row">
+                        <label className='label' htmlFor="Amount">Loan Amount</label>
+                        <div className='inputField'>
+                            <input type="number" name="loanamount" id="Amount" onChange={(e) => { setValues(e) }} />
+                        </div>
+                    </div>
 
-            </form>
-        </div>
+
+                    <div className="Form__row">
+                        <label className='label' htmlFor="monthlyinstalment">Monthly Installment</label>
+                        <div className='inputField'>
+                            <input type="number" disabled name="loanamount" id="monthlyinstalment" value={monthlyInstalment} />
+                        </div>
+
+                        {/* @36% per month */}
+                    </div>
+
+                    <div className="Form__row">
+                        <label className='label' htmlFor="totalAmount">Total Amount</label>
+                        <div className='inputField'>
+                            <input type="number" disabled name="totalamount" id="totalAmount" value={totalAmount} />
+                        </div>
+                    </div>
+
+
+                    <div className="Form__row">
+                        <label className='label' htmlFor="missedamount">If missed installment</label>
+                        <div className='inputField'>
+                            <input type="number" disabled name="missed" id="missedamount" value={missedInstalment} />
+                        </div>
+                    </div>
+
+                    <div className='btnDiv'>
+                        <button className='form__saveBtn' type='submit' onClick={onSubmit} value="save">Save</button>
+                    </div>
+
+                </form>
+            </div>
         </section>
     )
 }

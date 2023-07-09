@@ -4,6 +4,7 @@ const ClientSchema = new mongoose.Schema({
     name: { type: String, required: true, },
     fathername: { type: String, required: true, },
     gender: { type: String, required: true, },
+    phone: { type: Number, required: true},
     adhaar: { type: Number, required: true, length: 12 },
     loanamount: { type: Number, required: true, },
     Instalment: { type: Number, required: true, },
