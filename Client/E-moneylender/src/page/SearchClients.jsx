@@ -49,7 +49,7 @@ const SearchClients = () => {
   }
   const checkName = (e) => {
     const id = e.target.id;
-    axios.delete(`https://e-money-lender-back.vercel.app/client//removeClient/${id}`)
+    axios.delete(`https://e-money-lender-back.vercel.app/client/removeClient/${id}`)
   }
 
   return (
