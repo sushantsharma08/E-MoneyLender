@@ -48,7 +48,8 @@ const SearchClients = () => {
     setShowModal(true)
   }
   const checkName = (e) => {
-    console.log(e.target.id);
+    const id = e.target.id;
+    axios.delete(`https://e-money-lender-back.vercel.app/client//removeClient/${id}`)
   }
 
   return (

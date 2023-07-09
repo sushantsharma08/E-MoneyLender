@@ -69,5 +69,8 @@ router.patch("/instalmentDone/:username",async (req,res)=>{
         res.json(error)
     }
 })
+router.delete("/removeClient/:id",async (req,res)=>{
+    const user = await ClientModel.deleteOne({_id:req.params.id})
+})
 
 export { router as ClientRouter }
