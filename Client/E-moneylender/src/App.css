@@ -10,7 +10,7 @@
 }
 .navbar{
     border-bottom: 2px solid rgb(236, 225, 225);
-    padding: 20px;
+    padding-block: 20px;
     width: inherit;
     font-size: x-large;
     background-color: blanchedalmond;
@@ -118,7 +118,6 @@ input[type=text],input[type=number],.gender{
     display:flex
 }
 .popup_forClientDetails{
-    border: 1px solid red;
     height: 90vh;
     width: 90vw;
     position:sticky;
@@ -165,13 +164,14 @@ input[type=text],input[type=number],.gender{
     backdrop-filter: blur(10px);
     box-shadow: 5px 5px 20px 12px rgba(61, 69, 68, 0.623);
     user-select: none;
+    background-color: rgba(240, 248, 255, 0.419);
 }
 .image{
     position: absolute;
     top: 110px;
 }
 .image img{
-    width: 900px;
+    width: 800px;
 }
 #client{
     padding-top: 100px;

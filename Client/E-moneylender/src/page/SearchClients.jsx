@@ -33,12 +33,12 @@ const SearchClients = () => {
   </section>
 
   if (error) return <section id='client' style={{ position: "relative" }}>
-  <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
-    <div className="userdatadiv">
-      <h2>An error has occurred: <b>{error.message}</b></h2>
+    <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+      <div className="userdatadiv">
+        <h2>An error has occurred: <b>{error.message}</b></h2>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
   console.log(data);
 
   // const searchUserbyName = async (e)=>{setSearchName(e.target?.value);}
@@ -49,12 +49,12 @@ const SearchClients = () => {
   }
 
   return (
-    <section id='client' style={{ position: "relative" }}>
-      <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+    <section id='client' style={{ position: "relative"}}>
+      <div style={{ display: "flex",
+       flexDirection: "column",
+       justifyContent: "center",
+       alignItems: "center"}}>
 
-        {/* <div className="searchBar">
-          <input type="text" onChange={e => searchUserbyName(e)} />
-        </div> */}
         <div className="userdatadiv">
           <table>
             <thead style={{ position: "sticky", top: "0px", backgroundColor: "burlywood", fontStyle: "oblique", fontWeight: "600" }}>
@@ -66,11 +66,11 @@ const SearchClients = () => {
                 <td className="tabledata">Status</td>
               </tr>
             </thead>
-            <tbody style={{ overflow: "scroll" }}>
+            <tbody>
               {data?.map((user, index) =>
-                <tr  key={index} onClick={() => searchUser(user.name)} className="userDetails" style={{ display: "flex",cursor:"pointer" }}>
+                <tr key={index} onClick={() => searchUser(user.name)} className="userDetails" style={{ display: "flex", cursor: "pointer" }}>
                   <td className="tabledata index index_data">{index + 1}</td>
-                  <td className="tabledata personal"><span className='name'>{user.name}</span><br /><span className='phone'><img src="/images/phone.png" alt="" width="12px" />{user.adhaar}</span></td>
+                  <td className="tabledata personal"><span className='name'>{user.name}</span><br /><span className='phone'><img src="/images/phone.png" alt="" width="12px" />{user?.phone}</span></td>
                   <td className="tabledata FatherName personal2"><span>{user.fathername}</span><br /><span className="id"><img src="/images/id.png" alt="" width="20px" />{user.adhaar}</span></td>
                   <td className="tabledata LoanDetails">
                     <span>
