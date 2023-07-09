@@ -102,8 +102,8 @@ input[type=text],input[type=number],.gender{
     border-left: 1px solid rgba(128, 128, 128, 0.387);
 }
 .userdatadiv{
-    /* display: flex;
-    flex-direction: column; */
+    display: flex;
+    flex-direction: column;
     /* margin-top: 100px; */
 }
 .userDetailsHeader{
@@ -121,7 +121,7 @@ input[type=text],input[type=number],.gender{
     display:flex
 }
 .popup_forClientDetails{
-    height: 90vh;
+    height: 80vh;
     width: 90vw;
     position:sticky;
     bottom: 5%;
@@ -177,11 +177,11 @@ input[type=text],input[type=number],.gender{
     width: 800px;
 }
 #client{
-    /* padding-top: 100px; */
     margin-top: 50px;
     background-color: rgba(196, 227, 255, 0.096);
     overflow-x: hidden;
 }
+
 .personal{
     display: flex;
     flex-direction: column;

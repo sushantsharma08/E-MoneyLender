@@ -47,7 +47,7 @@ const SearchClients = () => {
     setSearchName(e);
     setShowModal(true)
   }
-  const checkName = (e)=>{
+  const checkName = (e) => {
     console.log(e.target.id);
   }
 
@@ -81,13 +81,8 @@ const SearchClients = () => {
                       <br />
                       <b>{user.remainingamount}</b></span></td>
                   <td className="tabledata status" style={{ color: user.remainingamount > 0 ? "green" : "red", textAlign: "center" }}>
-                    <span style={{
-                      backgroundColor: user.remainingamount > 0 ? "rgba(147, 209, 147, 0.359)" : "rgba(241, 170, 170, 0.753);",
-                    }}>
-                      {user.remainingamount > 0 ? "Active" : <span id={user._id} onClick={(e)=>checkName(e)}>Close Account</span>
-                      // <button style={{padding:"5px",borderRadius:"30px",border:"none"}}>Close Account</button>
-                      }
-                    </span>
+                    {user.remainingamount > 0 ? <span style={{ backgroundColor: "rgba(147, 209, 147, 0.359)" }}>Active</span> : <span style={{ backgroundColor: "rgba(241, 170, 170, 0.753)" }} id={user._id} onClick={(e) => checkName(e)}>Close Account</span>
+                    }
                   </td>
                 </tr>
               )}
