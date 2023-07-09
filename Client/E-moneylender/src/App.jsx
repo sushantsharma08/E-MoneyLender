@@ -15,7 +15,6 @@ function App() {
 
   return (
     <div className="App">
-      {/* <Form/> */}
       <Router>
         <QueryClientProvider client={queryClient}>
           <div className="navbar">
@@ -24,7 +23,6 @@ function App() {
           <Routes>
             <Route path='/form' element={<Form />} />
             <Route path='/search' element={<SearchClients />} />
-
           </Routes>
         </QueryClientProvider>
       </Router>

@@ -3,7 +3,7 @@ import{Link} from 'react-router-dom'
 
 const Navbar = () => {
   return (
-    <div style={{width:"100vw",display:"flex"}}>
+    <div style={{display:"flex"}}>
     <h4 style={{marginLeft:"50px"}}>E-moneyLender</h4>
     <nav style={{marginLeft:"150px"}}>
     <Link className='li' to="/" >Home</Link>

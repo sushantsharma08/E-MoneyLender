@@ -47,13 +47,13 @@ const SearchClients = () => {
     setSearchName(e);
     setShowModal(true)
   }
+  const checkName = (e)=>{
+    console.log(e.target.id);
+  }
 
   return (
-    <section id='client' style={{ position: "relative"}}>
-      <div style={{ display: "flex",
-       flexDirection: "column",
-       justifyContent: "center",
-       alignItems: "center"}}>
+    <section id='client' >
+      <div style={{}}>
 
         <div className="userdatadiv">
           <table>
@@ -84,7 +84,9 @@ const SearchClients = () => {
                     <span style={{
                       backgroundColor: user.remainingamount > 0 ? "rgba(147, 209, 147, 0.359)" : "rgba(241, 170, 170, 0.753);",
                     }}>
-                      {user.remainingamount > 0 ? "Active" : <button>Close Account</button>}
+                      {user.remainingamount > 0 ? "Active" : <span id={user._id} onClick={(e)=>checkName(e)}>Close Account</span>
+                      // <button style={{padding:"5px",borderRadius:"30px",border:"none"}}>Close Account</button>
+                      }
                     </span>
                   </td>
                 </tr>
