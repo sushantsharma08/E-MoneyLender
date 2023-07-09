@@ -17,14 +17,16 @@ function App() {
     <div className="App">
       {/* <Form/> */}
       <Router>
-          <QueryClientProvider client={queryClient}>
-        <Navbar />
-        <Routes>
-          <Route path='/form' element={<Form />} />
-          <Route path='/search' element={<SearchClients />} />
-          
-        </Routes>
-          </QueryClientProvider>
+        <QueryClientProvider client={queryClient}>
+          <div className="navbar">
+            <Navbar />
+          </div>
+          <Routes>
+            <Route path='/form' element={<Form />} />
+            <Route path='/search' element={<SearchClients />} />
+
+          </Routes>
+        </QueryClientProvider>
       </Router>
     </div>
   )

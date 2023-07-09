@@ -72,47 +72,47 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
             style={{ display: modalStatus ? "block" : "none" }}>
             <button style={{ position: "absolute", right: "5px", top: "5px" }} onClick={(e) => closeModal(e)} >close</button>
             <div className="table">
-                <h1>Client Details</h1>
-                <table style={{ backgroundColor: "rgba(0, 0, 0, 0.300)", padding: "5px" }}>
-                    <tbody style={{ backgroundColor: "rgba(217, 217, 217, 0.314)", color: "" }}>
-                        <tr className='popup_data'>
-                            <td>Name</td>
-                            <td>{Data?.name}</td>
+                <h1 style={{marginTop:"50px",color:"ghostwhite"}}>Client Details</h1>
+                <table className='popup_table'>
+                    <tbody>
+                        <tr>
+                            <td className="popup__tabledata">Name</td>
+                            <td className="popup__tabledata">{Data?.name}</td>
                         </tr>
 
-                        <tr className='popup_data'>
-                            <td>Father's Name :</td>
-                            <td>{Data?.fathername}</td>
+                        <tr>
+                            <td className="popup__tabledata">Father's Name :</td>
+                            <td className="popup__tabledata">{Data?.fathername}</td>
                         </tr>
 
-                        <tr className='popup_data'>
-                            <td>Adhaar No. :</td>
-                            <td>{Data?.adhaar}</td>
+                        <tr>
+                            <td className="popup__tabledata">Adhaar No. :</td>
+                            <td className="popup__tabledata">{Data?.adhaar}</td>
                         </tr>
 
-                        <tr className='popup_data'>
-                            <td>Loan Amount :</td>
-                            <td>{Data?.loanamount}</td>
+                        <tr>
+                            <td className="popup__tabledata">Loan Amount :</td>
+                            <td className="popup__tabledata">{Data?.loanamount}</td>
                         </tr>
 
-                        <tr className='popup_data'>
-                            <td>Total Amount :</td>
-                            <td>{Data?.totalAmount}</td>
+                        <tr>
+                            <td className="popup__tabledata">Total Amount :</td>
+                            <td className="popup__tabledata">{Data?.totalAmount}</td>
                         </tr>
 
-                        <tr className='popup_data'>
-                            <td>Monthly Instalment :</td>
-                            <td>{Data?.Instalment}</td>
+                        <tr>
+                            <td className="popup__tabledata">Monthly Instalment :</td>
+                            <td className="popup__tabledata">{Data?.Instalment}</td>
                         </tr>
 
-                        <tr className='popup_data'>
-                            <td>Instalments Done :</td>
-                            <td>{Data?.InstalmentsDone}</td>
+                        <tr>
+                            <td className="popup__tabledata">Instalments Done :</td>
+                            <td className="popup__tabledata">{Data?.InstalmentsDone}</td>
                         </tr>
 
-                        <tr className='popup_data' style={{ backgroundColor: Data?.remainingamount <= 0 ? "red" : "" }}>
-                            <td>Remaining Amount :</td>
-                            <td>{Data?.remainingamount}</td>
+                        <tr style={{ backgroundColor: Data?.remainingamount <= 0 ? "red" : "" }}>
+                            <td className="popup__tabledata">Remaining Amount :</td>
+                            <td className="popup__tabledata">{Data?.remainingamount}</td>
                         </tr>
 
                     </tbody>
