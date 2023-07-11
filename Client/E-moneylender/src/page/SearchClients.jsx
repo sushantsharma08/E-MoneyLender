@@ -54,7 +54,8 @@ const SearchClients = () => {
 
   return (
     <section id='client' >
-      <div style={{display:"flex",alignItems:"center",justifyContent:"center"}}>
+
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
 
         <div className="userdatadiv">
           <table>
@@ -70,12 +71,14 @@ const SearchClients = () => {
             </thead>
             <tbody>
               {data?.map((user, index) =>
-                <tr key={index} onClick={() => searchUser(user.name)} className="userDetails" style={{ display: "flex", cursor: "pointer" }}>
+                <tr key={index} className="userDetails" style={{ display: "flex", cursor: "pointer" }}>
                   <td className="tabledata index index_data">{index + 1}</td>
                   <td className="tabledata personal"><span className='name'>{user.name}</span><br /><span className='phone'><img src="/images/phone.png" alt="" width="12px" />{user?.phone}</span></td>
                   <td className="tabledata FatherName personal2"><span>{user.fathername}</span><br /></td>
                   <td className="tabledata adhaar">
-                  <span className="id"> <img src="/images/id.png" alt="" width="20px" />{user.adhaar}</span>
+                    <span className="id">
+                       <img src="/images/id.png" alt="" width="20px" />
+                       {user.adhaar}</span>
                   </td>
                   <td className="tabledata LoanDetails">
                     <span>
@@ -86,7 +89,7 @@ const SearchClients = () => {
                       <br />
                       <b>{user.remainingamount}</b></span></td>
                   <td className="tabledata status" style={{ color: user.remainingamount > 0 ? "green" : "red", textAlign: "center" }}>
-                    {user.remainingamount > 0 ? <span style={{ backgroundColor: "rgba(147, 209, 147, 0.359)" }}>Active</span> : <span style={{ backgroundColor: "rgba(241, 170, 170, 0.753)" }} id={user._id} onClick={(e) => checkName(e)}>Close Account</span>
+                    {user.remainingamount > 0 ? <span onClick={() => searchUser(user.name)} style={{ backgroundColor: "rgba(147, 209, 147, 0.359)" }}>Active</span> : <span style={{ backgroundColor: "rgba(241, 170, 170, 0.753)" }} id={user._id} onClick={(e) => checkName(e)}>Close Account</span>
                     }
                   </td>
                 </tr>
@@ -96,7 +99,9 @@ const SearchClients = () => {
         </div>
 
       </div>
-      <QueryClientProvider client={queryClient}><Popup show={showModal} clientName={SearchName} /></QueryClientProvider>
+      <QueryClientProvider client={queryClient}>
+        <Popup show={showModal} clientName={SearchName}/>
+      </QueryClientProvider>
 
     </section>
   )

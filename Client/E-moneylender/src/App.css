@@ -1,21 +1,25 @@
-*{
-    margin: 0;padding: 0;
+* {
+    margin: 0;
+    padding: 0;
 }
-.App{
+
+.App {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100vw;
     height: 100vh;
 }
-.navbar{
+
+.navbar {
     border-bottom: 2px solid rgb(236, 225, 225);
     padding-block: 20px;
     width: inherit;
     font-size: x-large;
     background-color: blanchedalmond;
 }
-.Form__row{
+
+.Form__row {
     display: flex;
     border-bottom: 2px solid rgb(115, 115, 115);
     height: 40px;
@@ -23,26 +27,32 @@
     justify-content: space-around;
     width: 600px;
 }
-.Form__row .label{
+
+.Form__row .label {
     /* width: 170px; */
     display: flex;
     align-items: center;
     text-align: left;
     padding-left: 20px;
-    width:inherit;
+    width: inherit;
     height: inherit;
     background-color: rgba(186, 168, 214, 0.538);
     font-size: larger;
 }
-.inputField{
+
+.inputField {
     display: flex;
     width: 260px;
     justify-content: space-evenly;
 }
-input[type=radio]{
-width: 17px;
+
+input[type=radio] {
+    width: 17px;
 }
-input[type=text],input[type=number],.gender{
+
+input[type=text],
+input[type=number],
+.gender {
     padding-inline: 10px;
     height: 38px;
     width: inherit;
@@ -52,7 +62,8 @@ input[type=text],input[type=number],.gender{
     font-size: larger;
     background-color: rgba(182, 194, 227, 0.684);
 }
-.form__mainsection{
+
+.form__mainsection {
     width: inherit;
     height: inherit;
     display: flex;
@@ -60,14 +71,16 @@ input[type=text],input[type=number],.gender{
     justify-content: center;
     background-color: rgba(210, 66, 66, 0.161);
 }
-.btnDiv{
+
+.btnDiv {
     /* background-color: rgba(30, 210, 141, 0.562); */
     background-color: rgba(210, 129, 30, 0.106);
     height: 40px;
     display: flex;
     justify-content: center;
 }
-.form__saveBtn{
+
+.form__saveBtn {
     font-size: large;
     padding: 5px;
     padding-inline: 15px;
@@ -76,24 +89,28 @@ input[type=text],input[type=number],.gender{
     width: 190px;
     color: rgb(209, 209, 209);
 }
-.form__saveBtn:hover{
-    box-shadow: 7px 2px 17px 10px  rgba(30, 210, 141, 0.562);
+
+.form__saveBtn:hover {
+    box-shadow: 7px 2px 17px 10px rgba(30, 210, 141, 0.562);
     background-color: rgba(43, 153, 226, 0.424);
 }
-.gender{
+
+.gender {
     display: flex;
     align-items: center;
     text-decoration: underline;
     color: black;
 }
-.li{
+
+.li {
     margin-inline: 15px;
-    color:cornflowerblue;
+    color: cornflowerblue;
     font-weight: 500;
     text-decoration: none;
     font-size: large;
 }
-.tabledata{
+
+.tabledata {
     /* margin-block: 3px; */
     padding: 3px;
     padding-inline: 0.3rem;
@@ -101,65 +118,80 @@ input[type=text],input[type=number],.gender{
     min-width: 150px;
     border-left: 1px solid rgba(128, 128, 128, 0.387);
 }
-.userdatadiv{
+
+.userdatadiv {
     display: flex;
     flex-direction: column;
-    max-width: max-content;
     /* margin-top: 100px; */
+    /* width: 100vw ;
+    overflow-x: hidden; */
 }
-.userDetailsHeader{
+
+.userDetailsHeader {
     border: 2px solid black;
-    height:50px;
+    height: 50px;
     font-size: larger;
 }
-.userDetails{
+
+.userDetails {
     border: 1px solid rgba(0, 0, 0, 0.468);
-    height:70px;
+    height: 70px;
     margin: 0;
     padding: 0;
 }
-.searchBar{
-    display:flex
+
+.searchBar {
+    display: flex
 }
-.popup_forClientDetails{
+
+.popup_forClientDetails {
     height: 80vh;
     width: 90vw;
-    position:sticky;
+    position: sticky;
     bottom: 10%;
     left: 5%;
-    background:linear-gradient(40deg, rgb(248, 231, 207),rgb(210, 166, 166),rgb(180, 180, 241));
+    background: linear-gradient(40deg, rgb(248, 231, 207), rgb(210, 166, 166), rgb(180, 180, 241));
     display: flex;
     justify-content: center;
     text-align: center;
     /* backdrop-filter:blur(10px); */
 }
+
 .userDetailsHeader td {
     text-align: center;
 }
-.LoanDetails{
+
+.LoanDetails {
     display: flex;
     flex-direction: column;
     background-color: beige;
 }
-.index{
-    min-width:50px;
+
+.index {
+    min-width: 50px;
 }
-.index_data{
-     text-align: center;
-     padding: auto;
-     margin: auto;
-     font-size:larger;
+
+.index_data {
+    text-align: center;
+    padding: auto;
+    margin: auto;
+    font-size: larger;
 }
-.status{
+
+.status {
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.status span{
-    border:1px solid rgb(237, 232, 232);padding-inline:9px;padding-block:4px;
-    border-radius:25px;
+
+.status span {
+    border: 1px solid rgb(237, 232, 232);
+    padding-inline: 9px;
+    padding-block: 4px;
+    border-radius: 25px;
 }
-.form{
+
+.form {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -170,35 +202,42 @@ input[type=text],input[type=number],.gender{
     user-select: none;
     background-color: rgba(240, 248, 255, 0.419);
 }
-.image{
+
+.image {
     position: absolute;
     top: 110px;
 }
-.image img{
+
+.image img {
     width: 800px;
 }
-#client{
+
+#client {
     margin-top: 50px;
     background-color: rgba(196, 227, 255, 0.096);
     /* overflow-x: hidden; */
 }
 
-.personal{
+.personal {
     display: flex;
     flex-direction: column;
     background-color: rgb(212, 231, 231);
 }
-.personal2{
+
+.personal2 {
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
 }
-.name{
+
+.name {
     font-weight: 600;
 }
-.phone{
+
+.phone {
     align-self: center;
 }
-.id{
+
+.id {
     display: flex;
     align-self: flex-end;
     justify-content: center;

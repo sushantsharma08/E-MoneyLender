@@ -8,7 +8,7 @@ import {
 const Popup = (props = { show: Boolean, clientName: String }) => {
     const [Data, setData] = useState();
     const [modalStatus, setmodalStatus] = useState();
-    const [text,setText]= useState();
+    const [text, setText] = useState();
     // const { isLoading, error,6data } = useQuery({
     //     queryKey: ['clientData'],
     //     queryFn: () =>
@@ -22,7 +22,7 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
     //     if (modalStatus===false) {
     //         setData();
     //     }else{
-            
+
     //     }
     // }, [props.clientName])
 
@@ -40,10 +40,10 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
             setData(res.data)
         });
 
-        if (Data?.remainingamount<=0) {
+        if (Data?.remainingamount <= 0) {
             setText('Loan Complete please close account')
-        }else{
-            setText(`Instalment for month ${Data?.InstalmentsDone+1} Done`);
+        } else {
+            setText(`Instalment for month ${Data?.InstalmentsDone + 1} Done`);
         }
 
     }, [props.clientName]);
@@ -51,32 +51,41 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
     const closeModal = () => {
         setmodalStatus(false);
         resetpopup();
+        window.location.reload();
     }
 
-    const resetpopup = ()=>{
+    const resetpopup = () => {
         setData(null);
         console.log(Data);
     }
 
-    console.log(props.clientName);
-
-    const patchInstalment = ()=>{
-        axios.patch(`https://e-money-lender-back.vercel.app/client/instalmentDone/${Data?.name}`,{
-            InstalmentsDone:Data?.InstalmentsDone+1,
-            remainingamount:Data?.remainingamount-(1*Data?.Instalment)
+    const patchInstalment = () => {
+        axios.patch(`https://e-money-lender-back.vercel.app/client/instalmentDone/${Data?.name}`, {
+            InstalmentsDone: Data?.InstalmentsDone + 1,
+            remainingamount: Data?.remainingamount - (1 * Data?.Instalment)
         });
     }
-    console.log(Data);
+
+    const printData = () => { 
+        let printContents = document.getElementById('printablediv').innerHTML;
+        let originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+        window.location.reload();
+    }
+
     return (
+
         <div className='popup_forClientDetails'
             style={{ display: modalStatus ? "block" : "none" }}>
-            <button style={{ position: "absolute", right: "5px", top: "5px" }} onClick={(e) => closeModal(e)} >close</button>
-            <div className="table">
-                <h1 style={{marginTop:"50px",color:"ghostwhite"}}>Client Details</h1>
+            <button className='popup__btn popup__closebtn' style={{ position: "absolute", right: "5px", top: "5px" }} onClick={(e) => closeModal(e)} ><img src="/images/close.png" alt="Close" width="40px" srcset="" /></button>
+            <div id='printablediv' className="table">
+                <h1 style={{ marginTop: "50px", color: "ghostwhite" }}>Client Details</h1>
                 <table className='popup_table'>
                     <tbody>
                         <tr>
-                            <td className="popup__tabledata">Name</td>
+                            <td className="popup__tabledata">Name :</td>
                             <td className="popup__tabledata">{Data?.name}</td>
                         </tr>
 
@@ -117,9 +126,13 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
 
                     </tbody>
                 </table>
-                <button className='instalmentDone' onClick={() => patchInstalment()}>{Data?.remainingamount > 0 ? `Instalment for month ${Data?.InstalmentsDone + 1} Done` : "Loan complete"}</button>
             </div>
-            {/* <button onClick={print}>print</button> */}
+            <div className="popup__btns">
+                <button className='popup__btn instalmentDone popup__instalmentbtn' onClick={() => patchInstalment()}>
+                    {Data?.remainingamount > 0 ? `Instalment for month ${Data?.InstalmentsDone + 1} Done` : "Loan complete"}
+                </button>
+                <button className='popup__btn popup__printBtn' onClick={printData}><span><img height="20px" src="/images/print.png" alt="" srcset="" /></span>Print</button>
+            </div>
         </div>
     )
 }
