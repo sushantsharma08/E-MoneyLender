@@ -60,7 +60,7 @@ const Form = () => {
                     <div className="Form__row">
                         <label className='label' htmlFor="name">Name</label>
                         <div className='inputField'>
-                            <input id='name' type="text" onChange={(e) => { setName(e.target.value.toLowerCase().trim()) }} />
+                            <input id='name' type="text" className='addClient__Input' onChange={(e) => { setName(e.target.value.toLowerCase().trim()) }} />
                         </div>
                     </div>
 
@@ -68,7 +68,7 @@ const Form = () => {
                     <div className="Form__row">
                         <label className='label' htmlFor="fathername">Father Name</label>
                         <div className='inputField'>
-                            <input id='fathername' type="text" onChange={(e) => { setFathersname(e.target.value.toLowerCase()) }} />
+                            <input id='fathername' type="text" className='addClient__Input' onChange={(e) => { setFathersname(e.target.value.toLowerCase()) }} />
                         </div>
                     </div>
 
@@ -102,14 +102,14 @@ const Form = () => {
                     <div className="Form__row">
                         <label className='label' htmlFor="phone">Phone Number</label>
                         <div className='inputField'>
-                            <input type="number" name="phone" id="phone" onChange={(e) => { setPhone(e.target.value) }} />
+                            <input type="number" className='addClient__Input'  name="phone" id="phone" onChange={(e) => { setPhone(e.target.value) }} />
                         </div>
                     </div>
 
                     <div className="Form__row">
                         <label className='label' htmlFor="adhaar">Adhaar Number</label>
                         <div className='inputField'>
-                            <input type="number" name="AdhaarNumber" id="adhaar" onChange={(e) => { setAdhaar(e.target.value) }} />
+                            <input type="number" className='addClient__Input'  name="AdhaarNumber" id="adhaar" onChange={(e) => { setAdhaar(e.target.value) }} />
                         </div>
                     </div>
 
@@ -117,7 +117,7 @@ const Form = () => {
                     <div className="Form__row">
                         <label className='label' htmlFor="Amount">Loan Amount</label>
                         <div className='inputField'>
-                            <input type="number" name="loanamount" id="Amount" onChange={(e) => { setValues(e) }} />
+                            <input type="number" className='addClient__Input'  name="loanamount" id="Amount" onChange={(e) => { setValues(e) }} />
                         </div>
                     </div>
 
@@ -125,7 +125,7 @@ const Form = () => {
                     <div className="Form__row">
                         <label className='label' htmlFor="monthlyinstalment">Monthly Installment</label>
                         <div className='inputField'>
-                            <input type="number" disabled name="loanamount" id="monthlyinstalment" value={monthlyInstalment} />
+                            <input type="number" className='addClient__Input'  disabled name="loanamount" id="monthlyinstalment" value={monthlyInstalment} />
                         </div>
 
                         {/* @36% per month */}
@@ -134,7 +134,7 @@ const Form = () => {
                     <div className="Form__row">
                         <label className='label' htmlFor="totalAmount">Total Amount</label>
                         <div className='inputField'>
-                            <input type="number" disabled name="totalamount" id="totalAmount" value={totalAmount} />
+                            <input type="number" className='addClient__Input'  disabled name="totalamount" id="totalAmount" value={totalAmount} />
                         </div>
                     </div>
 
@@ -142,7 +142,7 @@ const Form = () => {
                     <div className="Form__row">
                         <label className='label' htmlFor="missedamount">If missed installment</label>
                         <div className='inputField'>
-                            <input type="number" disabled name="missed" id="missedamount" value={missedInstalment} />
+                            <input type="number" className='addClient__Input'  disabled name="missed" id="missedamount" value={missedInstalment} />
                         </div>
                     </div>
 
