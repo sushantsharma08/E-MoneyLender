@@ -50,8 +50,7 @@ input[type=radio] {
     width: 17px;
 }
 
-input[type=text],
-input[type=number],
+.addClient__Input,
 .gender {
     padding-inline: 10px;
     height: 38px;
