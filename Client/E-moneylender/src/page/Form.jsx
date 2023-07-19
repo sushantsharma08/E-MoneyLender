@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from "axios";
+import { useGetUserId } from '../hooks/useGetUserId';
+
 
 const Form = () => {
 
@@ -12,6 +14,8 @@ const Form = () => {
     const [missedInstalment, setMissedInstalment] = useState(0);
     const [totalAmount, setTotalAmount] = useState(0);
     const [phone,setPhone]=useState(0);
+    const LenderId = useGetUserId();
+  
 
 
     const setValues = (amount) => {
@@ -42,7 +46,8 @@ const Form = () => {
                 Instalment: monthlyInstalment,
                 InstalmentsDone: 0,
                 remainingamount: totalAmount,
-                totalAmount
+                totalAmount,
+                LenderId
             });
         } catch (error) {
             console.log(error);
