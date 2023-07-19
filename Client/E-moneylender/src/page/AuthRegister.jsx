@@ -13,11 +13,11 @@ const AuthRegister = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const CreateUser = () => {
+  const CreateUser = async () => {
     event.preventDefault();
     if (password == confirmPassword && password!=="") {
       try {
-        const Response = axios.post("https://e-money-lender-back.vercel.app/auth/register", {
+        const Response = await axios.post("https://e-money-lender-back.vercel.app/auth/register", {
           name,
           email,
           phone,
@@ -27,6 +27,19 @@ const AuthRegister = () => {
           password,
         })
         console.log(Response);
+        if (Response.data.status==400) {
+          toast(Response.data.message,{
+            style:{
+              backgroundColor:"rgba(241, 170, 170,1)"
+            }
+          })
+        }else if (Response.data.status==201) {
+          toast(Response.data.message,{
+            style:{
+              backgroundColor:"greenyellow"
+            }
+          })
+        }
       } catch (error) {
         toast.error(error.message)
       }
