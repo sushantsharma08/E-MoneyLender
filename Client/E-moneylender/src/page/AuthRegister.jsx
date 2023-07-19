@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom"
+
 
 
 const AuthRegister = () => {
@@ -13,9 +15,15 @@ const AuthRegister = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  const navigate = useNavigate();
+
+
   const CreateUser = async () => {
     event.preventDefault();
     if (password == confirmPassword && password!=="") {
+      toast.loading("Creating User",{
+        duration:1000
+      })
       try {
         const Response = await axios.post("https://e-money-lender-back.vercel.app/auth/register", {
           name,
@@ -39,6 +47,7 @@ const AuthRegister = () => {
               backgroundColor:"greenyellow"
             }
           })
+          navigate("/auth_login")
         }
       } catch (error) {
         toast.error(error.message)
