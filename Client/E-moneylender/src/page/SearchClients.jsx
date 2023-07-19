@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Popup from './Popup';
+import { useGetUserId } from '../hooks/useGetUserId';
 import {
   QueryClient,
   QueryClientProvider,
@@ -15,12 +16,15 @@ const SearchClients = () => {
 
   const [SearchName, setSearchName] = useState()
   const [showClientDetailsModal, setShowClientDetailsModal] = useState(false)
-  const [UserList, setUserList] = useState([])
+  const [UserList, setUserList] = useState([]);
+  const userID = useGetUserId();
+
 
   const { isLoading, error, data } = useQuery({
     queryKey: ['repoData'],
     queryFn: () =>
-      fetch('https://e-money-lender-back.vercel.app/client/').then(
+      fetch(`https://e-money-lender-back.vercel.app/client/loadClients/${userID}`).then(
+      // fetch(`http://localhost:3001/client/loadClients/${userID}`).then(
         (res) => res.json(),
       ),
   });
@@ -31,10 +35,8 @@ const SearchClients = () => {
     setSearchName(e);
     setShowClientDetailsModal(true)
   }
-
   const OpenClientEdit = (e) => {
-    setSearchName(e);
-    set
+    // setSearchName(e);
   }
 
   const CloseAccount = (e) => {
@@ -45,6 +47,8 @@ const SearchClients = () => {
       clearTimeout()
     }, 1000);
   }
+
+  console.log(userID);
 
   //dynamic UI from useQuery output
 
@@ -136,7 +140,7 @@ const SearchClients = () => {
                       : <span style={{ backgroundColor: "rgba(241, 170, 170, 0.753)" }} id={user._id} onClick={(e) => CloseAccount(e)}>Close Account</span>
                     }
                   </td>
-                  <td className="tabledata Edit" style={{ display: "flex", justifyContent: "center", alignItems: "center" }}><span className='EditBtnSpan'>Edit</span></td>
+                  <td className="tabledata Edit" style={{ display: "flex", justifyContent: "center", alignItems: "center" }}><span className='EditBtnSpan' onClick={OpenClientEdit}>Edit</span></td>
                 </tr>
               )}
             </tbody>

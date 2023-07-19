@@ -13,7 +13,8 @@ router.post("/add_client", async (req, res) => {
         Instalment,
         InstalmentsDone,
         remainingamount,
-        totalAmount
+        totalAmount,
+        LenderId
     } = req.body;
 
     const client = await ClientModel.findOne({ adhaar });
@@ -32,7 +33,8 @@ router.post("/add_client", async (req, res) => {
         Instalment,
         InstalmentsDone,
         remainingamount,
-        totalAmount
+        totalAmount,
+        LenderId
     })
 
     await newClient.save()
@@ -44,10 +46,20 @@ router.post("/add_client", async (req, res) => {
 
 router.get("/", async (req, res) => {
     try {
+        // const users = await ClientModel.findOne({LenderId:req.params.LenderId})
         const users = await ClientModel.find({});
         res.json(users)
     } catch (error) {
-        res.json(error)
+        res.json(error);
+    }
+})
+router.get("/loadClients/:LenderId", async (req, res) => {
+    try {
+        const users = await ClientModel.find({LenderId:req.params.LenderId})
+        // const users = await ClientModel.find({});
+        res.json(users)
+    } catch (error) {
+        res.json(error);
     }
 })
 
