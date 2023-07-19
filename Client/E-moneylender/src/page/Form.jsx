@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from "axios";
 import { useGetUserId } from '../hooks/useGetUserId';
+import toast, { Toaster } from 'react-hot-toast';
 
 
 const Form = () => {
@@ -33,6 +34,9 @@ const Form = () => {
 
     const onSubmit = async (event) => {
         event.preventDefault();
+        toast.loading('Adding Client',{
+            duration:1000
+        })
         try {
             const url = "https://e-money-lender-back.vercel.app/client/add_client"
             // const url="http://localhost:3001/client/add_client"
@@ -49,6 +53,19 @@ const Form = () => {
                 totalAmount,
                 LenderId
             });
+            if (response.data.status===400) {
+                toast(response.data.message,{
+                  style:{
+                    backgroundColor:"rgba(241, 170, 170,1)"
+                  }
+                })
+              }else if (response.data.status===201) {
+                toast(response.data.message,{
+                  style:{
+                    backgroundColor:"greenyellow"
+                  }
+                })
+              }
         } catch (error) {
             console.log(error);
         }
@@ -157,6 +174,7 @@ const Form = () => {
 
                 </form>
             </div>
+            <Toaster/>
         </section>
     )
 }

@@ -20,7 +20,7 @@ router.post("/add_client", async (req, res) => {
     const client = await ClientModel.findOne({ adhaar });
 
     if (client) {
-        return res.json({ "message": "user already exists" });
+        return res.json({ status:400,message: "user already exists" });
     }
 
     const newClient = new ClientModel({
@@ -40,7 +40,7 @@ router.post("/add_client", async (req, res) => {
     await newClient.save()
 
         // res.sendFile(`uploads/${file}`, { root: '.' })
-        .then(() => res.json({"message":'client added'}))
+        .then(() => res.json({status:201,message:'client added'}))
         .catch(err => res.json(err));
 })
 
