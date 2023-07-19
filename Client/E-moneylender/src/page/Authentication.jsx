@@ -22,9 +22,9 @@ const Authentication = () => {
                 username, password
             });
             const { token, userID } = await response.data;
-            setCookies("access_token",token);
             console.log(userID);
             if (token) {
+                setCookies("access_token",token);
                 toast.success('Successful', {
                     style: { backgroundColor: "greenyellow", fontSize: "large" }
                 });
@@ -35,7 +35,6 @@ const Authentication = () => {
             } else {
                 toast.error(response.data.message, {
                     style: { backgroundColor: "rgba(241, 170, 170,1)", fontWeight: "400" }
-
                 })
             }
         } catch (err) {
@@ -49,7 +48,7 @@ const Authentication = () => {
     return (
         <div className=' pt-20' >
             <Toaster />
-            <div className="flex border min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+            <div className="flex border flex-1 flex-col justify-center px-6 py-12 lg:px-8">
                 <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                     {/* <img
             className="mx-auto h-10 w-auto"
