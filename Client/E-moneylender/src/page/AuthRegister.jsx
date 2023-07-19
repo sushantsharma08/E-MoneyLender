@@ -27,13 +27,13 @@ const AuthRegister = () => {
           password,
         })
         console.log(Response);
-        if (Response.data.status==400) {
+        if (Response.data.status===400) {
           toast(Response.data.message,{
             style:{
               backgroundColor:"rgba(241, 170, 170,1)"
             }
           })
-        }else if (Response.data.status==201) {
+        }else if (Response.data.status===201) {
           toast(Response.data.message,{
             style:{
               backgroundColor:"greenyellow"
