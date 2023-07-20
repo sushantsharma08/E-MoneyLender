@@ -24,7 +24,7 @@ const SearchClients = () => {
     queryKey: ['repoData'],
     queryFn: () =>
       fetch(`https://e-money-lender-back.vercel.app/client/loadClients/${userID}`).then(
-      // fetch(`http://localhost:3001/client/loadClients/${userID}`).then(
+        // fetch(`http://localhost:3001/client/loadClients/${userID}`).then(
         (res) => res.json(),
       ),
   });
@@ -117,7 +117,7 @@ const SearchClients = () => {
             </thead>
             <tbody>
               {data?.map((user, index) =>
-                <tr key={index} className="userDetails" style={{ display: "flex"}}>
+                <tr key={index} className="userDetails" style={{ display: "flex" }}>
                   <td className="tabledata index index_data">{index + 1}</td>
                   <td className="tabledata personal"><span className='name'>{user.name}</span><br /><span className='phone'><img src="/images/phone.png" alt="" width="12px" />{user?.phone}</span></td>
                   <td className="tabledata FatherName personal2"><span>{user.fathername}</span><br /></td>

@@ -60,7 +60,7 @@ const AuthRegister = () => {
   return (
 
 
-    <div className="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
+    <div className="min-h-screen p-6 flex items-center justify-center">
       <div className="container max-w-screen-lg mx-auto">
         <div>
           <h2 className="font-semibold text-xl text-gray-600">Create Lender Account</h2>

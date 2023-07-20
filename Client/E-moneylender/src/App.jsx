@@ -21,20 +21,23 @@ function App() {
 
   return (
     <div className="App">
+
       <Router>
         <QueryClientProvider client={queryClient}>
           <div className="navbar">
             <Navbar />
           </div>
-          <Routes>
-            <Route path='/' 
-            // render={data=>Authentication.} 
-            element={!cookies.access_token?<Navigate to="/auth_login"/>:<Home/>} />
-            <Route path='/auth_login' element={<Authentication/>} />
-            <Route path='/auth_register' element={<AuthRegister/>} />
-            <Route path='/form'element={!cookies.access_token?<Navigate to="/auth_login"/>:<Form />} />
-            <Route path='/search'element={!cookies.access_token?<Navigate to="/auth_login"/>:<SearchClients />} />
-          </Routes>
+          <div className="main mt-20">
+            <Routes>
+              <Route path='/'
+                // render={data=>Authentication.} 
+                element={!cookies.access_token ? <Navigate to="/auth_login" /> : <Home />} />
+              <Route path='/auth_login' element={<Authentication />} />
+              <Route path='/auth_register' element={<AuthRegister />} />
+              <Route path='/form' element={!cookies.access_token ? <Navigate to="/auth_login" /> : <Form />} />
+              <Route path='/search' element={!cookies.access_token ? <Navigate to="/auth_login" /> : <SearchClients />} />
+            </Routes>
+          </div>
         </QueryClientProvider>
       </Router>
     </div>

@@ -14,9 +14,9 @@ const Form = () => {
     const [monthlyInstalment, setMonthlyInstalment] = useState(0);
     const [missedInstalment, setMissedInstalment] = useState(0);
     const [totalAmount, setTotalAmount] = useState(0);
-    const [phone,setPhone]=useState(0);
+    const [phone, setPhone] = useState(0);
     const LenderId = useGetUserId();
-  
+
 
 
     const setValues = (amount) => {
@@ -34,8 +34,8 @@ const Form = () => {
 
     const onSubmit = async (event) => {
         event.preventDefault();
-        toast.loading('Adding Client',{
-            duration:1000
+        toast.loading('Adding Client', {
+            duration: 1000
         })
         try {
             const url = "https://e-money-lender-back.vercel.app/client/add_client"
@@ -53,19 +53,19 @@ const Form = () => {
                 totalAmount,
                 LenderId
             });
-            if (response.data.status===400) {
-                toast(response.data.message,{
-                  style:{
-                    backgroundColor:"rgba(241, 170, 170,1)"
-                  }
+            if (response.data.status === 400) {
+                toast(response.data.message, {
+                    style: {
+                        backgroundColor: "rgba(241, 170, 170,1)"
+                    }
                 })
-              }else if (response.data.status===201) {
-                toast(response.data.message,{
-                  style:{
-                    backgroundColor:"greenyellow"
-                  }
+            } else if (response.data.status === 201) {
+                toast(response.data.message, {
+                    style: {
+                        backgroundColor: "greenyellow"
+                    }
                 })
-              }
+            }
         } catch (error) {
             console.log(error);
         }
@@ -74,7 +74,7 @@ const Form = () => {
     return (
         <section className='form__mainsection'>
             <div className="image">
-                <img src="/images/lenderIcon.png"/>
+                <img src="/images/lenderIcon.png" />
             </div>
             <div className='form'>
                 <form action='/add_client' method="post" encType='multipart/form-data'>
@@ -124,14 +124,14 @@ const Form = () => {
                     <div className="Form__row">
                         <label className='label' htmlFor="phone">Phone Number</label>
                         <div className='inputField'>
-                            <input type="number" className='addClient__Input'  name="phone" id="phone" onChange={(e) => { setPhone(e.target.value) }} />
+                            <input type="number" className='addClient__Input' name="phone" id="phone" onChange={(e) => { setPhone(e.target.value) }} />
                         </div>
                     </div>
 
                     <div className="Form__row">
                         <label className='label' htmlFor="adhaar">Adhaar Number</label>
                         <div className='inputField'>
-                            <input type="number" className='addClient__Input'  name="AdhaarNumber" id="adhaar" onChange={(e) => { setAdhaar(e.target.value) }} />
+                            <input type="number" className='addClient__Input' name="AdhaarNumber" id="adhaar" onChange={(e) => { setAdhaar(e.target.value) }} />
                         </div>
                     </div>
 
@@ -139,7 +139,7 @@ const Form = () => {
                     <div className="Form__row">
                         <label className='label' htmlFor="Amount">Loan Amount</label>
                         <div className='inputField'>
-                            <input type="number" className='addClient__Input'  name="loanamount" id="Amount" onChange={(e) => { setValues(e) }} />
+                            <input type="number" className='addClient__Input' name="loanamount" id="Amount" onChange={(e) => { setValues(e) }} />
                         </div>
                     </div>
 
@@ -147,7 +147,7 @@ const Form = () => {
                     <div className="Form__row">
                         <label className='label' htmlFor="monthlyinstalment">Monthly Installment</label>
                         <div className='inputField'>
-                            <input type="number" className='addClient__Input'  disabled name="loanamount" id="monthlyinstalment" value={monthlyInstalment} />
+                            <input type="number" className='addClient__Input' disabled name="loanamount" id="monthlyinstalment" value={monthlyInstalment} />
                         </div>
 
                         {/* @36% per month */}
@@ -156,7 +156,7 @@ const Form = () => {
                     <div className="Form__row">
                         <label className='label' htmlFor="totalAmount">Total Amount</label>
                         <div className='inputField'>
-                            <input type="number" className='addClient__Input'  disabled name="totalamount" id="totalAmount" value={totalAmount} />
+                            <input type="number" className='addClient__Input' disabled name="totalamount" id="totalAmount" value={totalAmount} />
                         </div>
                     </div>
 
@@ -164,7 +164,7 @@ const Form = () => {
                     <div className="Form__row">
                         <label className='label' htmlFor="missedamount">If missed installment</label>
                         <div className='inputField'>
-                            <input type="number" className='addClient__Input'  disabled name="missed" id="missedamount" value={missedInstalment} />
+                            <input type="number" className='addClient__Input' disabled name="missed" id="missedamount" value={missedInstalment} />
                         </div>
                     </div>
 
@@ -174,7 +174,7 @@ const Form = () => {
 
                 </form>
             </div>
-            <Toaster/>
+            <Toaster />
         </section>
     )
 }

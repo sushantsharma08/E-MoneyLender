@@ -20,7 +20,7 @@ router.post("/add_client", async (req, res) => {
     const client = await ClientModel.findOne({ adhaar });
 
     if (client) {
-        return res.json({ status:400,message: "user already exists" });
+        return res.json({ status: 400, message: "user already exists" });
     }
 
     const newClient = new ClientModel({
@@ -40,7 +40,7 @@ router.post("/add_client", async (req, res) => {
     await newClient.save()
 
         // res.sendFile(`uploads/${file}`, { root: '.' })
-        .then(() => res.json({status:201,message:'client added'}))
+        .then(() => res.json({ status: 201, message: 'client added' }))
         .catch(err => res.json(err));
 })
 
@@ -55,7 +55,7 @@ router.get("/", async (req, res) => {
 })
 router.get("/loadClients/:LenderId", async (req, res) => {
     try {
-        const users = await ClientModel.find({LenderId:req.params.LenderId})
+        const users = await ClientModel.find({ LenderId: req.params.LenderId })
         // const users = await ClientModel.find({});
         res.json(users)
     } catch (error) {
@@ -65,24 +65,24 @@ router.get("/loadClients/:LenderId", async (req, res) => {
 
 router.get("/searchbyname/:username", async (req, res) => {
     try {
-        const userdata = await ClientModel.findOne({name:req.params.username});
+        const userdata = await ClientModel.findOne({ name: req.params.username });
         res.json(userdata)
     } catch (error) {
         res.json(error)
     }
 })
 
-router.patch("/instalmentDone/:username",async (req,res)=>{
-    const {InstalmentsDone,remainingamount}= req.body;
-    const user = await ClientModel.findOneAndUpdate({name:req.params.username},req.body)
-    try{
+router.patch("/instalmentDone/:username", async (req, res) => {
+    const { InstalmentsDone, remainingamount } = req.body;
+    const user = await ClientModel.findOneAndUpdate({ name: req.params.username }, req.body)
+    try {
         res.json(user)
-    }catch(error){
+    } catch (error) {
         res.json(error)
     }
 })
-router.delete("/removeClient/:id",async (req,res)=>{
-    const user = await ClientModel.deleteOne({_id:req.params.id})
+router.delete("/removeClient/:id", async (req, res) => {
+    const user = await ClientModel.deleteOne({ _id: req.params.id })
 })
 
 export { router as ClientRouter }

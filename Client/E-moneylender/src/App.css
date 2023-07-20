@@ -12,11 +12,11 @@
 }
 
 .navbar {
-    border-bottom: 2px solid rgb(236, 225, 225);
+    /* border-bottom: 2px solid rgb(236, 225, 225);
     padding-block: 20px;
     width: inherit;
-    font-size: x-large;
-    background-color: blanchedalmond;
+    font-size: x-large; */
+    /* background-color: blanchedalmond; */
 }
 
 .Form__row {
