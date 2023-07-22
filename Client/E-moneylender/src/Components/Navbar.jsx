@@ -69,7 +69,6 @@ const Navbar = () => {
         <div className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
             <span className="-m-1.5 p-1.5">
-              {/* <img className="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" /> */}
             <img className='h-24' src="/images/logo.png" alt="" />
 
             </span>
@@ -86,14 +85,14 @@ const Navbar = () => {
               <div className="space-y-2 py-6">
                 {!cookies.access_token ?
                   <nav style={{ marginLeft: "150px" }}>
-                    <Link className='li -mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50' to="/auth_login" >Login</Link>
-                    <Link className='li -mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50' to="/auth_register" >Register</Link>
+                    <Link className='li -mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50' to="/auth_login" onClick={ToggleSmallScreenNavTab}>Login</Link>
+                    <Link className='li -mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50' to="/auth_register" onClick={ToggleSmallScreenNavTab}>Register</Link>
                   </nav>
                   :
                   <nav style={{ marginLeft: "150px" }}>
-                    <Link className='li -mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50' to="/" >Home</Link>
-                    <Link className='li -mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50' to="/form" >Add Client</Link>
-                    <Link className='li -mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50' to="/search" >Search Clients</Link>
+                    <Link className='li -mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50' to="/" onClick={ToggleSmallScreenNavTab}>Home</Link>
+                    <Link className='li -mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50' to="/form" onClick={ToggleSmallScreenNavTab}>Add Client</Link>
+                    <Link className='li -mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50' to="/search" onClick={ToggleSmallScreenNavTab}>Search Clients</Link>
                     <button className='logout' onClick={logout}>Logout</button>
                   </nav>}
               </div>

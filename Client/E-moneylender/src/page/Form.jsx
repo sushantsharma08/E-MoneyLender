@@ -72,13 +72,15 @@ const Form = () => {
     }
 
     return (
-        <section className='form__mainsection'>
-            <div className="image">
+        <section className='bg-red-300 form__mainsection'>
+            <div className="image ">
                 <img src="/images/lenderIcon.png" />
             </div>
             <div className='form'>
-                <form action='/add_client' method="post" encType='multipart/form-data'>
+                <form action='/add_client'
+                method="post" encType='multipart/form-data'>
 
+                    <div className="form_content">
                     <div className="Form__row">
                         <label className='label' htmlFor="name">Name</label>
                         <div className='inputField'>
@@ -113,11 +115,6 @@ const Form = () => {
                                 <label htmlFor="Gender_female">Female</label>
                             </span>
                         </div>
-                        {/* <select name="gender" id="gender" onClick={(e) => { setGender(e.target.value) }}>
-                    <option value="" selected disabled>Select</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                </select> */}
                     </div>
 
 
@@ -171,8 +168,57 @@ const Form = () => {
                     <div className='btnDiv'>
                         <button className='form__saveBtn' type='submit' onClick={onSubmit} value="save">Save</button>
                     </div>
+                    </div>
 
                 </form>
+
+                {/* <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-6">
+                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                        <tbody>
+                            <tr class="border-b border-gray-200 ">
+                                <th scope="row" class="py-4 px-14 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white bg-black/60 text-lg">
+                                    Name
+                                </th>
+                                <td class="py-4 px-14 bg-gray-50 bg-black/60 text-lg">
+                                    <input id='name' type="text" className='addClient__Input' onChange={(e) => { setName(e.target.value.toLowerCase().trim()) }} />
+                                </td>
+                            </tr>
+                            <tr class="border-b border-gray-200 ">
+                                <th scope="row" class="py-4 px-14 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white bg-black/60 text-lg">
+                                    Microsoft Surface Pro
+                                </th>
+                                <td class="py-4 px-14 bg-gray-50 bg-black/60 text-lg">
+                                    Laptop PC
+                                </td>
+                            </tr>
+                            <tr class="border-b border-gray-200 ">
+                                <th scope="row" class="py-4 px-14 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white bg-black/60 text-lg">
+                                    Magic Mouse 2
+                                </th>
+                                <td class="py-4 px-14 bg-gray-50 bg-black/60 text-lg">
+                                    Accessories
+                                </td>
+                            </tr>
+                            <tr class="border-b border-gray-200 ">
+                                <th scope="row" class="py-4 px-14 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white bg-black/60 text-lg">
+                                    Google Pixel Phone
+                                </th>
+                                <td class="py-4 px-14 bg-gray-50 bg-black/60 text-lg">
+                                    Phone
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="py-4 px-14 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white bg-black/60 text-lg">
+                                    Apple Watch 5
+                                </th>
+                                <td class="py-4 px-14 bg-gray-50 bg-black/60 text-lg">
+                                    Wearables
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div> */}
+
             </div>
             <Toaster />
         </section>
