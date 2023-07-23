@@ -7,18 +7,17 @@ import {
   useQuery,
 } from '@tanstack/react-query';
 
-const queryClient = new QueryClient()
+const queryClient1 = new QueryClient()
 
 
 
 const Home = () => {
   const LenderId = useGetUserId();
 
-  const { isLoading, error, data } = useQuery({
-    queryKey: ['repoData'],
+  const { isLoading, error, data:homedata } = useQuery({
+    queryKey: ['userData'],
     queryFn: () =>
       fetch(`https://e-money-lender-back.vercel.app/auth/user/${LenderId}`).then(
-      // fetch(`http://localhost:3001/auth/user/${LenderId}`).then(
         (res) => res.json(),
       ),
   });
@@ -29,20 +28,20 @@ const Home = () => {
     <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", paddingTop: "100px" }}>
       <div className="userdatadiv">
       <div id="wifi-loader">
-          <svg class="circle-outer" viewBox="0 0 86 86">
-            <circle class="back" cx="43" cy="43" r="40"></circle>
-            <circle class="front" cx="43" cy="43" r="40"></circle>
-            <circle class="new" cx="43" cy="43" r="40"></circle>
+          <svg className="circle-outer" viewBox="0 0 86 86">
+            <circle className="back" cx="43" cy="43" r="40"></circle>
+            <circle className="front" cx="43" cy="43" r="40"></circle>
+            <circle className="new" cx="43" cy="43" r="40"></circle>
           </svg>
-          <svg class="circle-middle" viewBox="0 0 60 60">
-            <circle class="back" cx="30" cy="30" r="27"></circle>
-            <circle class="front" cx="30" cy="30" r="27"></circle>
+          <svg className="circle-middle" viewBox="0 0 60 60">
+            <circle className="back" cx="30" cy="30" r="27"></circle>
+            <circle className="front" cx="30" cy="30" r="27"></circle>
           </svg>
-          <svg class="circle-inner" viewBox="0 0 34 34">
-            <circle class="back" cx="17" cy="17" r="14"></circle>
-            <circle class="front" cx="17" cy="17" r="14"></circle>
+          <svg className="circle-inner" viewBox="0 0 34 34">
+            <circle className="back" cx="17" cy="17" r="14"></circle>
+            <circle className="front" cx="17" cy="17" r="14"></circle>
           </svg>
-          <div class="text" data-text="Loading..."></div>
+          <div className="text" data-text="Loading..."></div>
         </div>
       </div>
     </div>
@@ -55,8 +54,6 @@ const Home = () => {
       </div>
     </div>
   </section>
-  console.log(data);
-
 
   return (
     <>
@@ -69,11 +66,11 @@ const Home = () => {
           </div>
           {/* <div className="mx-auto max-w-2xl pb-32 sm:pb-48 lg:pb-44"> */}
           <div className="slide-in-elliptic-top-fwd slide-out-top sm:mb-8 sm:flex sm:justify-center">
-            <div className="relative rounded-full px-8 py-4 leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20 text-3xl">
-              Welcome, <b><i>{data?.name}</i></b>
+            <div className="relative rounded-full px-8 py-4 leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20 text-xl">
+              Welcome, <b><i>{homedata?.name}</i></b>
             </div>
           </div>
-          <div className=''>
+          <div className='fade-in-fwd'>
             <div className="text-center flex items-center flex-col sm:flex-row">
               <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl pb-14">Data to enrich your online business</h1>
               <a href="https://storyset.com/business"><img src="/images/homelogo.gif" alt="" /></a>

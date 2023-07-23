@@ -147,7 +147,7 @@ input[type=radio] {
   }
 
   .Form__row {
-    width: 99vw;
+    width: 100vw;
   }
 
   .image {
@@ -192,7 +192,6 @@ input[type=radio] {
 
 .userDetails {
   border: 1px solid rgba(0, 0, 0, 0.468);
-  height: 70px;
   margin: 0;
   padding: 0;
 }
@@ -268,10 +267,6 @@ input[type=radio] {
 
 .name {
   font-weight: 600;
-}
-
-.phone {
-  align-self: center;
 }
 
 .id {
@@ -582,4 +577,9 @@ input[type=radio] {
             transform: translateZ(0);
     opacity: 1;
   }
+}
+
+.fade-in-fwd {
+	-webkit-animation: fade-in-fwd 0.6s cubic-bezier(0.390, 0.575, 0.565, 1.000) 4.5s both;
+	        animation: fade-in-fwd 0.6s cubic-bezier(0.390, 0.575, 0.565, 1.000) 4.5s both;
 }

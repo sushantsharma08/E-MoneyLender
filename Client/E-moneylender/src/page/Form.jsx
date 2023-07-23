@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import axios from "axios";
 import { useGetUserId } from '../hooks/useGetUserId';
 import toast, { Toaster } from 'react-hot-toast';
@@ -15,15 +15,21 @@ const Form = () => {
     const [missedInstalment, setMissedInstalment] = useState(0);
     const [totalAmount, setTotalAmount] = useState(0);
     const [phone, setPhone] = useState(0);
+    const [Interest, setInterest] = useState();
     const LenderId = useGetUserId();
+
+    useEffect(() => {
+      
+        const getLender = axios.get(`https://e-money-lender-back.vercel.app/auth/user/${LenderId}`).then((res)=>setInterest(res.data.interestRate));
+    }, [])
+    
 
 
 
     const setValues = (amount) => {
         let P = Number(amount.target.value);
-        let R = 36;
         let T = 1;
-        const interest = Math.ceil(P * R * T / 100);
+        const interest = Math.ceil(P * Interest * T / 100);
         let emi = Math.ceil((P + interest) / 12);
         setLoanAmount(P);
         setMonthlyInstalment(emi);
@@ -82,9 +88,12 @@ const Form = () => {
                 <a href="https://storyset.com/business"><img src="/images/Uploading.gif" /></a>
             </div>
             <div className='form mx-auto my-20'>
-                <span className="form_title text-xl font-bold py-2 ">Enter Client Data</span>
+            <div className='border-b 
+            border-b-gray-400 w-full text-center text-orange-800 bg-slate-100'>*Your current interest rate is {Interest}%</div>
+            <hr/>
+                <span className="form_title text-xl font-bold py-2 bg-slate-200 w-full text-center">Enter Client Data</span>
 
-                
+
                 <form  action='/add_client'
                     method="post" encType='multipart/form-data'>
 
@@ -98,7 +107,7 @@ const Form = () => {
 
 
                         <div className="Form__row">
-                            <label className='label' htmlFor="fathername">Father Name</label>
+                            <label className='label' htmlFor="fathername">Father's Name</label>
                             <div className='inputField'>
                                 <input id='fathername' type="text" className='addClient__Input' onChange={(e) => { setFathersname(e.target.value.toLowerCase()) }} />
                             </div>
