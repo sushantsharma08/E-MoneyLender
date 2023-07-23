@@ -17,8 +17,8 @@ const Home = () => {
   const { isLoading, error, data } = useQuery({
     queryKey: ['repoData'],
     queryFn: () =>
-      // fetch(`https://e-money-lender-back.vercel.app/client/loadClients/${userID}`).then(
-      fetch(`http://localhost:3001/auth/user/${LenderId}`).then(
+      fetch(`https://e-money-lender-back.vercel.app/auth/user/${LenderId}`).then(
+      // fetch(`http://localhost:3001/auth/user/${LenderId}`).then(
         (res) => res.json(),
       ),
   });
