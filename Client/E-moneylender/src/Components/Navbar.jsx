@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom"
 
 const Navbar = () => {
   const [cookies, setCookies] = useCookies(["access_token"]);
-  const [SmallScreenState, setSmallScreenState] = useState("")
+  const [SmallScreenState, setSmallScreenState] = useState(" hidden")
   const userID = useGetUserId();
   const navigate = useNavigate();
 
@@ -23,7 +23,6 @@ const Navbar = () => {
     }else{
       setSmallScreenState(" hidden")
     }
-    console.log(SmallScreenState);
   }
 
   return (
