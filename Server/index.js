@@ -1,6 +1,8 @@
 import express from "express";
 import cors from 'cors';
 import mongoose from 'mongoose';
+import * as dotenv from "dotenv";
+
 // const cors=require("cors");
 const corsOptions = {
    origin: '*',
@@ -13,6 +15,7 @@ import { UserRouter } from "./src/routes/user.js";
 import { ClientRouter } from "./src/routes/client.js";
 
 const app = express();
+dotenv.config({path:"./config.env"});
 app.use(express.json());
 app.use(cors(corsOptions))
 // app.use(cors());
@@ -20,9 +23,11 @@ app.use(cors(corsOptions))
 app.use("/auth", UserRouter)
 app.use("/client", ClientRouter)
 
-const port = 3001;
+const port =process.env.PORT;
 
-mongoose.connect(`mongodb+srv://sushantsharmadev:moneylenderkapassword@moneylender.ejybvtr.mongodb.net/?retryWrites=true&w=majority`)
+mongoose.connect(`mongodb+srv://${process.env.USERNAME_DB}:${process.env.PASSWORD_DB}@moneylender.ejybvtr.mongodb.net/?retryWrites=true&w=majority`)
 
 
-app.listen(port, () => { console.log("Server up!!!"); })
+app.listen(port,()=>{
+   console.log("Server Up!");
+})
