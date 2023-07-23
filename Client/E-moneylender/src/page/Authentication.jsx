@@ -7,7 +7,8 @@ import { useNavigate } from "react-router-dom"
 const Authentication = () => {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("");
-    const [,setCookies] = useCookies(["access_token"])
+    const [ShowTooltip, setShowTooltip] = useState(false);
+    const [, setCookies] = useCookies(["access_token"])
     const navigate = useNavigate();
 
 
@@ -22,7 +23,7 @@ const Authentication = () => {
             });
             const { token, userID } = await response.data;
             if (token) {
-                setCookies("access_token",token);
+                setCookies("access_token", token);
                 toast.success('Successful', {
                     style: { backgroundColor: "greenyellow", fontSize: "large" }
                 });
@@ -47,11 +48,6 @@ const Authentication = () => {
             <Toaster />
             <div className="flex border flex-1 flex-col justify-center px-6 py-12 lg:px-8">
                 <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-                    {/* <img
-            className="mx-auto h-10 w-auto"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-            alt="Your Company"
-          /> */}
                     <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
                         Sign in to your E-Lender account
                     </h2>
@@ -109,10 +105,22 @@ const Authentication = () => {
                         </div>
                     </form>
                     <div className="flex p-3">
-                    <p className=''>Dont have an account?</p><span onClick={()=>navigate("/auth_register")}>Sign Up</span>
+                        <p className=''>Dont have an account?</p><span className='text-md font-bold' onClick={() => navigate("/auth_register")}>Sign Up</span>
                     </div>
                 </div>
+
             </div>
+            <br />
+            <div className="tooltip_div">
+                <button className='border-2 px-3 py-1 bg-slate-400' onFocus={()=>setShowTooltip(true)}>Tooltip</button>
+                <div className="border w-64 px-6 py-4" style={{display:ShowTooltip?"block":"none"}}>
+                    <p className='title text-lg text-center'>For Guests</p>
+                    Username:Guest_Account <br />
+                    Password:123456789
+                </div>
+            </div>
+
+
         </div>
     )
 }
