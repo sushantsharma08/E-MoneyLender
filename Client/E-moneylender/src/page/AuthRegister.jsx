@@ -34,7 +34,6 @@ const AuthRegister = () => {
           username,
           password,
         })
-        console.log(Response);
         if (Response.data.status===400) {
           toast(Response.data.message,{
             style:{

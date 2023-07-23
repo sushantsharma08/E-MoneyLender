@@ -29,7 +29,6 @@ const Form = () => {
         setMonthlyInstalment(emi);
         setTotalAmount(P + interest);
         setMissedInstalment(((10 / 100) * emi) + emi)
-        console.log(P, emi, interest, totalAmount, missedInstalment);
     }
 
     const onSubmit = async (event) => {
@@ -67,107 +66,116 @@ const Form = () => {
                 })
             }
         } catch (error) {
-            console.log(error);
         }
     }
 
     return (
-        <section className='bg-red-300 form__mainsection'>
-            <div className="image ">
-                <img src="/images/lenderIcon.png" />
+        <section className='form__mainsection'>
+            <div className="text-center flex items-center flex-col sm:flex-row">
+                <div className='flex flex-col'>
+                    <span className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl pb-14">
+                        Enter client data in the form below
+                    </span>
+                    <p className='text-sm text-gray-500 '>This will help keep track of the borrowers and their payments</p>
+
+                </div>
+                <a href="https://storyset.com/business"><img src="/images/Uploading.gif" /></a>
             </div>
-            <div className='form'>
-                <form action='/add_client'
-                method="post" encType='multipart/form-data'>
+            <div className='form mx-auto my-20'>
+                <span className="form_title text-xl font-bold py-2 ">Enter Client Data</span>
+
+                
+                <form  action='/add_client'
+                    method="post" encType='multipart/form-data'>
 
                     <div className="form_content">
-                    <div className="Form__row">
-                        <label className='label' htmlFor="name">Name</label>
-                        <div className='inputField'>
-                            <input id='name' type="text" className='addClient__Input' onChange={(e) => { setName(e.target.value.toLowerCase().trim()) }} />
-                        </div>
-                    </div>
-
-
-                    <div className="Form__row">
-                        <label className='label' htmlFor="fathername">Father Name</label>
-                        <div className='inputField'>
-                            <input id='fathername' type="text" className='addClient__Input' onChange={(e) => { setFathersname(e.target.value.toLowerCase()) }} />
-                        </div>
-                    </div>
-
-
-                    <div className="Form__row">
-                        <label className='label' htmlFor="gender">Gender</label>
-                        <div className='inputField'>
-                            <span className="gender" >
-                                <input
-                                    onClick={(e) => { setGender(e.target.value) }}
-                                    style={{ height: "20px" }}
-                                    type="radio" name="gender" value="male" id="Gender_male" />
-                                <label htmlFor="Gender_male">Male</label>
-                            </span>
-                            <span className="gender">
-                                <input
-                                    onClick={(e) => { setGender(e.target.value) }}
-                                    style={{ height: "20px" }}
-                                    type="radio" name="gender" id="Gender_female" value="female" />
-                                <label htmlFor="Gender_female">Female</label>
-                            </span>
-                        </div>
-                    </div>
-
-
-                    <div className="Form__row">
-                        <label className='label' htmlFor="phone">Phone Number</label>
-                        <div className='inputField'>
-                            <input type="number" className='addClient__Input' name="phone" id="phone" onChange={(e) => { setPhone(e.target.value) }} />
-                        </div>
-                    </div>
-
-                    <div className="Form__row">
-                        <label className='label' htmlFor="adhaar">Adhaar Number</label>
-                        <div className='inputField'>
-                            <input type="number" className='addClient__Input' name="AdhaarNumber" id="adhaar" onChange={(e) => { setAdhaar(e.target.value) }} />
-                        </div>
-                    </div>
-
-
-                    <div className="Form__row">
-                        <label className='label' htmlFor="Amount">Loan Amount</label>
-                        <div className='inputField'>
-                            <input type="number" className='addClient__Input' name="loanamount" id="Amount" onChange={(e) => { setValues(e) }} />
-                        </div>
-                    </div>
-
-
-                    <div className="Form__row">
-                        <label className='label' htmlFor="monthlyinstalment">Monthly Installment</label>
-                        <div className='inputField'>
-                            <input type="number" className='addClient__Input' disabled name="loanamount" id="monthlyinstalment" value={monthlyInstalment} />
+                        <div className="Form__row">
+                            <label className='label' htmlFor="name">Name</label>
+                            <div className='inputField'>
+                                <input id='name' type="text" className='addClient__Input' onChange={(e) => { setName(e.target.value.toLowerCase().trim()) }} />
+                            </div>
                         </div>
 
-                        {/* @36% per month */}
-                    </div>
 
-                    <div className="Form__row">
-                        <label className='label' htmlFor="totalAmount">Total Amount</label>
-                        <div className='inputField'>
-                            <input type="number" className='addClient__Input' disabled name="totalamount" id="totalAmount" value={totalAmount} />
+                        <div className="Form__row">
+                            <label className='label' htmlFor="fathername">Father Name</label>
+                            <div className='inputField'>
+                                <input id='fathername' type="text" className='addClient__Input' onChange={(e) => { setFathersname(e.target.value.toLowerCase()) }} />
+                            </div>
                         </div>
-                    </div>
 
 
-                    <div className="Form__row">
-                        <label className='label' htmlFor="missedamount">If missed installment</label>
-                        <div className='inputField'>
-                            <input type="number" className='addClient__Input' disabled name="missed" id="missedamount" value={missedInstalment} />
+                        <div className="Form__row">
+                            <label className='label' htmlFor="gender">Gender</label>
+                            <div className='inputField'>
+                                <span className="gender" >
+                                    <input
+                                        onClick={(e) => { setGender(e.target.value) }}
+                                        style={{ height: "20px" }}
+                                        type="radio" name="gender" value="male" id="Gender_male" />
+                                    <label htmlFor="Gender_male">Male</label>
+                                </span>
+                                <span className="gender">
+                                    <input
+                                        onClick={(e) => { setGender(e.target.value) }}
+                                        style={{ height: "20px" }}
+                                        type="radio" name="gender" id="Gender_female" value="female" />
+                                    <label htmlFor="Gender_female">Female</label>
+                                </span>
+                            </div>
                         </div>
-                    </div>
 
-                    <div className='btnDiv'>
-                        <button className='form__saveBtn' type='submit' onClick={onSubmit} value="save">Save</button>
-                    </div>
+
+                        <div className="Form__row">
+                            <label className='label' htmlFor="phone">Phone Number</label>
+                            <div className='inputField'>
+                                <input type="number" className='addClient__Input' name="phone" id="phone" onChange={(e) => { setPhone(e.target.value) }} />
+                            </div>
+                        </div>
+
+                        <div className="Form__row">
+                            <label className='label' htmlFor="adhaar">Adhaar Number</label>
+                            <div className='inputField'>
+                                <input type="number" className='addClient__Input' name="AdhaarNumber" id="adhaar" onChange={(e) => { setAdhaar(e.target.value) }} />
+                            </div>
+                        </div>
+
+
+                        <div className="Form__row">
+                            <label className='label' htmlFor="Amount">Loan Amount</label>
+                            <div className='inputField'>
+                                <input type="number" className='addClient__Input' name="loanamount" id="Amount" onChange={(e) => { setValues(e) }} />
+                            </div>
+                        </div>
+
+
+                        <div className="Form__row">
+                            <label className='label' htmlFor="monthlyinstalment">Monthly Installment</label>
+                            <div className='inputField'>
+                                <input type="number" className='addClient__Input' disabled name="loanamount" id="monthlyinstalment" value={monthlyInstalment} />
+                            </div>
+
+                            {/* @36% per month */}
+                        </div>
+
+                        <div className="Form__row">
+                            <label className='label' htmlFor="totalAmount">Total Amount</label>
+                            <div className='inputField'>
+                                <input type="number" className='addClient__Input' disabled name="totalamount" id="totalAmount" value={totalAmount} />
+                            </div>
+                        </div>
+
+
+                        <div className="Form__row">
+                            <label className='label' htmlFor="missedamount">If missed installment</label>
+                            <div className='inputField'>
+                                <input type="number" className='addClient__Input' disabled name="missed" id="missedamount" value={missedInstalment} />
+                            </div>
+                        </div>
+
+                        <div className='btnDiv'>
+                            <button className='form__saveBtn' type='submit' onClick={onSubmit} value="save">Save</button>
+                        </div>
                     </div>
 
                 </form>

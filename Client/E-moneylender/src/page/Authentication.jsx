@@ -16,13 +16,11 @@ const Authentication = () => {
         toast('Signing In', {
             icon: '🐱‍👤',
         });
-        console.log(username, password);
         try {
             const response = await axios.post("https://e-money-lender-back.vercel.app/auth/login", {
                 username, password
             });
             const { token, userID } = await response.data;
-            console.log(userID);
             if (token) {
                 setCookies("access_token",token);
                 toast.success('Successful', {
@@ -39,7 +37,6 @@ const Authentication = () => {
             }
         } catch (err) {
             toast.error(err.message)
-            console.log(err);
         }
 
 
