@@ -35,7 +35,6 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
 
     useEffect(() => {
         setmodalStatus(props.show);
-        console.log(`https://e-money-lender-back.vercel.app/client/searchbyname/${props.clientName}`);
         axios.get(`https://e-money-lender-back.vercel.app/client/searchbyname/${props.clientName}`).then((res) => {
             setData(res.data)
         });
@@ -56,7 +55,6 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
 
     const resetpopup = () => {
         setData(null);
-        console.log(Data);
     }
 
     const patchInstalment = () => {

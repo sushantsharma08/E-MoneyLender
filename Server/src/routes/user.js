@@ -5,6 +5,12 @@ import jwt from 'jsonwebtoken'
 import { UserModel } from "../models/User.js";
 
 const router = express.Router();
+router.get("/user/:uid",async (req,res)=>{
+    const user = await UserModel.findById(req.params.uid);
+    if (user) {
+        res.json(user);
+    }
+})
 
 router.post("/register", async (req, res) => {
     const { username, password, name, email, phone, adhaar, panId } = req.body;
