@@ -170,36 +170,6 @@ input[type=radio] {
 
 /* client Data styles */
 
-.tabledata {
-  /* margin-block: 3px; */
-  padding: 3px;
-  padding-inline: 0.3rem;
-  /* border: 1px solid black; */
-  min-width: 150px;
-  border-left: 1px solid rgba(128, 128, 128, 0.387);
-}
-
-/* .userdatadiv {
-    display: flex;
-    flex-direction: column;
-} */
-
-.userDetailsHeader {
-  border: 2px solid black;
-  height: 50px;
-  font-size: larger;
-}
-
-.userDetails {
-  border: 1px solid rgba(0, 0, 0, 0.468);
-  margin: 0;
-  padding: 0;
-}
-
-.searchBar {
-  display: flex
-}
-
 .popup_forClientDetails {
   height: 80vh;
   width: 90vw;
@@ -213,25 +183,8 @@ input[type=radio] {
   /* backdrop-filter:blur(10px); */
 }
 
-.userDetailsHeader td {
-  text-align: center;
-}
-
 .LoanDetails {
-  display: flex;
-  flex-direction: column;
   background-color: beige;
-}
-
-.index {
-  min-width: 50px;
-}
-
-.index_data {
-  text-align: center;
-  padding: auto;
-  margin: auto;
-  font-size: larger;
 }
 
 .status {
@@ -250,31 +203,16 @@ input[type=radio] {
 
 #client {
   margin-top: 50px;
-  background-color: rgba(196, 227, 255, 0.096);
-  /* overflow-x: hidden; */
+  /* background-color: rgba(196, 227, 255, 0.096); */
 }
 
-.personal {
-  display: flex;
-  flex-direction: column;
-  background-color: rgb(212, 231, 231);
-}
-
-.personal2 {
-  display: flex;
-  flex-direction: column;
-}
-
-.name {
-  font-weight: 600;
+.tabled{
+  border: 2px solid rgb(215, 208, 208);
+  ::-webkit-scrollbar {display:none;}
 }
 
 .id {
-  display: flex;
-  align-self: flex-end;
-  justify-content: center;
-  align-items: center;
-  /* background-color: rgb(181, 158, 216); */
+  background-color: rgb(181, 158, 216);
 }
 
 .EditBtnSpan {
