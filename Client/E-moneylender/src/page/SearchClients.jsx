@@ -87,7 +87,6 @@ const SearchClients = () => {
   </section>
 
   // Main 
-  console.log(lenderClients?.length);
 
   return (
     <div id='client' className='w-screen sm:w-[95vw] mx-auto' >

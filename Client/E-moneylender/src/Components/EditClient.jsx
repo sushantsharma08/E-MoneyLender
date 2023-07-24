@@ -41,13 +41,9 @@ const EditClient = (props = { show: Boolean, clientName: String }) => {
                 phone:UpdatedPhone
             });
 
-            console.log(response);
         } catch (error) {
             console.log(error);
         }
-        setTimeout(() => {
-            console.log(Data);
-        }, 2000);
     }
 
     return (
