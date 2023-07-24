@@ -33,6 +33,9 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
 
     // if (error) return 'An error has occurred: ' + error.message
 
+    const isLast = 3;
+    const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
+
     useEffect(() => {
         setmodalStatus(props.show);
         axios.get(`https://e-money-lender-back.vercel.app/client/searchbyname/${props.clientName}`).then((res) => {
@@ -64,7 +67,7 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
         });
     }
 
-    const printData = () => { 
+    const printData = () => {
         let printContents = document.getElementById('printablediv').innerHTML;
         let originalContents = document.body.innerHTML;
         document.body.innerHTML = printContents;
@@ -77,59 +80,146 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
 
         <div className='popup_forClientDetails'
             style={{ display: modalStatus ? "block" : "none" }}>
-            <button className='popup__btn popup__closebtn' style={{ position: "absolute", right: "5px", top: "5px" }} onClick={(e) => closeModal(e)} ><img src="/images/close.png" alt="Close" width="40px" srcset="" /></button>
-            <div id='printablediv' className="table">
-                <h1 style={{ marginTop: "50px", color: "ghostwhite" }}>Client Details</h1>
-                <table className='popup_table'>
-                    <tbody>
-                        <tr>
-                            <td className="popup__tabledata">Name :</td>
-                            <td className="popup__tabledata">{Data?.name}</td>
-                        </tr>
 
-                        <tr>
-                            <td className="popup__tabledata">Father's Name :</td>
-                            <td className="popup__tabledata">{Data?.fathername}</td>
-                        </tr>
+            <button className='absolute right-4 top-4 hover:bg-rose-500' onClick={(e) => closeModal(e)} >
+                <img src="/images/close.png" alt="Close" width="40px" srcset="" />
+            </button>
 
-                        <tr>
-                            <td className="popup__tabledata">Adhaar No. :</td>
-                            <td className="popup__tabledata">{Data?.adhaar}</td>
-                        </tr>
+            <div id='printablediv'>
+                <div className=" h-full w-3/4 mx-auto sm:w-1/2 overflow-hidden  mt-28 ">
+                    <div className='text-center'>
+                        <h1 className='mt-14 mb-6 text-3xl font-bold text-slate-100'>Client Details</h1>
+                    </div>
+                    <table className="tabled w-full min-w-max table-auto text-left font-bold text-base border-slate-800">
+                        <tbody>
 
-                        <tr>
-                            <td className="popup__tabledata">Loan Amount :</td>
-                            <td className="popup__tabledata">{Data?.loanamount}</td>
-                        </tr>
+                            <tr className='border-b border-slate-800 ' >
 
-                        <tr>
-                            <td className="popup__tabledata">Total Amount :</td>
-                            <td className="popup__tabledata">{Data?.totalAmount}</td>
-                        </tr>
-
-                        <tr>
-                            <td className="popup__tabledata">Monthly Instalment :</td>
-                            <td className="popup__tabledata">{Data?.Instalment}</td>
-                        </tr>
-
-                        <tr>
-                            <td className="popup__tabledata">Instalments Done :</td>
-                            <td className="popup__tabledata">{Data?.InstalmentsDone}</td>
-                        </tr>
-
-                        <tr style={{ backgroundColor: Data?.remainingamount <= 0 ? "red" : "" }}>
-                            <td className="popup__tabledata">Remaining Amount :</td>
-                            <td className="popup__tabledata">{Data?.remainingamount}</td>
-                        </tr>
-
-                    </tbody>
-                </table>
+                                <td
+                                    variant="small"
+                                    color="blue-gray"
+                                    className=" leading-none opacity-70 px-4"
+                                >
+                                    Name
+                                </td>
+                                <td className={`${classes} border border-slate-800`}>
+                                    <span variant="small" color="blue-gray" className="">
+                                        {Data?.name}
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr className='border-b border-slate-800 '>
+                                <td
+                                    variant="small"
+                                    color="blue-gray"
+                                    className=" leading-none opacity-70 px-4"
+                                >
+                                    Father's Name
+                                </td>
+                                <td className={`${classes} border border-slate-800`}>
+                                    <span variant="small" color="blue-gray" className=" flex items-center">
+                                        {Data?.fathername}</span>
+                                </td>
+                            </tr>
+                            <tr className='border-b border-slate-800 '>
+                                <td
+                                    variant="small"
+                                    color="blue-gray"
+                                    className=" leading-none opacity-70 px-4"
+                                >
+                                    Adhaar Number
+                                </td>
+                                <td className={`${classes} border border-slate-800`}>
+                                    <span variant="small" color="blue-gray" className=" flex items-center">{Data?.adhaar}</span>
+                                </td>
+                            </tr>
+                            <tr className='border-b border-slate-800 '>
+                                <td
+                                    variant="small"
+                                    color="blue-gray"
+                                    className=" leading-none opacity-70 px-4"
+                                >
+                                    Phone number
+                                </td>
+                                <td className={`${classes} border border-slate-800`}>
+                                    <span variant="small" color="blue-gray" className=" flex items-center">
+                                        <img src="/images/phone.png" alt="" width="12px" className='mx-1' />{Data?.phone}</span>
+                                </td>
+                            </tr>
+                            <tr className='border-b border-slate-800 '>
+                                <td
+                                    variant="small"
+                                    color="blue-gray"
+                                    className=" leading-none opacity-70 px-4"
+                                >
+                                    Loan Principle Amount
+                                </td>
+                                <td className={`${classes} border border-slate-800`}>
+                                    <span variant="small" color="blue-gray" className=" flex items-center">{Data?.loanamount}</span>
+                                </td>
+                            </tr>
+                            <tr className='border-b border-slate-800 '>
+                                <td
+                                    variant="small"
+                                    color="blue-gray"
+                                    className=" leading-none opacity-70 px-4"
+                                >
+                                    Total Amount
+                                </td>
+                                <td className={`${classes} border border-slate-800`}>
+                                    <span variant="small" color="blue-gray" className=" flex items-center">
+                                        {Data?.totalAmount}
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr className='border-b border-slate-800 '>
+                                <td
+                                    variant="small"
+                                    color="blue-gray"
+                                    className=" leading-none opacity-70 px-4"
+                                >
+                                    Monthly Instalment amount
+                                </td>
+                                <td className={`${classes} border border-slate-800`}>
+                                    <span variant="small" color="blue-gray" className=" flex items-center">{Data?.Instalment}</span>
+                                </td>
+                            </tr>
+                            <tr className='border-b border-slate-800 '>
+                                <td
+                                    variant="small"
+                                    color="blue-gray"
+                                    className=" leading-none opacity-70 px-4"
+                                >
+                                    Number of Instalments done
+                                </td>
+                                <td className={`${classes} border border-slate-800`}>
+                                    <span variant="small" color="blue-gray" className=" flex items-center">
+                                        {Data?.InstalmentsDone}</span>
+                                </td>
+                            </tr>
+                            <tr className='border-b border-slate-800 '>
+                                <td
+                                    variant="small"
+                                    color="blue-gray"
+                                    className=" leading-none opacity-70 px-4"
+                                >
+                                    Total Remaining Amount
+                                </td>
+                                <td className={`${classes} border border-slate-800`}>
+                                    <span variant="small" color="blue-gray" className=" flex items-center">
+                                        {Data?.remainingamount}
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div className="popup__btns">
-                <button className='popup__btn instalmentDone popup__instalmentbtn' onClick={() => patchInstalment()}>
+            <div className="flex flex-col justify-center items-center">
+                <button className='mt-4 p-4 border border-yellow-400 bg-indigo-500 font-medium text-md' onClick={() => patchInstalment()}>
                     {Data?.remainingamount > 0 ? `Instalment for month ${Data?.InstalmentsDone + 1} Done` : "Loan complete"}
                 </button>
-                <button className='popup__btn popup__printBtn' onClick={printData}><span><img height="20px" src="/images/print.png" alt="" srcset="" /></span>Print</button>
+                <button className='p-4 flex items-center text-xl' onClick={printData}><span><img className='h-8' src="/images/print.png" alt="" srcset="" /></span>Print</button>
             </div>
         </div>
     )

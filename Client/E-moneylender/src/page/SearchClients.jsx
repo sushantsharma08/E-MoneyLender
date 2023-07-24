@@ -19,7 +19,7 @@ const SearchClients = () => {
   const userID = useGetUserId();
 
 
-  const { isLoading, error, data } = useQuery({
+  const { isLoading, error, data:lenderClients } = useQuery({
     queryKey: ['repoData'],
     queryFn: () =>
       fetch(`https://e-money-lender-back.vercel.app/client/loadClients/${userID}`).then(
@@ -83,7 +83,7 @@ const SearchClients = () => {
   </section>
 
   // Main 
-  console.log(data?.length);
+  console.log(lenderClients?.length);
 
   return (
     <div id='client' className='w-screen sm:w-[95vw] mx-auto' >
@@ -230,8 +230,8 @@ const SearchClients = () => {
             </tr>
           </thead>
           <tbody>
-            {data.map((user, index) => {
-              const isLast = index === data?.length;
+            {lenderClients.map((user, index) => {
+              const isLast = index === lenderClients?.length;
               const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
               // const classes =  "p-4 border-b border-blue-gray-50";
               return (
