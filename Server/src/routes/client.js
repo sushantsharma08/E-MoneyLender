@@ -81,6 +81,17 @@ router.patch("/instalmentDone/:username", async (req, res) => {
         res.json(error)
     }
 })
+router.patch("/update_client/:username", async (req, res) => {
+    const { name,fathername,adhaar,phone} = req.body;
+    const user = await ClientModel.findOneAndUpdate({ name: req.params.username }, req.body)
+    try {
+        res.json(user)
+    } catch (error) {
+        res.json(error)
+    }
+})
+
+
 router.delete("/removeClient/:id", async (req, res) => {
     const user = await ClientModel.deleteOne({ _id: req.params.id })
 })

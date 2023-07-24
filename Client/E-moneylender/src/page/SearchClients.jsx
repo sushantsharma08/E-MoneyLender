@@ -7,6 +7,7 @@ import {
   QueryClientProvider,
   useQuery,
 } from '@tanstack/react-query'
+import EditClient from '../Components/EditClient';
 
 const queryClient = new QueryClient()
 
@@ -16,6 +17,7 @@ const SearchClients = () => {
 
   const [SearchName, setSearchName] = useState()
   const [showClientDetailsModal, setShowClientDetailsModal] = useState(false)
+  const [showEditModal, setShowEditModal] = useState(false)
   const userID = useGetUserId();
 
 
@@ -35,7 +37,9 @@ const SearchClients = () => {
     setShowClientDetailsModal(true)
   }
   const OpenClientEdit = (e) => {
+    setSearchName(e);
     // setSearchName(e);
+    setShowEditModal(true)
   }
 
   const CloseAccount = (e) => {
@@ -87,60 +91,6 @@ const SearchClients = () => {
 
   return (
     <div id='client' className='w-screen sm:w-[95vw] mx-auto' >
-
-      {/* <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-
-        <div className="userdatadiv">
-          <table>
-            <thead style={{ position: "sticky", top: "0px", backgroundColor: "burlywood", fontStyle: "oblique", fontWeight: "600" }}>
-              <tr className="userDetailsHeader" style={{ display: "flex", alignItems: "center", }}>
-                <td className="tabledata index">Index</td>
-                <td className="tabledata">Name</td>
-                <td className="tabledata">Fathers Name</td>
-                <td className="tabledata">Adhaar No.</td>
-                <td className="tabledata">Loan amount</td  >
-                <td className="tabledata">Status</td>
-              </tr>
-            </thead>
-            <tbody>
-              {data.map((user, index) =>
-                <tr key={index} className="userDetails" style={{ display: "flex" }}>
-                  <td className="tabledata index index_data">{index + 1}</td>
-                  <td className="tabledata personal"><span className='name'>{user.name}</span>
-                    <span className='phone flex items-center justify-end pt-2'><img src="/images/phone.png" alt="" width="12px" className='mx-1' />{user?.phone}</span></td>
-                  <td className="tabledata FatherName personal2"><span>{user.fathername}</span><br /></td>
-                  <td className="tabledata adhaar">
-                    <span className="id">
-                      <img src="/images/id.png" alt="" width="20px" />
-                      {user.adhaar}</span>
-                  </td>
-                  <td className="tabledata LoanDetails">
-                    <span>
-                      <b>{user.loanamount}</b>
-                    </span>
-                    <span className='flex flex-col items-end text-red-500'>
-                      <span>
-                        <i><u>Remaining</u></i>
-                      </span>
-
-                      <b>{user.remainingamount}</b>
-                    </span>
-                  </td>
-                  <td className="tabledata status" style={{ color: user.remainingamount > 0 ? "green" : "red", textAlign: "center" }}>
-                    {user.remainingamount > 0 ?
-                      <span onClick={() => OpenUserDetails(user.name)}
-                        className="hover:text-lg" style={{ backgroundColor: "rgba(147, 209, 147, 0.359)" }}>Active</span>
-                      : <span className="hover:text-lg" style={{ backgroundColor: "rgba(241, 170, 170, 0.753)" }} id={user._id} onClick={(e) => CloseAccount(e)}>Close Account</span>
-                    }
-                  </td>
-                  <td className="tabledata Edit" style={{ display: "flex", justifyContent: "center", alignItems: "center" }}><span className='EditBtnSpan' onClick={OpenClientEdit}>Edit</span></td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
-
-      </div> */}
 
       <div className=" h-full w-full overflow-scroll">
         <table className="tabled w-full min-w-max table-auto text-left">
@@ -281,7 +231,7 @@ const SearchClients = () => {
                   </td>
                   <td className={classes}>
                     <span variant="small" color="blue-gray" className="font-normal">
-                      <span className='EditBtnSpan' onClick={OpenClientEdit}>Edit</span>
+                      <span className='EditBtnSpan' onClick={()=>OpenClientEdit(user.name)}>Edit</span>
                     </span>
                   </td>
 
@@ -292,10 +242,8 @@ const SearchClients = () => {
         </table>
       </div>
 
-
-      <QueryClientProvider client={queryClient}>
         <Popup show={showClientDetailsModal} clientName={SearchName} />
-      </QueryClientProvider>
+        <EditClient show={showEditModal} clientName={SearchName} />
 
     </div>
   )
