@@ -145,7 +145,7 @@ const SearchClients = () => {
       <div className=" h-full w-full overflow-scroll">
         <table className="tabled w-full min-w-max table-auto text-left">
           <thead>
-            <tr className='bg-orange-300 text-md font-bold'>
+            <tr className='bg-orange-300 text-md text-center font-bold'>
               <th className="border-b border-blue-gray-100 bg-blue-gray-50 border-r p-4">
                 <span
                   variant="small"
@@ -159,7 +159,7 @@ const SearchClients = () => {
                 <span
                   variant="small"
                   color="blue-gray"
-                  className="font-normal leading-none opacity-70"
+                  className=" leading-none opacity-70"
                 >
                   Name
                 </span>
@@ -168,7 +168,7 @@ const SearchClients = () => {
                 <span
                   variant="small"
                   color="blue-gray"
-                  className="font-normal leading-none opacity-70"
+                  className=" leading-none opacity-70"
                 >
                   Contact Number
                 </span>
@@ -177,7 +177,7 @@ const SearchClients = () => {
                 <span
                   variant="small"
                   color="blue-gray"
-                  className="font-normal leading-none opacity-70"
+                  className=" leading-none opacity-70"
                 >
                   Father's Name
                 </span>
@@ -186,7 +186,7 @@ const SearchClients = () => {
                 <span
                   variant="small"
                   color="blue-gray"
-                  className="font-normal leading-none opacity-70 "
+                  className=" leading-none opacity-70 "
                 >
                   Adhaar Number
                 </span>
@@ -195,7 +195,7 @@ const SearchClients = () => {
                 <span
                   variant="small"
                   color="blue-gray"
-                  className="font-normal leading-none opacity-70"
+                  className=" leading-none opacity-70"
                 >
                   Loan Amount
                 </span>
@@ -204,16 +204,16 @@ const SearchClients = () => {
                 <span
                   variant="small"
                   color="blue-gray"
-                  className="font-normal leading-none opacity-70"
+                  className=" leading-none opacity-70"
                 >
-                  <b>Remaining Amount</b>
+                  Remaining Amount
                 </span>
               </th>
               <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4 ps-8">
                 <span
                   variant="small"
                   color="blue-gray"
-                  className="font-normal leading-none opacity-70"
+                  className=" leading-none opacity-70"
                 >
                   Status
                 </span>
@@ -222,7 +222,7 @@ const SearchClients = () => {
                 <span
                   variant="small"
                   color="blue-gray"
-                  className="font-normal leading-none opacity-70"
+                  className=" leading-none opacity-70"
                 >
                   Edit client details
                 </span>
@@ -235,7 +235,7 @@ const SearchClients = () => {
               const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
               // const classes =  "p-4 border-b border-blue-gray-50";
               return (
-                <tr key={index} className='border-b ' >
+                <tr key={index} className='border-b text-center' >
                   <td className={`${classes} border-r`}>
                     <span variant="small" color="blue-gray" className="font-normal">
                       {index + 1}
@@ -271,7 +271,7 @@ const SearchClients = () => {
                     </span>
                   </td>
                   <td className={classes}>
-                    <span variant="small" color="blue-gray" className="font-normal status w-20 " style={{ color: user.remainingamount > 0 ? "green" : "red", textAlign: "center" }}>
+                    <span variant="small" color="blue-gray" className="font-normal status w-20  h-9  " style={{ marginInline:"auto",color: user.remainingamount > 0 ? "green" : "red", textAlign: "center" }}>
                       {user.remainingamount > 0
                         ? <span onClick={() => OpenUserDetails(user.name)}
                           className="hover:text-lg" style={{ backgroundColor: "rgba(147, 209, 147, 0.359)" }}>Active</span>
