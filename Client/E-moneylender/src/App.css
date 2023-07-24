@@ -170,19 +170,6 @@ input[type=radio] {
 
 /* client Data styles */
 
-.popup_forClientDetails {
-  height: 80vh;
-  width: 90vw;
-  position: sticky;
-  bottom: 10%;
-  left: 5%;
-  background: linear-gradient(40deg, rgb(248, 231, 207), rgb(210, 166, 166), rgb(180, 180, 241));
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  /* backdrop-filter:blur(10px); */
-}
-
 .LoanDetails {
   background-color: beige;
 }

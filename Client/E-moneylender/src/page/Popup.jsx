@@ -78,7 +78,7 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
 
     return (
 
-        <div className='popup_forClientDetails'
+        <div className='sticky bottom-10 left-12 bg-slate-300 '
             style={{ display: modalStatus ? "block" : "none" }}>
 
             <button className='absolute right-4 top-4 hover:bg-rose-500' onClick={(e) => closeModal(e)} >
@@ -86,9 +86,9 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
             </button>
 
             <div id='printablediv'>
-                <div className=" h-full w-3/4 mx-auto sm:w-1/2 overflow-hidden  mt-28 ">
+                <div className=" h-full w-3/4 mx-auto sm:w-1/2 overflow-scroll  md:overflow-hidden  mt-28 ">
                     <div className='text-center'>
-                        <h1 className='mt-14 mb-6 text-3xl font-bold text-slate-100'>Client Details</h1>
+                        <h1 className='mt-14 mb-6 text-3xl font-bold text-neutral-700'>Client Details</h1>
                     </div>
                     <table className="tabled w-full min-w-max table-auto text-left font-bold text-base border-slate-800">
                         <tbody>
@@ -216,10 +216,10 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
                 </div>
             </div>
             <div className="flex flex-col justify-center items-center">
-                <button className='mt-4 p-4 border border-yellow-400 bg-indigo-500 font-medium text-md' onClick={() => patchInstalment()}>
+                <button className='mt-4 p-4 border border-teal-500/40 bg-indigo-500 font-medium text-md' onClick={() => patchInstalment()}>
                     {Data?.remainingamount > 0 ? `Instalment for month ${Data?.InstalmentsDone + 1} Done` : "Loan complete"}
                 </button>
-                <button className='p-4 flex items-center text-xl' onClick={printData}><span><img className='h-8' src="/images/print.png" alt="" srcset="" /></span>Print</button>
+                <button className='p-4 my-2 flex items-center text-xl bg-slate-400' onClick={printData}><span><img className='h-8' src="/images/print.png" alt="" srcset="" /></span>Print</button>
             </div>
         </div>
     )
