@@ -83,11 +83,11 @@ router.patch("/instalmentDone/:username", async (req, res) => {
 })
 router.patch("/update_client/:username", async (req, res) => {
     const { name,fathername,adhaar,phone} = req.body;
-    const user = await ClientModel.findOneAndUpdate({ name: req.params.username }, req.body)
     try {
-        res.json(user)
+        const user = await ClientModel.findOneAndUpdate({ name: req.params.username }, req.body)
+        res.json({status:202,message:"Updated Successfully"})
     } catch (error) {
-        res.json(error)
+        res.json({status:400,message:error})
     }
 })
 

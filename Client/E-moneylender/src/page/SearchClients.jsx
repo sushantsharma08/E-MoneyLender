@@ -36,6 +36,7 @@ const SearchClients = () => {
     setSearchName(e);
     setShowClientDetailsModal(true)
   }
+  
   const OpenClientEdit = (e) => {
     setSearchName(e);
     // setSearchName(e);
@@ -43,13 +44,18 @@ const SearchClients = () => {
   }
 
   const CloseAccount = (e) => {
+    toast.loading('Deleting Client', {
+        duration: 2000,
+        style: { backgroundColor: "red" }
+    });
     const id = e.target.id;
     axios.delete(`https://e-money-lender-back.vercel.app/client/removeClient/${id}`);
+    toast.success("deleted Successfully")
     setTimeout(() => {
-      window.location.reload();
-      clearTimeout()
+        window.location.reload();
+        clearTimeout()
     }, 1000);
-  }
+}
 
   //dynamic UI from useQuery output
 

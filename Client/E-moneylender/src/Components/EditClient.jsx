@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import axios from 'axios';
+import toast, { Toaster } from 'react-hot-toast';
 
 
 const EditClient = (props = { show: Boolean, clientName: String }) => {
@@ -30,29 +31,44 @@ const EditClient = (props = { show: Boolean, clientName: String }) => {
     }
 
     const patchClientUpdate = async () => {
-         setData({...Data,name:UpdatedName,fathername:UpdatedFathersname,adhaar:UpdatedAdhaar,phone:UpdatedPhone});
-        // try {
-        //     const response= await axios.patch(`https://e-money-lender-back.vercel.app/client/update_client/${Data?.name}`, {
-        //         // const response= await axios.patch(`http://localhost:3001/client/update_client/${Data?.name}`, {
-        //         name:UpdatedName,
-        //         fathername:UpdatedFathersname,
-        //         adhaar:UpdatedAdhaar,
-        //         phone:UpdatedPhone
-        //     });
+        toast.loading('Updating Client', {
+            duration: 2000
+        });
+        setData({ ...Data, name: UpdatedName, fathername: UpdatedFathersname, adhaar: UpdatedAdhaar, phone: UpdatedPhone });
+        try {
+            const response = await axios.patch(`https://e-money-lender-back.vercel.app/client/update_client/${Data?.name}`, {
+                // const response= await axios.patch(`http://localhost:3001/client/update_client/${Data?.name}`, {
+                name: UpdatedName,
+                fathername: UpdatedFathersname,
+                adhaar: UpdatedAdhaar,
+                phone: UpdatedPhone
+            });
 
-        // } catch (error) {
-        //     console.log(error);
-        // }
+            if (response.data.status == 202) {
+                toast.success(response.data.message)
+            } else if (response.data.status == 400) {
+                toast.error(response.data.message)
+            }
+
+        } catch (error) {
+            console.log(error);
+            toast.error(error.message)
+        }
     }
 
     const CloseAccount = (e) => {
+        toast.loading('Deleting Client', {
+            duration: 2000,
+            style: { backgroundColor: "red" }
+        });
         const id = e.target.id;
         axios.delete(`https://e-money-lender-back.vercel.app/client/removeClient/${id}`);
+        toast.success("deleted Successfully")
         setTimeout(() => {
-          window.location.reload();
-          clearTimeout()
+            window.location.reload();
+            clearTimeout()
         }, 1000);
-      }
+    }
 
     return (
 
@@ -86,7 +102,7 @@ const EditClient = (props = { show: Boolean, clientName: String }) => {
                                 </td>
 
                                 <td className={`${classes} border border-slate-800`}>
-                                        <input className='h-10 p-3 w-full' type="text" name="" id="" placeholder='Enter New Name' onChange={(e)=>setUpdatedName(e.target.value)} />
+                                    <input className='h-10 p-3 w-full' type="text" name="" id="" placeholder='Enter New Name' onChange={(e) => setUpdatedName(e.target.value)} />
                                 </td>
                             </tr>
                             <tr className='border-b border-slate-800 '>
@@ -102,7 +118,7 @@ const EditClient = (props = { show: Boolean, clientName: String }) => {
                                         {Data?.fathername}</span>
                                 </td>
                                 <td className={`${classes} border border-slate-800`}>
-                                <input className='h-10 p-3 w-full' type="text" name="" id="" placeholder="Enter New Father's Name" onChange={(e)=>setUpdatedFathersname(e.target.value)}/>
+                                    <input className='h-10 p-3 w-full' type="text" name="" id="" placeholder="Enter New Father's Name" onChange={(e) => setUpdatedFathersname(e.target.value)} />
                                 </td>
                             </tr>
                             <tr className='border-b border-slate-800 '>
@@ -117,9 +133,9 @@ const EditClient = (props = { show: Boolean, clientName: String }) => {
                                     <span variant="small" color="blue-gray" className=" flex items-center">{Data?.adhaar}</span>
                                 </td>
                                 <td className={`${classes} border border-slate-800`}>
-                                <input className='h-10 p-3 w-full' type="number" name="" id="" placeholder="Enter New Adhaar Number" onChange={(e)=>setUpdatedAdhaar(e.target.value)}/>
+                                    <input className='h-10 p-3 w-full' type="number" name="" id="" placeholder="Enter New Adhaar Number" onChange={(e) => setUpdatedAdhaar(e.target.value)} />
                                 </td>
-                                
+
                             </tr>
                             <tr className='border-b border-slate-800 '>
                                 <td
@@ -134,7 +150,7 @@ const EditClient = (props = { show: Boolean, clientName: String }) => {
                                         <img src="/images/phone.png" alt="" width="12px" className='mx-1' />{Data?.phone}</span>
                                 </td>
                                 <td className={`${classes} border border-slate-800`}>
-                                <input className='h-10 p-3 w-full' type="number" name="" id="" placeholder="Enter New Contact Number" onChange={(e)=>setUpdatedPhone(e.target.value)}/>
+                                    <input className='h-10 p-3 w-full' type="number" name="" id="" placeholder="Enter New Contact Number" onChange={(e) => setUpdatedPhone(e.target.value)} />
                                 </td>
                             </tr>
 
@@ -212,8 +228,9 @@ const EditClient = (props = { show: Boolean, clientName: String }) => {
                 <button className='mt-4 p-4 border border-teal-500/40 bg-indigo-500 font-medium text-md' onClick={() => patchClientUpdate()}>
                     Update Client
                 </button>
-                <button id={Data?._id} className='p-4 py`-2 my-2 flex items-center text-xl bg-red-400' onClick={(e)=>CloseAccount(e)} ><span><img src="/images/delete.png" alt="" srcset="" /></span>Delete Client</button>
+                <button id={Data?._id} className='p-4 py`-2 my-2 flex items-center text-xl bg-red-400' onClick={(e) => CloseAccount(e)} ><span><img src="/images/delete.png" alt="" srcset="" /></span>Delete Client</button>
             </div>
+            <Toaster />
         </div>
     )
 }

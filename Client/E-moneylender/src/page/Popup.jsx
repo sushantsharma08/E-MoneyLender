@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios'
 import "./Popup.css"
 
@@ -34,10 +35,20 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
     }
 
     const patchInstalment = () => {
-        axios.patch(`https://e-money-lender-back.vercel.app/client/instalmentDone/${Data?.name}`, {
-            InstalmentsDone: Data?.InstalmentsDone + 1,
-            remainingamount: Data?.remainingamount - (1 * Data?.Instalment)
-        });
+        toast.loading("Adding Instalment",{
+            duration:1000
+        })
+        try {
+            axios.patch(`https://e-money-lender-back.vercel.app/client/instalmentDone/${Data?.name}`, {
+                InstalmentsDone: Data?.InstalmentsDone + 1,
+                remainingamount: Data?.remainingamount - (1 * Data?.Instalment)
+            });
+            setTimeout(() => {
+                toast.success("Instalment Done Successfully")
+            }, 1000);
+        } catch (error) {
+            toast.error(error.message)
+        }
     }
 
     const printData = () => {
@@ -194,6 +205,7 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
                 </button>
                 <button className='p-4 my-2 flex items-center text-xl bg-slate-400' onClick={printData}><span><img className='h-8' src="/images/print.png" alt="" srcset="" /></span>Print</button>
             </div>
+            <Toaster/>
         </div>
     )
 }
