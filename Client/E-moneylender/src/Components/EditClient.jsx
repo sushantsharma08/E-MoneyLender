@@ -59,7 +59,6 @@ const EditClient = (props = { show: Boolean, clientName: String }) => {
     const CloseAccount = (e) => {
         toast.loading('Deleting Client', {
             duration: 2000,
-            style: { backgroundColor: "red" }
         });
         const id = e.target.id;
         axios.delete(`https://e-money-lender-back.vercel.app/client/removeClient/${id}`);
