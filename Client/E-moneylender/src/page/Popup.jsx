@@ -16,11 +16,11 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
             setData(res.data)
         });
 
-        if (Data?.remainingamount <= 0) {
-            setText('Loan Complete please close account')
-        } else {
-            setText(`Instalment for month ${Data?.InstalmentsDone + 1} Done`);
-        }
+        // if (Data?.remainingamount <= 0) {
+        //     setText('Loan Complete please close account')
+        // } else {
+        //     setText(`Instalment for month ${Data?.InstalmentsDone + 1} Done`);
+        // }
 
     }, [props.clientName]);
 
@@ -35,8 +35,9 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
     }
 
     const patchInstalment = () => {
-        toast.loading("Adding Instalment",{
-            duration:1000
+        toast.loading("Adding Instalment", {
+            duration: 1000,
+            style: { position: "absolute", top: "40px" }
         })
         try {
             axios.patch(`https://e-money-lender-back.vercel.app/client/instalmentDone/${Data?.name}`, {
@@ -44,8 +45,9 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
                 remainingamount: Data?.remainingamount - (1 * Data?.Instalment)
             });
             setTimeout(() => {
+                closeModal();
                 toast.success("Instalment Done Successfully")
-            }, 1000);
+            }, 2000);
         } catch (error) {
             toast.error(error.message)
         }
@@ -205,7 +207,7 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
                 </button>
                 <button className='p-4 my-2 flex items-center text-xl bg-slate-400' onClick={printData}><span><img className='h-8' src="/images/print.png" alt="" srcset="" /></span>Print</button>
             </div>
-            <Toaster/>
+            <Toaster />
         </div>
     )
 }

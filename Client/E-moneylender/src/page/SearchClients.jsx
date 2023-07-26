@@ -8,6 +8,7 @@ import {
   useQuery,
 } from '@tanstack/react-query'
 import EditClient from '../Components/EditClient';
+import { Toaster, toast } from 'react-hot-toast';
 
 const queryClient = new QueryClient()
 
@@ -21,7 +22,7 @@ const SearchClients = () => {
   const userID = useGetUserId();
 
 
-  const { isLoading, error, data:lenderClients } = useQuery({
+  const { isLoading, error, data: lenderClients } = useQuery({
     queryKey: ['repoData'],
     queryFn: () =>
       fetch(`https://e-money-lender-back.vercel.app/client/loadClients/${userID}`).then(
@@ -36,7 +37,7 @@ const SearchClients = () => {
     setSearchName(e);
     setShowClientDetailsModal(true)
   }
-  
+
   const OpenClientEdit = (e) => {
     setSearchName(e);
     // setSearchName(e);
@@ -45,17 +46,16 @@ const SearchClients = () => {
 
   const CloseAccount = (e) => {
     toast.loading('Deleting Client', {
-        duration: 2000,
-        style: { backgroundColor: "red" }
+      duration: 1000,
     });
     const id = e.target.id;
     axios.delete(`https://e-money-lender-back.vercel.app/client/removeClient/${id}`);
-    toast.success("deleted Successfully")
     setTimeout(() => {
-        window.location.reload();
-        clearTimeout()
+      toast.success("deleted Successfully")
+      window.location.reload();
+      clearTimeout()
     }, 1000);
-}
+  }
 
   //dynamic UI from useQuery output
 
@@ -226,7 +226,7 @@ const SearchClients = () => {
                     </span>
                   </td>
                   <td className={classes}>
-                    <span variant="small" color="blue-gray" className="font-normal status w-20  h-9  " style={{ marginInline:"auto",color: user.remainingamount > 0 ? "green" : "red", textAlign: "center" }}>
+                    <span variant="small" color="blue-gray" className="font-normal status w-20  h-9  " style={{ marginInline: "auto", color: user.remainingamount > 0 ? "green" : "red", textAlign: "center" }}>
                       {user.remainingamount > 0
                         ? <span onClick={() => OpenUserDetails(user.name)}
                           className="hover:text-lg" style={{ backgroundColor: "rgba(147, 209, 147, 0.359)" }}>Active</span>
@@ -236,7 +236,7 @@ const SearchClients = () => {
                   </td>
                   <td className={classes}>
                     <span variant="small" color="blue-gray" className="font-normal">
-                      <span className='EditBtnSpan' onClick={()=>OpenClientEdit(user.name)}>Edit</span>
+                      <span className='EditBtnSpan' onClick={() => OpenClientEdit(user.name)}>Edit</span>
                     </span>
                   </td>
 
@@ -247,8 +247,9 @@ const SearchClients = () => {
         </table>
       </div>
 
-        <Popup show={showClientDetailsModal} clientName={SearchName} />
-        <EditClient show={showEditModal} clientName={SearchName} />
+      <Popup show={showClientDetailsModal} clientName={SearchName} />
+      <EditClient show={showEditModal} clientName={SearchName} />
+      <Toaster />
 
     </div>
   )
