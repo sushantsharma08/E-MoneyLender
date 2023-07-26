@@ -45,7 +45,10 @@ const EditClient = (props = { show: Boolean, clientName: String }) => {
             });
 
             if (response.data.status == 202) {
-                toast.success(response.data.message)
+                toast.success(response.data.message);
+                setTimeout(()=>{
+                  closeModal();  
+                },2000)
             } else if (response.data.status == 400) {
                 toast.error(response.data.message)
             }
