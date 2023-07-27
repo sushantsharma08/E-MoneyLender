@@ -112,7 +112,7 @@ const Authentication = () => {
             </div>
             <br />
             <div className="tooltip_div">
-                <button className='border-2 px-3 py-1 bg-slate-400' onFocus={()=>setShowTooltip(true)}>Tooltip</button>
+                <button className='border-2 px-3 py-1 bg-slate-400' onClick={()=>setShowTooltip(true)}>New here?</button>
                 <div className="border w-64 px-6 py-4" style={{display:ShowTooltip?"block":"none"}}>
                     <p className='title text-lg text-center'>For Guests</p>
                     Username:Guest_Account <br />
