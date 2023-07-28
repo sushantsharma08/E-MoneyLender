@@ -5,7 +5,7 @@ import { ClientModel } from "../models/Client.js";
 // import * as lib from "lib";
 import lib from 'twilio';
 import * as dotenv from "dotenv";
-dotenv.config({path:"./config.env"});
+dotenv.config({path:"../config.env"});
 
 
 const client = lib(`${process.env.TWILIOSID}`, `${process.env.TWILIOAUTHTOKEN}`);
