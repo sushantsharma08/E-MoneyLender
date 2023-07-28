@@ -4,11 +4,11 @@ import { ClientModel } from "../models/Client.js";
 // import * as Twilio from 'twilio';
 // import * as lib from "lib";
 import lib from 'twilio';
-import * as dotenv from "dotenv";
-dotenv.config({path:"../config.env"});
+// import * as dotenv from "dotenv";
+// dotenv.config({path:"./config.env"});
 
 
-const client = lib(`${process.env.TWILIOSID}`, `${process.env.TWILIOAUTHTOKEN}`);
+// const client = lib(`${process.env.TWILIOSID}`, `${process.env.TWILIOAUTHTOKEN}`);
 
 const router = express.Router();
 
@@ -82,21 +82,21 @@ router.get("/searchbyname/:username", async (req, res) => {
     }
 })
 
-router.post("/send_sms",async(req,res)=>{
-    // const Contactno= req.params.phoneno;
-    const {ContactNumber,Text}=req.body;
-    try {
-        const message = await client.messages.create({
-            body:Text,
-            to:ContactNumber,
-            from:'+17624754780'
-            });
-        console.log(message);
-      } catch (error) {
-        // You can implement your fallback code here
-        console.error(error);
-      }
-})
+// router.post("/send_sms",async(req,res)=>{
+//     // const Contactno= req.params.phoneno;
+//     const {ContactNumber,Text}=req.body;
+//     try {
+//         const message = await client.messages.create({
+//             body:Text,
+//             to:ContactNumber,
+//             from:'+17624754780'
+//             });
+//         console.log(message);
+//       } catch (error) {
+//         // You can implement your fallback code here
+//         console.error(error);
+//       }
+// })
 
 router.patch("/instalmentDone/:username", async (req, res) => {
     const { InstalmentsDone, remainingamount } = req.body;
