@@ -104,7 +104,7 @@ const EditClient = (props = { show: Boolean, clientName: String }) => {
                                 </td>
 
                                 <td className={`${classes} border border-slate-800`}>
-                                    <input className='h-10 p-3 w-full' type="text" name="" id="" placeholder='Enter New Name' onChange={(e) => setUpdatedName(e.target.value)} />
+                                    <input className='h-10 p-3 w-full' type="text" name="" id="" placeholder='Enter New Name' onChange={(e) => setUpdatedName(e.target.value.toLowerCase().trim())} />
                                 </td>
                             </tr>
                             <tr className='border-b border-slate-800 '>
