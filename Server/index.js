@@ -15,7 +15,7 @@ import { UserRouter } from "./src/routes/user.js";
 import { ClientRouter } from "./src/routes/client.js";
 
 const app = express();
-dotenv.config({path:"./config.env"});
+dotenv.config({path:"./vars/config.env"});
 app.use(express.json());
 app.use(cors(corsOptions))
 // app.use(cors());

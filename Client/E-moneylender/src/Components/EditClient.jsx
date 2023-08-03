@@ -10,6 +10,10 @@ const EditClient = (props = { show: Boolean, clientName: String }) => {
     const [UpdatedAdhaar, setUpdatedAdhaar] = useState();
     const [UpdatedPhone, setUpdatedPhone] = useState();
     const [modalStatus, setmodalStatus] = useState();
+    const [UpdatedPrinciple, setUpdatedPrinciple] = useState(0);
+    const [UpdatedInstalment, setUpdatedInstalment] = useState(0);
+    const [UpdatedRemaingAmount, setUpdatedRemaingAmount] = useState(0);
+    const [UpdatedTotalAmount, setUpdatedTotalAmount] = useState(0);
     const isLast = 3;
     const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
 
@@ -30,25 +34,42 @@ const EditClient = (props = { show: Boolean, clientName: String }) => {
         setData(null);
     }
 
+    const ChangeLoanDetails = (x) => {
+        setUpdatedPrinciple(Data?.loanamount + Number(x));
+        const newTotal = Data?.remainingamount + Number(x) * 136 / 100;
+        setUpdatedRemaingAmount(newTotal);
+        setUpdatedInstalment( Math.ceil(newTotal / (12 - (Data?.InstalmentsDone))));
+        setUpdatedTotalAmount(Data?.totalAmount +  Number(x) * 136 / 100);
+
+        console.log(UpdatedPrinciple,
+            newTotal,
+            UpdatedInstalment,
+            UpdatedRemaingAmount,
+            UpdatedTotalAmount);
+    }
+
     const patchClientUpdate = async () => {
         toast.loading('Updating Client', {
             duration: 2000
         });
         setData({ ...Data, name: UpdatedName, fathername: UpdatedFathersname, adhaar: UpdatedAdhaar, phone: UpdatedPhone });
+
         try {
             const response = await axios.patch(`https://e-money-lender-back.vercel.app/client/update_client/${Data?.name}`, {
                 // const response= await axios.patch(`http://localhost:3001/client/update_client/${Data?.name}`, {
                 name: UpdatedName,
                 fathername: UpdatedFathersname,
                 adhaar: UpdatedAdhaar,
-                phone: UpdatedPhone
+                phone: UpdatedPhone,
+                remainingamount: newTotal,
+
             });
 
             if (response.data.status == 202) {
                 toast.success(response.data.message);
-                setTimeout(()=>{
-                  closeModal();  
-                },2000)
+                setTimeout(() => {
+                    //   closeModal();  
+                }, 2000)
             } else if (response.data.status == 400) {
                 toast.error(response.data.message)
             }
@@ -86,7 +107,7 @@ const EditClient = (props = { show: Boolean, clientName: String }) => {
                     <div className='text-center'>
                         <h1 className=' mb-28 text-3xl font-bold text-neutral-700'>Edit Client Details</h1>
                     </div>
-                    <table className="tabled w-full min-w-max table-auto text-left font-bold text-base border-slate-800 text-gray-950">
+                    <table className="w-full min-w-max table-auto text-left font-bold text-base border-slate-800 text-gray-950">
                         <tbody>
 
                             <tr className='border-b border-slate-800' >
@@ -157,19 +178,33 @@ const EditClient = (props = { show: Boolean, clientName: String }) => {
                             </tr>
 
                             {/* Extra features */}
-                            {/* <tr className='border-b border-slate-800 '>
+
+                            <tr className='border-b border-slate-800 '>
                                 <td
                                     variant="small"
                                     color="blue-gray"
-                                    className=" leading-none opacity-70 px-4"
+                                    className=" leading-none opacity-70 px-4 old"
                                 >
-                                    Loan Principle Amount
+                                    Previous Loan Amount
                                 </td>
-                                <td className={`${classes} border border-slate-800`}>
+                                <td className={`${classes} border border-slate-800 old`}>
                                     <span variant="small" color="blue-gray" className=" flex items-center">{Data?.loanamount}</span>
                                 </td>
+                                <td className={`${classes} border border-slate-800`}>
+                                    <input className='h-10 p-3 w-full' type="number" name="" id="" placeholder="Enter Newly Taken Principle Amount" onChange={(e) => ChangeLoanDetails(e.target.value)} />
+                                </td>
                             </tr>
-                            <tr className='border-b border-slate-800 '>
+                            <td className={`${classes} border border-slate-800 old`}>
+                                <span variant="small" color="blue-gray" className=" flex items-center">{UpdatedPrinciple}</span>
+                            </td>
+                            <td className={`${classes} border border-slate-800 old`}>
+                                <span variant="small" color="blue-gray" className=" flex items-center">{UpdatedRemaingAmount}</span>
+                            </td>
+                            <td className={`${classes} border border-slate-800 old`}>
+                                <span variant="small" color="blue-gray" className=" flex items-center">{UpdatedTotalAmount}</span>
+                            </td>
+
+                            {/* <tr className='border-b border-slate-800 '>
                                 <td
                                     variant="small"
                                     color="blue-gray"
