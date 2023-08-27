@@ -5,7 +5,7 @@ const ClientSchema = new mongoose.Schema({
     fathername: { type: String, required: true, },
     gender: { type: String, required: true, },
     phone: { type: Number, required: true},
-    adhaar: { type: Number, required: true, length: 12 },
+    adhaar: { type: Number, required: true},
     loanamount: { type: Number, required: true, },
     Instalment: { type: Number, required: true, },
     InstalmentsDone:{type:Number,required:true},

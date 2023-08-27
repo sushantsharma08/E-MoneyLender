@@ -1,5 +1,6 @@
 import express from "express";
 import { ClientModel } from "../models/Client.js";
+import { ClientExtraLoanModel } from "../models/ExtraLoan.js";
 // import client from ('twilio')("AC0eabea656803bc0bd73addb3b3c845ea", "64d0a8ab1e5bf1d4efd619c4ea5bd43a");
 // import * as Twilio from 'twilio';
 // import * as lib from "lib";
@@ -107,14 +108,79 @@ router.patch("/instalmentDone/:username", async (req, res) => {
         res.json(error)
     }
 })
-router.patch("/update_client/:username", async (req, res) => {
-    const { name,fathername,adhaar,phone} = req.body;
+router.patch("/update_client_PersonalDetails/:username", async (req, res) => {
+    const {
+        name,
+        fathername,
+        adhaar,
+        phone,
+        loanamount,
+        Instalment,
+        remainingamount,
+        totalAmount,
+    } = req.body;
     try {
         const user = await ClientModel.findOneAndUpdate({ name: req.params.username }, req.body)
-        res.json({status:202,message:"Updated Successfully"})
+        res.json({ status: 202, message: "Updated Successfully" })
     } catch (error) {
-        res.json({status:400,message:error})
+        res.json({ status: 400, message: error })
     }
+})
+
+router.patch("/update_client_ExtraLoan/:username", async (req, res) => {
+    const { name,
+        fathername,
+        adhaar,
+        phone,
+        loanamount,
+        Instalment,
+        remainingamount,
+        totalAmount,
+    } = req.body;
+    try {
+        const user = await ClientModel.findOneAndUpdate({ name: req.params.username }, req.body)
+        res.json({ status: 202, message: "Updated Successfully" })
+    } catch (error) {
+        res.json({ status: 400, message: error })
+    }
+})
+
+// Extra loan takers DataBase
+router.post("/add_ExtraLoanTakers", async (req, res) => {
+    const {
+        name,
+        phone,
+        adhaar,
+        previousLoanPrinciple,
+        previousMonthlyInstalment,
+        instalmentsDoneBeforeNewLoan,
+        newLoanPrinciple,
+        newMonthlyInstalment,
+        ClientId,
+    } = req.body;
+
+    // const client = await ClientExtraLoanModel.findOne({ adhaar });
+
+    // if (client) {
+    //     return res.json({ status: 400, message: "user already exists" });
+    // }
+
+    const newClient = new ClientExtraLoanModel({
+        name,
+        phone,
+        adhaar,
+        previousLoanPrinciple,
+        previousMonthlyInstalment,
+        instalmentsDoneBeforeNewLoan,
+        newLoanPrinciple,
+        newMonthlyInstalment,
+        ClientId,
+    })
+
+    await newClient.save()
+        // res.sendFile(`uploads/${file}`, { root: '.' })
+        .then(() => res.json({ status: 201, message: 'client added' }))
+        .catch(err => res.json(err));
 })
 
 

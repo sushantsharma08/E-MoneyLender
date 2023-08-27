@@ -38,8 +38,8 @@ const EditClient = (props = { show: Boolean, clientName: String }) => {
         setUpdatedPrinciple(Data?.loanamount + Number(x));
         const newTotal = Data?.remainingamount + Number(x) * 136 / 100;
         setUpdatedRemaingAmount(newTotal);
-        setUpdatedInstalment( Math.ceil(newTotal / (12 - (Data?.InstalmentsDone))));
-        setUpdatedTotalAmount(Data?.totalAmount +  Number(x) * 136 / 100);
+        setUpdatedInstalment(Math.ceil(newTotal / (12 - (Data?.InstalmentsDone))));
+        setUpdatedTotalAmount(Data?.totalAmount + Number(x) * 136 / 100);
 
         console.log(UpdatedPrinciple,
             newTotal,
@@ -52,28 +52,70 @@ const EditClient = (props = { show: Boolean, clientName: String }) => {
         toast.loading('Updating Client', {
             duration: 2000
         });
-        setData({ ...Data, name: UpdatedName, fathername: UpdatedFathersname, adhaar: UpdatedAdhaar, phone: UpdatedPhone });
-
         try {
-            const response = await axios.patch(`https://e-money-lender-back.vercel.app/client/update_client/${Data?.name}`, {
-                // const response= await axios.patch(`http://localhost:3001/client/update_client/${Data?.name}`, {
-                name: UpdatedName,
-                fathername: UpdatedFathersname,
-                adhaar: UpdatedAdhaar,
-                phone: UpdatedPhone,
-                remainingamount: newTotal,
+            console.log(UpdatedPrinciple,
+                UpdatedInstalment,
+                UpdatedRemaingAmount,
+                UpdatedTotalAmount)
 
-            });
+            // Update Loan Amount when Extra loan Given
 
-            if (response.data.status == 202) {
-                toast.success(response.data.message);
-                setTimeout(() => {
-                    //   closeModal();  
-                }, 2000)
-            } else if (response.data.status == 400) {
-                toast.error(response.data.message)
+            if (UpdatedPrinciple != 0) {
+                const response = await axios.patch(`https://e-money-lender-back.vercel.app/client/update_client_PersonalDetails/${Data?.name}`, {
+                    // const response = await axios.patch(`http://localhost:3001/client/update_client_PersonalDetails/${Data?.name}`, {
+                    name: UpdatedName,
+                    fathername: UpdatedFathersname,
+                    adhaar: UpdatedAdhaar,
+                    phone: UpdatedPhone,
+                    loanamount: UpdatedPrinciple,
+                    Instalment: UpdatedInstalment,
+                    remainingamount: UpdatedRemaingAmount,
+                    totalAmount: UpdatedTotalAmount,
+                });
+
+                // const ExtraLoan = axios.post("http://localhost:3001/client/add_ExtraLoanTakers", {
+                const ExtraLoan = axios.post("https://e-money-lender-back.vercel.app/client/add_ExtraLoanTakers", {
+                    name: UpdatedName ? UpdatedName : Data?.name,
+                    phone: UpdatedPhone ? UpdatedPhone : Data?.phone,
+                    adhaar: UpdatedAdhaar ? UpdatedAdhaar : Data?.adhaar,
+                    previousLoanPrinciple: Data?.loanamount,
+                    previousMonthlyInstalment: Data.Instalment,
+                    instalmentsDoneBeforeNewLoan: Data?.InstalmentsDone,
+                    newLoanPrinciple: UpdatedPrinciple,
+                    newMonthlyInstalment: UpdatedInstalment,
+                    ClientId: Data?._id,
+                })
+
+                console.log('updated loan too');
+                if (response.data.status == 202) {
+                    toast.success(response.data.message);
+                    setTimeout(() => {
+                        //   closeModal();  
+                    }, 2000)
+                } else if (response.data.status == 400) {
+                    toast.error(response.data.message)
+                }
+                // Only Update Personal Details
+            } else {
+                const response = await axios.patch
+                    (`https://e-money-lender-back.vercel.app/client/update_client_PersonalDetails/${Data?.name}`, {
+                        // (`http://localhost:3001/client/update_client_PersonalDetails/${Data?.name}`, {
+                        name: UpdatedName,
+                        fathername: UpdatedFathersname,
+                        adhaar: UpdatedAdhaar,
+                        phone: UpdatedPhone,
+
+                    })
+                console.log('updated personal only');
+                if (response.data.status == 202) {
+                    toast.success(response.data.message);
+                    setTimeout(() => {
+                        //   closeModal();  
+                    }, 2000)
+                } else if (response.data.status == 400) {
+                    toast.error(response.data.message)
+                }
             }
-
         } catch (error) {
             console.log(error);
             toast.error(error.message)
