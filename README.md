@@ -1,7 +1,5 @@
 # E MONEY-LENDER
 A mern stack project
-[Have a look!](http://e-money-lender.vercel.app/)
-
 
 ## Description
 Welcome to this project! This is a project to be used by Money Lenders to keep records, update and manage information of their clients.
@@ -26,3 +24,4 @@ Welcome to this project! This is a project to be used by Money Lenders to keep r
 6. multer
 7. nodemon
 
+[Have a look!](http://e-money-lender.vercel.app/)
