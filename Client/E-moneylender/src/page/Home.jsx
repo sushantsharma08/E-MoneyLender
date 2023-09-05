@@ -14,7 +14,7 @@ const queryClient1 = new QueryClient()
 const Home = () => {
   const LenderId = useGetUserId();
 
-  const { isLoading, error, data:homedata } = useQuery({
+  const { isLoading, error, data: homedata } = useQuery({
     queryKey: ['userData'],
     queryFn: () =>
       fetch(`https://e-money-lender-back.vercel.app/auth/user/${LenderId}`).then(
@@ -27,7 +27,7 @@ const Home = () => {
   if (isLoading) return <section id='client' style={{ position: "relative" }}>
     <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", paddingTop: "100px" }}>
       <div className="userdatadiv">
-      <div id="wifi-loader">
+        <div id="wifi-loader">
           <svg className="circle-outer" viewBox="0 0 86 86">
             <circle className="back" cx="43" cy="43" r="40"></circle>
             <circle className="front" cx="43" cy="43" r="40"></circle>
@@ -55,6 +55,8 @@ const Home = () => {
     </div>
   </section>
 
+  console.log(homedata);
+
   return (
     <>
       <div className="bg-white">
@@ -70,80 +72,85 @@ const Home = () => {
               Welcome, <b><i>{homedata?.name}</i></b>
             </div>
           </div>
+
+          {/* main div */}
+
           <div className='fade-in-fwd'>
             <div className="text-center flex items-center flex-col sm:flex-row">
               <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl pb-14">Data to enrich your online business</h1>
               <a href="https://storyset.com/business"><img src="/images/homelogo.gif" alt="" /></a>
             </div>
-            <ul role="list" className="divide-y divide-gray-100   rounded-lg border px-4">
-              <li className="flex justify-between gap-x-6 py-5">
-                <div className="flex gap-x-4">
-                  <div className="h-12 w-12 flex-none rounded-full bg-gray-50" alt="" >hello</div>
-                  <div className="min-w-0 flex-auto">
-                    <p className="text-sm font-semibold leading-6 text-gray-900">name</p>
-                    <p className="mt-1 truncate text-xs leading-5 text-gray-500">mail</p>
-                  </div>
-                </div>
-                <div className="hidden sm:flex sm:flex-col sm:items-end">
-                  <p className="text-sm leading-6 text-gray-900">checkout</p>
-                </div>
-              </li>
-              <li className="flex justify-between gap-x-6 py-5">
-                <div className="flex gap-x-4">
-                  <div className="h-12 w-12 flex-none rounded-full bg-gray-50" alt="" >hello</div>
-                  <div className="min-w-0 flex-auto">
-                    <p className="text-sm font-semibold leading-6 text-gray-900">name</p>
-                    <p className="mt-1 truncate text-xs leading-5 text-gray-500">mail</p>
-                  </div>
-                </div>
-                <div className="hidden sm:flex sm:flex-col sm:items-end">
-                  <p className="text-sm leading-6 text-gray-900">role</p>
-                  <div className="mt-1 flex items-center gap-x-1.5">
-                    <div className="flex-none rounded-full bg-emerald-500/20 p-1">
-                      <div className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+
+            <section className="text-gray-600 body-font border">
+              {/* <div className="container px-5  mx-auto flex"> */}
+                {/* <div className="flex flex-wrap justify-center -m-4 card-container" > */}
+
+                  <div className="cards p-4 md:w-1/3 ">
+                    <div className="flex rounded-lg h-full bg-gray-100 p-8 flex-col card"
+                    // style="background: linear-gradient(rgba(0, 0, 0, 0.1502) , rgba(62, 42, 78, 0.15))"
+                    >
+                      <div className="flex items-center mb-3">
+                        <div
+                          className="w-8 h-8 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0"
+                        // style="background-color: #2e2e2e5e;"
+                        >
+                          <i className="bi card-icon text-lg  bi-search"></i>
+                        </div>
+                        <h2 className="text-gray-900 text-lg title-font font-medium pl-6">{homedata?.name}</h2>
+                      </div>
+                      <hr className="mb-2 relative -top-2.5 ml-9 border-gray-700" />
+                      <div className="flex-grow">
+
+                        <div className=" links flex-col flex justify-center items-center">
+                          <tr className='w-full flex justify-between border '><td className='min-w-[30%] border  bg-slate-400/20'>Current Rate of Interest:</td> <td className='font-semibold '>{homedata?.interestRate}</td></tr>
+
+                          <tr className='w-full flex justify-between border '><td className='min-w-[30%] border  bg-slate-400/20'>E-mail :</td> <td className='font-semibold '>{homedata?.email}</td></tr>
+
+                          <tr className='w-full flex justify-between border '><td className='min-w-[30%] border  bg-slate-400/20'>Phone no. :</td> <td className='font-semibold '>{homedata?.phone}</td></tr>
+
+                          <tr className='w-full flex justify-between border '><td className='min-w-[30%] border  bg-slate-400/20'>Adhaar no. :</td> <td className='font-semibold '>{homedata?.adhaar}</td></tr>
+
+                          <tr className='w-full flex justify-between border '><td className='min-w-[30%] border  bg-slate-400/20'>PAN Id :</td> <td className='font-semibold '>{homedata?.panId}</td> </tr>
+
+                        </div>
+                      </div>
                     </div>
-                    <p className="text-xs leading-5 text-gray-500">Online</p>
                   </div>
-                </div>
-              </li>
-              <li className="flex justify-between gap-x-6 py-5">
-                <div className="flex gap-x-4">
-                  <div className="h-12 w-12 flex-none rounded-full bg-gray-50" alt="" >hello</div>
-                  <div className="min-w-0 flex-auto">
-                    <p className="text-sm font-semibold leading-6 text-gray-900">name</p>
-                    <p className="mt-1 truncate text-xs leading-5 text-gray-500">mail</p>
-                  </div>
-                </div>
-                <div className="hidden sm:flex sm:flex-col sm:items-end">
-                  <p className="text-sm leading-6 text-gray-900">role</p>
-                  <div className="mt-1 flex items-center gap-x-1.5">
-                    <div className="flex-none rounded-full bg-emerald-500/20 p-1">
-                      <div className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                  <div className="cards p-4 md:w-1/3 ">
+                    <div className="flex rounded-lg h-full bg-gray-100 p-8 flex-col card"
+                    // style="background: linear-gradient(rgba(0, 0, 0, 0.1502) , rgba(62, 42, 78, 0.15))"
+                    >
+                      <div className="flex items-center mb-3">
+                        <div
+                          className="w-8 h-8 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0"
+                        // style="background-color: #2e2e2e5e;"
+                        >
+                          <i className="bi card-icon text-lg  bi-search"></i>
+                        </div>
+                        <h2 className="text-gray-900 text-lg title-font font-medium pl-6">Change Interest Rate</h2>
+                      </div>
+                      <hr className="mb-2 relative -top-2.5 ml-9 border-gray-700" />
+                      <div className="flex-grow">
+
+                        <div className=" links flex justify-center items-center">
+                          <label htmlFor="interestRate"></label><input type="number" name="interestRate" id="interestRate" /> <button className='btn p-2 border rounded bg-violet-400 font-semibold'>Update</button>
+                        </div>
+                      </div>
                     </div>
-                    <p className="text-xs leading-5 text-gray-500">Online</p>
                   </div>
-                </div>
-              </li>
-              <li className="flex justify-between gap-x-6 py-5">
-                <div className="flex gap-x-4">
-                  <div className="h-12 w-12 flex-none rounded-full bg-gray-50" alt="" >hello</div>
-                  <div className="min-w-0 flex-auto">
-                    <p className="text-sm font-semibold leading-6 text-gray-900">name</p>
-                    <p className="mt-1 truncate text-xs leading-5 text-gray-500">mail</p>
-                  </div>
-                </div>
-                <div className="hidden sm:flex sm:flex-col sm:items-end">
-                  <p className="text-sm leading-6 text-gray-900">role</p>
-                  <div className="mt-1 flex items-center gap-x-1.5">
-                    <div className="flex-none rounded-full bg-emerald-500/20 p-1">
-                      <div className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                    </div>
-                    <p className="text-xs leading-5 text-gray-500">Online</p>
-                  </div>
-                </div>
-              </li>
-            </ul>
+
+                {/* </div> */}
+              {/* </div> */}
+            </section>
+
+
+
           </div>
+
+
+
+
+
           {/* </div> */}
           <div className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]" aria-hidden="true">
             <div className="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
