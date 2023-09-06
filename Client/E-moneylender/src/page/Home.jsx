@@ -81,7 +81,7 @@ const Home = () => {
               <a href="https://storyset.com/business"><img src="/images/homelogo.gif" alt="" /></a>
             </div>
 
-            <section className="text-gray-600 body-font border-l">
+            <section className="text-gray-600 body-font border-l container px-5  mx-auto flex flex-wrap justify-center -m-4 card-container">
               {/* <div className="container px-5  mx-auto flex"> */}
                 {/* <div className="flex flex-wrap justify-center -m-4 card-container" > */}
 
@@ -132,9 +132,9 @@ const Home = () => {
                       <hr className="mb-2 relative -top-2.5 ml-9 border-gray-700" />
                       <div className="flex-grow">
 
-                        <div className=" links flex justify-center items-center">
+                        <div className=" links flex flex-col md:flex-row sm:flex-row justify-center items-center">
                           <label htmlFor="interestRate"></label>
-                          <input className='px-2 py-1' type="number" name="interestRate" id="interestRate" /> 
+                          <input className='px-2 py-1' type="number" name="interestRate" id="interestRate" />
                           <button className='btn px-2 py-1 border text-zinc-100 rounded bg-violet-400 font-semibold'>Update</button>
                         </div>
                       </div>
