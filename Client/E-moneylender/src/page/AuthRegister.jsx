@@ -25,13 +25,18 @@ const AuthRegister = () => {
         duration:1000
       })
       try {
-        const Response = await axios.post("https://e-money-lender-back.vercel.app/auth/register", {
+        const Response = await axios.post(
+          "https://e-money-lender-back.vercel.app/auth/register",
+          // "http://localhost:3001/auth/register",
+           {
           name,
           email,
           phone,
           adhaar,
           panId,
           username,
+          interestRate:36,
+          totalCapital:0,
           password,
         })
         if (Response.data.status===400) {

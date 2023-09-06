@@ -81,7 +81,7 @@ const Home = () => {
               <a href="https://storyset.com/business"><img src="/images/homelogo.gif" alt="" /></a>
             </div>
 
-            <section className="text-gray-600 body-font border">
+            <section className="text-gray-600 body-font border-l">
               {/* <div className="container px-5  mx-auto flex"> */}
                 {/* <div className="flex flex-wrap justify-center -m-4 card-container" > */}
 
@@ -102,15 +102,15 @@ const Home = () => {
                       <div className="flex-grow">
 
                         <div className=" links flex-col flex justify-center items-center">
-                          <tr className='w-full flex justify-between border '><td className='min-w-[30%] border  bg-slate-400/20'>Current Rate of Interest:</td> <td className='font-semibold '>{homedata?.interestRate}</td></tr>
+                          <tr className='w-full flex justify-between '><td className='min-w-[30%]   bg-slate-50'>Current Rate of Interest:</td> <td className='font-semibold '>{homedata?.interestRate}%</td></tr>
 
-                          <tr className='w-full flex justify-between border '><td className='min-w-[30%] border  bg-slate-400/20'>E-mail :</td> <td className='font-semibold '>{homedata?.email}</td></tr>
+                          <tr className='w-full flex justify-between '><td className='min-w-[30%]   bg-slate-50'>E-mail :</td> <td className='font-semibold text-sm'>{homedata?.email}</td></tr>
 
-                          <tr className='w-full flex justify-between border '><td className='min-w-[30%] border  bg-slate-400/20'>Phone no. :</td> <td className='font-semibold '>{homedata?.phone}</td></tr>
+                          <tr className='w-full flex justify-between '><td className='min-w-[30%]   bg-slate-50'>Phone no. :</td> <td className='font-semibold '>{homedata?.phone}</td></tr>
 
-                          <tr className='w-full flex justify-between border '><td className='min-w-[30%] border  bg-slate-400/20'>Adhaar no. :</td> <td className='font-semibold '>{homedata?.adhaar}</td></tr>
+                          <tr className='w-full flex justify-between '><td className='min-w-[30%]   bg-slate-50'>Adhaar no. :</td> <td className='font-semibold '>{homedata?.adhaar}</td></tr>
 
-                          <tr className='w-full flex justify-between border '><td className='min-w-[30%] border  bg-slate-400/20'>PAN Id :</td> <td className='font-semibold '>{homedata?.panId}</td> </tr>
+                          <tr className='w-full flex justify-between '><td className='min-w-[30%]   bg-slate-50'>PAN Id :</td> <td className='font-semibold '>{homedata?.panId}</td> </tr>
 
                         </div>
                       </div>
@@ -133,7 +133,40 @@ const Home = () => {
                       <div className="flex-grow">
 
                         <div className=" links flex justify-center items-center">
-                          <label htmlFor="interestRate"></label><input type="number" name="interestRate" id="interestRate" /> <button className='btn p-2 border rounded bg-violet-400 font-semibold'>Update</button>
+                          <label htmlFor="interestRate"></label>
+                          <input className='px-2 py-1' type="number" name="interestRate" id="interestRate" /> 
+                          <button className='btn px-2 py-1 border text-zinc-100 rounded bg-violet-400 font-semibold'>Update</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="cards p-4 md:w-1/3 ">
+                    <div className="flex rounded-lg h-full bg-gray-100 p-8 flex-col card"
+                    // style="background: linear-gradient(rgba(0, 0, 0, 0.1502) , rgba(62, 42, 78, 0.15))"
+                    >
+                      <div className="flex items-center mb-3">
+                        <div
+                          className="w-8 h-8 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0"
+                        // style="background-color: #2e2e2e5e;"
+                        >
+                          <i className="bi card-icon text-lg  bi-search"></i>
+                        </div>
+                        <h2 className="text-gray-900 text-lg title-font font-medium pl-6">Finance Information</h2>
+                      </div>
+                      <hr className="mb-2 relative -top-2.5 ml-9 border-gray-700" />
+                      <div className="flex-grow">
+
+                        <div className=" links flex justify-center items-center">
+                          <table>
+                            <thead>
+                            <td></td><td></td>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Capital Input</td> <td>{homedata?.totalCapital}</td>
+                              </tr>
+                            </tbody>
+                            </table>
                         </div>
                       </div>
                     </div>
@@ -146,10 +179,6 @@ const Home = () => {
 
 
           </div>
-
-
-
-
 
           {/* </div> */}
           <div className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]" aria-hidden="true">

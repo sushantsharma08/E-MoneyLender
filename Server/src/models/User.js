@@ -7,7 +7,9 @@ const UserSchema = new mongoose.Schema({
     email:{type:String,required:true},
     phone:{type:Number,required:true,length:10},
     adhaar:{type:Number,required:true,length:12,unique:true},
-    panId:{type:String,required:true,unique:true}    
+    panId:{type:String,required:true,unique:true},
+    interestRate:{type:Number,required:true},
+    totalCapital:{type:Number,required:true} 
 });
 
 export const UserModel = mongoose.model("users",UserSchema)

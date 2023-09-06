@@ -13,7 +13,7 @@ router.get("/user/:uid",async (req,res)=>{
 })
 
 router.post("/register", async (req, res) => {
-    const { username, password, name, email, phone, adhaar, panId } = req.body;
+    const { username, password, name, email, phone, adhaar, panId, interestRate, totalCapital } = req.body;
 
     const user = await UserModel.findOne({ adhaar, panId });
     if (user) {
@@ -21,7 +21,7 @@ router.post("/register", async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 8);
-    const newUser = new UserModel({ username, password: hashedPassword, name, email, phone, adhaar, panId });
+    const newUser = new UserModel({ username, password: hashedPassword, name, email, phone, adhaar, panId, interestRate, totalCapital });
     await newUser.save();
     res.json({ status:201 ,message: "user registered successfully" });
 });
