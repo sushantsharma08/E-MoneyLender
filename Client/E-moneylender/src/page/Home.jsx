@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import axios from 'axios';
 import { useGetUserId } from '../hooks/useGetUserId';
 import {
@@ -6,13 +6,38 @@ import {
   QueryClientProvider,
   useQuery,
 } from '@tanstack/react-query';
+import toast, { Toaster } from 'react-hot-toast';
 
 const queryClient1 = new QueryClient()
 
-
-
 const Home = () => {
   const LenderId = useGetUserId();
+  const [newRate, setnewRate] = useState()
+
+  const ChangeInterestRate =async()=>{
+    try {
+      const url = `https://e-money-lender-back.vercel.app/auth/changeRate/${LenderId}`
+      // const url=`http://localhost:3001/auth/changeRate/${LenderId}`
+      const response = await axios.post(url,{
+        interestRate:newRate
+      })
+      if (response.data.status === 400) {
+        toast(response.data.message, {
+            style: {
+                backgroundColor: "rgba(241, 170, 170,1)"
+            }
+        })
+    } else if (response.data.status === 202) {
+        toast(response.data.message, {
+            style: {
+                backgroundColor: "greenyellow"
+            }
+        })
+    }
+    } catch (error) {
+      
+    }
+  }
 
   const { isLoading, error, data: homedata } = useQuery({
     queryKey: ['userData'],
@@ -55,7 +80,6 @@ const Home = () => {
     </div>
   </section>
 
-  console.log(homedata);
 
   return (
     <>
@@ -134,8 +158,8 @@ const Home = () => {
 
                         <div className=" links flex flex-col md:flex-row sm:flex-row justify-center items-center">
                           <label htmlFor="interestRate"></label>
-                          <input className='px-2 py-1' type="number" name="interestRate" id="interestRate" />
-                          <button className='btn px-2 py-1 border text-zinc-100 rounded bg-violet-400 font-semibold'>Update</button>
+                          <input className='px-2 py-1' type="number" name="interestRate" id="interestRate" onChange={(e)=>setnewRate(e.target.value)} />
+                          <button className='btn px-2 py-1 border text-zinc-100 rounded bg-violet-400 font-semibold' onClick={ChangeInterestRate}>Update</button>
                         </div>
                       </div>
                     </div>
@@ -186,6 +210,7 @@ const Home = () => {
         </div>
 
       </div>
+      <Toaster />
     </>
   )
 }

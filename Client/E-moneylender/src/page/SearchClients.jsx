@@ -93,6 +93,15 @@ const SearchClients = () => {
   </section>
 
   // Main 
+  // console.log(lenderClients);
+  // const sum = ()=>{
+  //   let sumall =0;
+  //   lenderClients.forEach(client => {
+  //     sumall+=client.loanamount;
+  //   });
+  //   console.log(sumall);
+  // }
+  // sum()
 
   return (
     <div id='client' className='w-screen sm:w-[95vw] mx-auto' >

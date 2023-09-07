@@ -45,4 +45,27 @@ router.post("/login", async (req, res) => {
 
 });
 
+router.post("/addCapital/:id", async (req,res)=>{
+    const {totalCapital} = req.body;
+    const user = await UserModel.findOne({_id:req.params.id});
+    const newCapitalAmt = user.totalCapital+totalCapital
+    // UserModel.updateOne
+    try {
+        const response= await UserModel.updateOne({_id:req.params.id},{totalCapital:newCapitalAmt});
+        res.json({ status: 202, message: "total capital Updated Successfully" })
+    } catch (error) {
+        res.json({ status: 400, message: error })
+    }
+})
+
+router.post("/changeRate/:id",async (req,res)=>{
+    const {interestRate} = req.body;
+    try {
+        const user = await UserModel.findOneAndUpdate({_id:req.params.id},req.body);
+        res.json({ status: 202, message: "Interest Rate Changed" })
+    } catch (error) {
+        res.json({ status: 400, message: error })
+    }
+})
+
 export { router as UserRouter }

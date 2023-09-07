@@ -19,11 +19,8 @@ const Form = () => {
     const LenderId = useGetUserId();
 
     useEffect(() => {
-      
         const getLender = axios.get(`https://e-money-lender-back.vercel.app/auth/user/${LenderId}`).then((res)=>setInterest(res.data.interestRate));
     }, [])
-    
-
 
 
     const setValues = (amount) => {
@@ -72,6 +69,28 @@ const Form = () => {
                 })
             }
         } catch (error) {
+        }
+        try {
+            const url = `https://e-money-lender-back.vercel.app/auth/addCapital/${LenderId}`
+            // const url=`http://localhost:3001/auth/addCapital/${LenderId}`
+            const response = await axios.post(url, {
+                totalCapital: loanAmount,
+            });
+            if (response.data.status === 400) {
+                toast(response.data.message, {
+                    style: {
+                        backgroundColor: "rgba(241, 170, 170,1)"
+                    }
+                })
+            } else if (response.data.status === 202) {
+                toast(response.data.message, {
+                    style: {
+                        backgroundColor: "greenyellow"
+                    }
+                })
+            }
+        } catch (error) {
+            
         }
     }
 
