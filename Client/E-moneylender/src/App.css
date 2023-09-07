@@ -191,9 +191,20 @@ input[type=radio] {
 
 .tabled{
   border: 2px solid rgb(215, 208, 208);
-  
+  height: 80vh;
+  position: relative;
 }
-.tabled::-webkit-scrollbar {display:none;}
+
+/* .tabled::-webkit-scrollbar {
+  display:none;
+  width: 0px;
+  background-color: #b8cbf1;
+  position: fixed;
+  bottom: 0px;
+} */
+/* .tabled::-webkit-scrollbar-thumb{
+  background-color: rgb(38, 38, 36);
+} */
 
 .id {
   background-color: rgb(181, 158, 216);

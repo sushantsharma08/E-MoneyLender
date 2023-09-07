@@ -97,10 +97,10 @@ const SearchClients = () => {
   return (
     <div id='client' className='w-screen sm:w-[95vw] mx-auto' >
 
-      <div className="tabled h-full w-full overflow-scroll">
+      <div className="tabled  w-full overflow-scroll">
         <table className=" w-full min-w-max table-auto text-left">
           <thead>
-            <tr className='bg-orange-300 text-md text-center font-bold'>
+            <tr className='bg-orange-300 text-md text-center font-bold sticky top-0'>
               <th className="border-b border-blue-gray-100 bg-blue-gray-50 border-r p-4">
                 <span
                   variant="small"

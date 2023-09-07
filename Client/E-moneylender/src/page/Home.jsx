@@ -158,12 +158,9 @@ const Home = () => {
 
                         <div className=" links flex justify-center items-center">
                           <table>
-                            <thead>
-                            <td></td><td></td>
-                            </thead>
                             <tbody>
                               <tr>
-                                <td>Capital Input</td> <td>{homedata?.totalCapital}</td>
+                                <td>Capital Input:</td> <td className='font-semibold'>{homedata?.totalCapital}</td>
                               </tr>
                             </tbody>
                             </table>
