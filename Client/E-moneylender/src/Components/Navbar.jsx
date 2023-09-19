@@ -31,11 +31,11 @@ const Navbar = () => {
       <nav className="flex items-center justify-between  lg:px-8" aria-label="Global">
         <div className="flex lg:flex-1">
           <span className="-m-1.5 p-1.5">
-            <img className='h-24' src="/images/logo.png" alt="" />
+            <img className='logo' src="/images/logo.png" alt="" />
             {/* E-MoneyLender */}
           </span>
         </div>
-        <div className='lg:hidden' onClick={ToggleSmallScreenNavTab}><button className="-m-2.5 rounded-md p-2.5 text-gray-700">
+        <div className='lg:hidden' onClick={ToggleSmallScreenNavTab}><button className=" rounded-md p-2.5 text-gray-700">
           {/* hello */}
           <img className='h-10' src="/images/nav_open.png" alt="" />
         </button></div>

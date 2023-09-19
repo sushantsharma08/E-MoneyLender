@@ -137,7 +137,7 @@ const EditClient = (props = { show: Boolean, clientName: String }) => {
 
     return (
 
-        <div className='sticky pt-2 bottom-28 left-12 bg-gray-400 '
+        <div className='sticky pt-2 bottom-full left-12 bg-gray-400 '
             style={{ display: modalStatus ? "block" : "none" }}>
 
             <button className='absolute right-4 top-4 hover:bg-rose-500' onClick={(e) => closeModal(e)} >

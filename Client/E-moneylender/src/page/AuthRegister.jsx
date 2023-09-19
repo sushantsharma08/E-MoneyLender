@@ -37,6 +37,9 @@ const AuthRegister = () => {
           username,
           interestRate:36,
           totalCapital:0,
+          expectedInFlow:0,
+          currentCollection:0,
+          interestGained:0,
           password,
         })
         if (Response.data.status===400) {

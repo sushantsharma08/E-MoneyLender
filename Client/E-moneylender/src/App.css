@@ -3,8 +3,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* width: 100vw; */
-  height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+  /* height: 100vh; */
 }
 
 .li {
@@ -13,6 +14,10 @@
   font-weight: 500;
   text-decoration: none;
   font-size: large;
+}
+
+.logo{
+  height: 5rem;
 }
 
 /* Form Styles */
@@ -161,6 +166,9 @@ input[type=radio] {
 
   .label {
     width: 150px;
+  }
+  .logo{
+    height: 3rem;
   }
 }
 

@@ -64,7 +64,7 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
 
     return (
 
-        <div className='sticky bottom-10 left-12 bg-slate-300 '
+        <div className='sticky bottom-full left-12 bg-slate-300 '
             style={{ display: modalStatus ? "block" : "none" }}>
 
             <button className='absolute right-4 top-4 hover:bg-rose-500' onClick={(e) => closeModal(e)} >
