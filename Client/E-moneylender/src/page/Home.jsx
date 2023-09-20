@@ -55,7 +55,7 @@ const Home = () => {
   // fetch(`http://localhost:3001/client/getallloans/${LenderId}`)
 
   const Getsum = async () => {
-    const response = await fetch(`http://localhost:3001/client/getallloans/${LenderId}`);
+    const response = await fetch(`https://e-money-lender-back.vercel.app/client/getallloans/${LenderId}`);
     const res = await response.json()
     console.log(res);
     setPrincipleSum(res?.allLoanAmounts)
