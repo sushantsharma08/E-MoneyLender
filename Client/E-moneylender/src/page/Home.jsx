@@ -8,6 +8,24 @@ import {
   useQuery,
 } from '@tanstack/react-query';
 import toast, { Toaster } from 'react-hot-toast';
+import {
+  Chart as ChartJS,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  Tooltip,
+  Legend
+} from 'chart.js';
+
+import { Bar } from 'react-chartjs-2';
+
+ChartJS.register(
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  Tooltip,
+  Legend
+)
 
 const queryClient1 = new QueryClient()
 
@@ -16,6 +34,57 @@ const Home = () => {
   const [newRate, setnewRate] = useState()
   const [PrincipleSum, setPrincipleSum] = useState()
   const [TotalSum, setTotalSum] = useState()
+
+  const data = {
+    labels: ['Principle ', 'Amount', 'Profit',],
+    datasets: [
+      {
+      label: 'Business Stats',
+      data: [PrincipleSum, TotalSum, TotalSum - PrincipleSum],
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 159, 64, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(201, 203, 207, 0.2)'
+      ],
+      borderColor: [
+        'rgb(255, 99, 132)',
+        'rgb(255, 159, 64)',
+        'rgb(75, 192, 192)',
+        'rgb(54, 162, 235)',
+        'rgb(153, 102, 255)',
+        'rgb(201, 203, 207)'
+      ],
+      borderWidth: 1,
+      barThickness: 55,
+      maxBarThickness: 100,
+    },
+    // {
+    //   label: 'current Stats  ',
+    //   data: [PrincipleSum-90000, TotalSum-200000, TotalSum - PrincipleSum-20000],
+    //   backgroundColor: [
+    //     'rgba(54, 162, 235, 0.2)',
+    //     'rgba(153, 102, 255, 0.2)',
+    //     'rgba(201, 203, 207, 0.2)'
+    //   ],
+    //   borderColor: [
+    //     'rgb(54, 162, 235)',
+    //     'rgb(153, 102, 255)',
+    //     'rgb(201, 203, 20)'
+    //   ],
+      
+    //   borderWidth: 1,
+    //   barThickness: 55,
+    //   maxBarThickness: 100,
+    // }
+  ],
+  };
+
+  const options = {
+
+  }
 
   const ChangeInterestRate = async () => {
     try {
@@ -42,18 +111,6 @@ const Home = () => {
     }
   }
 
-  const { isLoading, error, data: homedata } = useQuery({
-    queryKey: ['userData'],
-    queryFn: () =>
-      fetch(`https://e-money-lender-back.vercel.app/auth/user/${LenderId}`).then(
-        (res) => res.json(),
-      ),
-  });
-
-
-  // fetch(`https://e-money-lender-back.vercel.app/client/getallloans/${LenderId}`).then(
-  // fetch(`http://localhost:3001/client/getallloans/${LenderId}`)
-
   const Getsum = async () => {
     const response = await fetch(`https://e-money-lender-back.vercel.app/client/getallloans/${LenderId}`);
     const res = await response.json()
@@ -61,6 +118,14 @@ const Home = () => {
     setPrincipleSum(res?.allLoanAmounts)
     setTotalSum(res?.sumTotal)
   }
+
+  const { isLoading, error, data: homedata } = useQuery({
+    queryKey: ['userData'],
+    queryFn: () =>
+      fetch(`https://e-money-lender-back.vercel.app/auth/user/${LenderId}`).then(
+        (res) => res.json(),
+      ),
+  });
 
   //dynamic UI from useQuery output
 
@@ -197,22 +262,6 @@ const Home = () => {
                   <hr className="mb-2 relative -top-2.5 ml-9 border-gray-700" />
                   <div className="flex-grow">
 
-                    {/* <div className=" links flex justify-center items-center">
-                      <table>
-                        <tbody>
-                          <tr>
-                            <td>Capital Input:</td> <td className='font-semibold'>{PrincipleSum}</td>
-                          </tr>
-                          <tr>
-                            <td>Total To Come:</td> <td className='font-semibold'>{TotalSum}</td>
-                          </tr>
-                          <tr>
-                            <td>Profit Figure:</td> <td className='font-semibold'>{TotalSum - PrincipleSum}</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div> */}
-
                     <div className=" links flex-col flex justify-center items-center">
                       <tr className='w-full flex justify-between border-b border-gray-300 '>
                         <td className='min-w-[30%] b'>Capital Input:</td>
@@ -249,8 +298,12 @@ const Home = () => {
               {/* </div> */}
             </section>
 
-
-
+            <div className='w-half h-80 border flex justify-center mt-10'>
+              <Bar
+                data={data}
+                options={options}
+              ></Bar>
+            </div>
           </div>
 
           {/* </div> */}
@@ -262,6 +315,7 @@ const Home = () => {
         </div>
 
       </div>
+
       <Toaster />
     </>
   )
