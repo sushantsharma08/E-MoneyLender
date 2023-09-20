@@ -175,7 +175,7 @@ const Home = () => {
 
                     <div className=" links flex flex-col md:flex-row sm:flex-row justify-center items-center">
                       <label htmlFor="interestRate"></label>
-                      <input className='px-2 py-1 bg-blue-300/20 outline-0 border rounded border-violet-300' type="number" name="interestRate" id="interestRate" onChange={(e) => setnewRate(e.target.value)} />
+                      <input className='px-2 py-1 bg-blue-300/20 outline-0 border rounded border-violet-300' placeholder='Enter new rates' type="number" name="interestRate" id="interestRate" onChange={(e) => setnewRate(e.target.value)} />
                       <button className='btn px-2 py-1 border text-zinc-100 rounded bg-violet-400 font-semibold' onClick={ChangeInterestRate}>Update</button>
                     </div>
                   </div>
