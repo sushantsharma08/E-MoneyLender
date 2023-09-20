@@ -58,8 +58,8 @@ const Home = () => {
         'rgb(201, 203, 207)'
       ],
       borderWidth: 1,
-      barThickness: 55,
-      maxBarThickness: 100,
+      // barThickness: 55,
+      // maxBarThickness: 100,
     },
     // {
     //   label: 'current Stats  ',
@@ -298,7 +298,7 @@ const Home = () => {
               {/* </div> */}
             </section>
 
-            <div className='w-half h-80 border flex justify-center mt-10'>
+            <div className=' h-40 border flex justify-center mt-10 sm:h-80'>
               <Bar
                 data={data}
                 options={options}
