@@ -1,9 +1,10 @@
-import React,{useState} from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
+import axios, { all } from 'axios';
 import { useGetUserId } from '../hooks/useGetUserId';
+import { FaUser, FaMoneyBillWaveAlt } from 'react-icons/fa';
+import { GiGrowth } from 'react-icons/gi';
 import {
   QueryClient,
-  QueryClientProvider,
   useQuery,
 } from '@tanstack/react-query';
 import toast, { Toaster } from 'react-hot-toast';
@@ -13,29 +14,31 @@ const queryClient1 = new QueryClient()
 const Home = () => {
   const LenderId = useGetUserId();
   const [newRate, setnewRate] = useState()
+  const [PrincipleSum, setPrincipleSum] = useState()
+  const [TotalSum, setTotalSum] = useState()
 
-  const ChangeInterestRate =async()=>{
+  const ChangeInterestRate = async () => {
     try {
       const url = `https://e-money-lender-back.vercel.app/auth/changeRate/${LenderId}`
       // const url=`http://localhost:3001/auth/changeRate/${LenderId}`
-      const response = await axios.post(url,{
-        interestRate:newRate
+      const response = await axios.post(url, {
+        interestRate: newRate
       })
       if (response.data.status === 400) {
         toast(response.data.message, {
-            style: {
-                backgroundColor: "rgba(241, 170, 170,1)"
-            }
+          style: {
+            backgroundColor: "rgba(241, 170, 170,1)"
+          }
         })
-    } else if (response.data.status === 202) {
+      } else if (response.data.status === 202) {
         toast(response.data.message, {
-            style: {
-                backgroundColor: "greenyellow"
-            }
+          style: {
+            backgroundColor: "greenyellow"
+          }
         })
-    }
+      }
     } catch (error) {
-      
+
     }
   }
 
@@ -46,6 +49,18 @@ const Home = () => {
         (res) => res.json(),
       ),
   });
+
+
+  // fetch(`https://e-money-lender-back.vercel.app/client/getallloans/${LenderId}`).then(
+  // fetch(`http://localhost:3001/client/getallloans/${LenderId}`)
+
+  const Getsum = async () => {
+    const response = await fetch(`http://localhost:3001/client/getallloans/${LenderId}`);
+    const res = await response.json()
+    console.log(res);
+    setPrincipleSum(res?.allLoanAmounts)
+    setTotalSum(res?.sumTotal)
+  }
 
   //dynamic UI from useQuery output
 
@@ -80,6 +95,7 @@ const Home = () => {
     </div>
   </section>
 
+  Getsum();
 
   return (
     <>
@@ -107,93 +123,129 @@ const Home = () => {
 
             <section className="text-gray-600 body-font border-l container px-5  mx-auto flex flex-wrap justify-center -m-4 card-container">
               {/* <div className="container px-5  mx-auto flex"> */}
-                {/* <div className="flex flex-wrap justify-center -m-4 card-container" > */}
+              {/* <div className="flex flex-wrap justify-center -m-4 card-container" > */}
 
-                  <div className="cards p-4 md:w-1/3 ">
-                    <div className="flex rounded-lg h-full bg-gray-100 p-8 flex-col card"
-                    // style="background: linear-gradient(rgba(0, 0, 0, 0.1502) , rgba(62, 42, 78, 0.15))"
+              <div className="cards p-4 md:w-1/3 ">
+                <div className="flex rounded-lg h-full bg-gray-100 p-8 flex-col card"
+                // style="background: linear-gradient(rgba(0, 0, 0, 0.1502) , rgba(62, 42, 78, 0.15))"
+                >
+                  <div className="flex items-center mb-3">
+                    <div
+                      className="w-8 h-8 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0"
+                    // style="background-color: #2e2e2e5e;"
                     >
-                      <div className="flex items-center mb-3">
-                        <div
-                          className="w-8 h-8 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0"
-                        // style="background-color: #2e2e2e5e;"
-                        >
-                          <i className="bi card-icon text-lg  bi-search"></i>
-                        </div>
-                        <h2 className="text-gray-900 text-lg title-font font-medium pl-6">{homedata?.name}</h2>
-                      </div>
-                      <hr className="mb-2 relative -top-2.5 ml-9 border-gray-700" />
-                      <div className="flex-grow">
+                      {/* <i className="bi card-icon text-lg  bi-search"></i> */}
+                      <FaUser className='text-gray-300' />
+                    </div>
+                    <h2 className="text-gray-900 text-lg title-font font-medium pl-6">{homedata?.name}</h2>
+                  </div>
+                  <hr className="mb-2 relative -top-2.5 ml-9 border-gray-700" />
+                  <div className="flex-grow">
 
-                        <div className=" links flex-col flex justify-center items-center">
-                          <tr className='w-full flex justify-between '><td className='min-w-[30%]   bg-slate-50'>Current Rate of Interest:</td> <td className='font-semibold '>{homedata?.interestRate}%</td></tr>
+                    <div className=" links flex-col flex justify-center items-center">
+                      <tr className='w-full flex justify-between border-b border-gray-300 '><td className='min-w-[30%] b'>Current Rate of Interest:</td> <td className='font-semibold '>{homedata?.interestRate}%</td></tr>
 
-                          <tr className='w-full flex justify-between '><td className='min-w-[30%]   bg-slate-50'>E-mail :</td> <td className='font-semibold text-sm'>{homedata?.email}</td></tr>
+                      <tr className='w-full flex justify-between border-b border-gray-300 '><td className='min-w-[30%] b'>E-mail :</td> <td className='font-semibold text-sm'>{homedata?.email}</td></tr>
 
-                          <tr className='w-full flex justify-between '><td className='min-w-[30%]   bg-slate-50'>Phone no. :</td> <td className='font-semibold '>{homedata?.phone}</td></tr>
+                      <tr className='w-full flex justify-between border-b border-gray-300 '><td className='min-w-[30%] b'>Phone no. :</td> <td className='font-semibold '>{homedata?.phone}</td></tr>
 
-                          <tr className='w-full flex justify-between '><td className='min-w-[30%]   bg-slate-50'>Adhaar no. :</td> <td className='font-semibold '>{homedata?.adhaar}</td></tr>
+                      <tr className='w-full flex justify-between border-b border-gray-300 '><td className='min-w-[30%] b'>Adhaar no. :</td> <td className='font-semibold '>{homedata?.adhaar}</td></tr>
 
-                          <tr className='w-full flex justify-between '><td className='min-w-[30%]   bg-slate-50'>PAN Id :</td> <td className='font-semibold '>{homedata?.panId}</td> </tr>
+                      <tr className='w-full flex justify-between border-b border-gray-300 '><td className='min-w-[30%] b'>PAN Id :</td> <td className='font-semibold '>{homedata?.panId}</td> </tr>
 
-                        </div>
-                      </div>
                     </div>
                   </div>
-                  <div className="cards p-4 md:w-1/3 ">
-                    <div className="flex rounded-lg h-full bg-gray-100 p-8 flex-col card"
-                    // style="background: linear-gradient(rgba(0, 0, 0, 0.1502) , rgba(62, 42, 78, 0.15))"
+                </div>
+              </div>
+              <div className="cards p-4 md:w-1/3 ">
+                <div className="flex rounded-lg h-full bg-gray-100 p-8 flex-col card"
+                // style="background: linear-gradient(rgba(0, 0, 0, 0.1502) , rgba(62, 42, 78, 0.15))"
+                >
+                  <div className="flex items-center mb-3">
+                    <div
+                      className="w-8 h-8 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0"
+                    // style="background-color: #2e2e2e5e;"
                     >
-                      <div className="flex items-center mb-3">
-                        <div
-                          className="w-8 h-8 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0"
-                        // style="background-color: #2e2e2e5e;"
-                        >
-                          <i className="bi card-icon text-lg  bi-search"></i>
-                        </div>
-                        <h2 className="text-gray-900 text-lg title-font font-medium pl-6">Change Interest Rate</h2>
-                      </div>
-                      <hr className="mb-2 relative -top-2.5 ml-9 border-gray-700" />
-                      <div className="flex-grow">
+                      <GiGrowth />
+                    </div>
+                    <h2 className="text-gray-900 text-lg title-font font-medium pl-6">Change Interest Rate</h2>
+                  </div>
+                  <hr className="mb-2 relative -top-2.5 ml-9 border-gray-700" />
+                  <div className="flex-grow">
 
-                        <div className=" links flex flex-col md:flex-row sm:flex-row justify-center items-center">
-                          <label htmlFor="interestRate"></label>
-                          <input className='px-2 py-1 bg-blue-300/20 outline-0 border rounded border-violet-300' type="number" name="interestRate" id="interestRate" onChange={(e)=>setnewRate(e.target.value)} />
-                          <button className='btn px-2 py-1 border text-zinc-100 rounded bg-violet-400 font-semibold' onClick={ChangeInterestRate}>Update</button>
-                        </div>
-                      </div>
+                    <div className=" links flex flex-col md:flex-row sm:flex-row justify-center items-center">
+                      <label htmlFor="interestRate"></label>
+                      <input className='px-2 py-1 bg-blue-300/20 outline-0 border rounded border-violet-300' type="number" name="interestRate" id="interestRate" onChange={(e) => setnewRate(e.target.value)} />
+                      <button className='btn px-2 py-1 border text-zinc-100 rounded bg-violet-400 font-semibold' onClick={ChangeInterestRate}>Update</button>
                     </div>
                   </div>
-                  <div className="cards p-4 md:w-1/3 ">
-                    <div className="flex rounded-lg h-full bg-gray-100 p-8 flex-col card"
-                    // style="background: linear-gradient(rgba(0, 0, 0, 0.1502) , rgba(62, 42, 78, 0.15))"
+                </div>
+              </div>
+              <div className="cards p-4 md:w-1/3 ">
+                <div className="flex rounded-lg h-full bg-gray-100 p-8 flex-col card"
+                // style="background: linear-gradient(rgba(0, 0, 0, 0.1502) , rgba(62, 42, 78, 0.15))"
+                >
+                  <div className="flex items-center mb-3">
+                    <div
+                      className="w-8 h-8 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0"
+                    // style="background-color: #2e2e2e5e;"
                     >
-                      <div className="flex items-center mb-3">
-                        <div
-                          className="w-8 h-8 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0"
-                        // style="background-color: #2e2e2e5e;"
-                        >
-                          <i className="bi card-icon text-lg  bi-search"></i>
-                        </div>
-                        <h2 className="text-gray-900 text-lg title-font font-medium pl-6">Finance Information</h2>
-                      </div>
-                      <hr className="mb-2 relative -top-2.5 ml-9 border-gray-700" />
-                      <div className="flex-grow">
-
-                        <div className=" links flex justify-center items-center">
-                          <table>
-                            <tbody>
-                              <tr>
-                                <td>Capital Input:</td> <td className='font-semibold'>{homedata?.totalCapital}</td>
-                              </tr>
-                            </tbody>
-                            </table>
-                        </div>
-                      </div>
+                      <FaMoneyBillWaveAlt className='text-gray-300' />
                     </div>
+                    <h2 className="text-gray-900 text-lg title-font font-medium pl-6">Finance Information</h2>
                   </div>
+                  <hr className="mb-2 relative -top-2.5 ml-9 border-gray-700" />
+                  <div className="flex-grow">
 
-                {/* </div> */}
+                    {/* <div className=" links flex justify-center items-center">
+                      <table>
+                        <tbody>
+                          <tr>
+                            <td>Capital Input:</td> <td className='font-semibold'>{PrincipleSum}</td>
+                          </tr>
+                          <tr>
+                            <td>Total To Come:</td> <td className='font-semibold'>{TotalSum}</td>
+                          </tr>
+                          <tr>
+                            <td>Profit Figure:</td> <td className='font-semibold'>{TotalSum - PrincipleSum}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div> */}
+
+                    <div className=" links flex-col flex justify-center items-center">
+                      <tr className='w-full flex justify-between border-b border-gray-300 '>
+                        <td className='min-w-[30%] b'>Capital Input:</td>
+                        <td className='font-semibold '>{PrincipleSum} ₹</td>
+                      </tr>
+
+                      <tr className='w-full flex justify-between border-b border-gray-300 '>
+                        <td className='min-w-[30%] b'>Total To Come:</td>
+                        <td className='font-semibold '>{TotalSum} ₹</td>
+                      </tr>
+
+                      <tr className='w-full flex justify-between border-b border-gray-300 '>
+                        <td className='min-w-[30%] b'>Profit Figure:</td>
+                        <td className='font-semibold '>{TotalSum - PrincipleSum} ₹</td>
+                      </tr>
+                      {/* 
+                        <tr className='w-full flex justify-between border-b border-gray-300 '>
+                          <td className='min-w-[30%] b'>Adhaar no. :</td>
+                          <td className='font-semibold '>{homedata?.adhaar}</td>
+                        </tr>
+
+                        <tr className='w-full flex justify-between border-b border-gray-300 '>
+                          <td className='min-w-[30%] b'>PAN Id :</td>
+                          <td className='font-semibold '>{homedata?.panId}</td>
+                        </tr>  */}
+
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+              {/* </div> */}
               {/* </div> */}
             </section>
 

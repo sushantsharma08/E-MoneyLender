@@ -83,6 +83,18 @@ router.get("/searchbyname/:username", async (req, res) => {
     }
 })
 
+router.get("/getallloans/:userid", async (req, res) => {
+    const user = await ClientModel.find({ LenderId: req.params.userid });
+    const allLoanAmounts = user.map((client) => (client.loanamount)).reduce((accumulator, currentValue) => {
+        return accumulator + currentValue
+    }, 0);
+    const sumTotal = user.map((client) => (client.totalAmount)).reduce((accumulator, currentValue) => {
+        return accumulator + currentValue
+    }, 0); 
+
+    res.json({allLoanAmounts,sumTotal});
+})
+
 // router.post("/send_sms",async(req,res)=>{
 //     // const Contactno= req.params.phoneno;
 //     const {ContactNumber,Text}=req.body;
