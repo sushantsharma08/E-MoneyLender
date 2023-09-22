@@ -174,7 +174,7 @@ const Home = () => {
           </div>
           {/* <div className="mx-auto max-w-2xl pb-32 sm:pb-48 lg:pb-44"> */}
           <div className="slide-in-elliptic-top-fwd slide-out-top sm:mb-8 sm:flex sm:justify-center">
-            <div className="relative rounded-full px-8 py-4 leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20 text-xl">
+            <div className="relative rounded-full px-8 py-4 leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20 sm:text-xl text-base text-center">
               Welcome, <b><i>{homedata?.name}</i></b>
             </div>
           </div>
@@ -280,13 +280,13 @@ const Home = () => {
                       </tr>
                       
                         <tr className='w-full flex justify-between border-b border-gray-300 '>
-                          <td className='min-w-[30%] b'>Amount to Recover :</td>
-                          <td className='font-semibold '>{TotalRemainingAmount} ₹</td>
+                          <td className='min-w-[30%] b'>Amount to Recover:</td>
+                          <td className='font-semibold whitespace-nowrap'>{TotalRemainingAmount} ₹</td>
                         </tr>
 
                         <tr className='w-full flex justify-between border-b border-gray-300 '>
-                          <td className='min-w-[30%] b'>Amount Recieved :</td>
-                          <td className='font-semibold '>{TotalSum-TotalRemainingAmount} ₹</td>
+                          <td className='min-w-[30%] b'>Amount Recieved:</td>
+                          <td className='font-semibold whitespace-nowrap '>{TotalSum-TotalRemainingAmount} ₹</td>
                         </tr> 
 
                     </div>
@@ -299,7 +299,7 @@ const Home = () => {
               {/* </div> */}
             </section>
 
-            <div className=' h-40 border flex justify-center mt-10 sm:h-80'>
+            <div className=' h-48 border flex justify-center mt-10 sm:h-80'>
               <Bar
                 data={data}
                 options={options}
