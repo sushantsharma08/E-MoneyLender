@@ -34,13 +34,14 @@ const Home = () => {
   const [newRate, setnewRate] = useState()
   const [PrincipleSum, setPrincipleSum] = useState()
   const [TotalSum, setTotalSum] = useState()
+  const [TotalRemainingAmount, setTotalRemainingAmount] = useState()
 
   const data = {
-    labels: ['Principle ', 'Amount', 'Profit',],
+    labels: ['Principle ', 'Amount', 'Profit', 'Recovered', 'To Be Recovered'],
     datasets: [
       {
       label: 'Business Stats',
-      data: [PrincipleSum, TotalSum, TotalSum - PrincipleSum],
+      data: [PrincipleSum, TotalSum, TotalSum - PrincipleSum,TotalSum-TotalRemainingAmount,TotalRemainingAmount],
       backgroundColor: [
         'rgba(255, 99, 132, 0.2)',
         'rgba(255, 159, 64, 0.2)',
@@ -82,9 +83,7 @@ const Home = () => {
   ],
   };
 
-  const options = {
-
-  }
+  const options = { }
 
   const ChangeInterestRate = async () => {
     try {
@@ -112,11 +111,13 @@ const Home = () => {
   }
 
   const Getsum = async () => {
+    // const response = await fetch(`http://localhost:3001/client/getallloans/${LenderId}`);
     const response = await fetch(`https://e-money-lender-back.vercel.app/client/getallloans/${LenderId}`);
     const res = await response.json()
     console.log(res);
     setPrincipleSum(res?.allLoanAmounts)
     setTotalSum(res?.sumTotal)
+    setTotalRemainingAmount(res?.sumTotalremaining)
   }
 
   const { isLoading, error, data: homedata } = useQuery({
@@ -277,16 +278,16 @@ const Home = () => {
                         <td className='min-w-[30%] b'>Profit Figure:</td>
                         <td className='font-semibold '>{TotalSum - PrincipleSum} ₹</td>
                       </tr>
-                      {/* 
+                      
                         <tr className='w-full flex justify-between border-b border-gray-300 '>
-                          <td className='min-w-[30%] b'>Adhaar no. :</td>
-                          <td className='font-semibold '>{homedata?.adhaar}</td>
+                          <td className='min-w-[30%] b'>Amount to Recover :</td>
+                          <td className='font-semibold '>{TotalRemainingAmount} ₹</td>
                         </tr>
 
                         <tr className='w-full flex justify-between border-b border-gray-300 '>
-                          <td className='min-w-[30%] b'>PAN Id :</td>
-                          <td className='font-semibold '>{homedata?.panId}</td>
-                        </tr>  */}
+                          <td className='min-w-[30%] b'>Amount Recieved :</td>
+                          <td className='font-semibold '>{TotalSum-TotalRemainingAmount} ₹</td>
+                        </tr> 
 
                     </div>
 

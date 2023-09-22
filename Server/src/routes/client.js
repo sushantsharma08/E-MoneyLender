@@ -91,8 +91,11 @@ router.get("/getallloans/:userid", async (req, res) => {
     const sumTotal = user.map((client) => (client.totalAmount)).reduce((accumulator, currentValue) => {
         return accumulator + currentValue
     }, 0); 
+    const sumTotalremaining = user.map((client) => (client.remainingamount)).reduce((accumulator, currentValue) => {
+        return accumulator + currentValue
+    }, 0); 
 
-    res.json({allLoanAmounts,sumTotal});
+    res.json({allLoanAmounts,sumTotal,sumTotalremaining});
 })
 
 // router.post("/send_sms",async(req,res)=>{
