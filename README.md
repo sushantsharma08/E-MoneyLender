@@ -33,13 +33,41 @@ Welcome to this project! This is a project to be used by Money Lenders to keep r
 ## Preview Pages :
 
 <div style="display:flex;flex-direction:row">
-  <div class="images"> <img src="./assets/login.png" height="300px" /> <br/> <span>login Page</span> </div>
-  <div class="images"> <img src="./assets/register.png" height="300px" /> <br/> <span>Register Yourself as a Lender</span> </div>
-  <div class="images"> <img src="./assets/home.png" height="300px" />  <br/> <span>Home Page has all the lender's data</span>  </div>
-  <div class="images"> <img src="./assets/addclient.png" height="300px" />   <br/> <span>add your new clients data </span>   </div>
-  <div class="images"> <img src="./assets/allclients.png" height="300px" />   <br/> <span>Have the data for all clients at one place</span>   </div>
-  <div class="images"> <img src="./assets/clientdetail.png" height="300px" />   <br/> <span>Detailed form view of Clients</span>   </div>
-  <div class="images"> <img src="./assets/edit.png" height="300px" />   <br/> <span>Form to edit client's details</span>   </div>
+  <div class="images"> 
+   <span>login Page</span>  
+   <img src="./assets/login.png" height="300px" /> 
+   <br/>
+  </div>
+  <div class="images"> 
+  <span>Register Yourself as a Lender</span> 
+  <img src="./assets/register.png" height="300px" /> 
+  <br/> 
+  </div>
+  <div class="images"> 
+  <span>Home Page has all the lender's data</span> 
+  <img src="./assets/home.png" height="300px" />  
+  <br/>  
+   </div>
+  <div class="images"> 
+  <span>add your new clients data </span> 
+  <img src="./assets/addclient.png" height="300px" />   
+  <br/>   
+  </div>
+  <div class="images"> 
+  <span>Have the data for all clients at one place</span> 
+  <img src="./assets/allclients.png" height="300px" />  
+   <br/>   
+   </div>
+  <div class="images"> 
+  <span>Detailed form view of Clients</span>  
+  <img src="./assets/clientdetail.png" height="300px" />  
+   <br/>  
+   </div>
+  <div class="images">  
+  <span>Form to edit client's details</span>  
+  <img src="./assets/edit.png" height="300px" />  
+   <br/> 
+   </div>
 </div>
 
 [Have a look!](http://e-money-lender.vercel.app/)
