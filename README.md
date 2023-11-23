@@ -25,4 +25,8 @@ Welcome to this project! This is a project to be used by Money Lenders to keep r
 6. multer
 7. nodemon
 
+
+Project Plan :
+<img src="./assets/projectPlan.jpg" />
+
 [Have a look!](http://e-money-lender.vercel.app/)
