@@ -27,6 +27,6 @@ Welcome to this project! This is a project to be used by Money Lenders to keep r
 
 
 Project Plan :
-<img src="./assets/projectPlan.jpg" />
+<img src="./assets/projectPlan.jpg" height="70%" />
 
 [Have a look!](http://e-money-lender.vercel.app/)
