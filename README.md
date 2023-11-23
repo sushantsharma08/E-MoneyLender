@@ -33,13 +33,13 @@ Welcome to this project! This is a project to be used by Money Lenders to keep r
 ## Preview Pages :
 
 <div style="display:flex;flex-direction:row">
-  <div class="images"> <img src="./assets/login.png" height="100px" /> <span>login Page</span> </div>
-  <div class="images"> <img src="./assets/register.png" height="500px" /> </div>
-  <div class="images"> <img src="./assets/home.png" height="200px" /> </div>
+  <div class="images"> <img src="./assets/login.png" height="300px" /> <span>login Page</span> </div>
+  <div class="images"> <img src="./assets/register.png" height="300px" /> </div>
+  <div class="images"> <img src="./assets/home.png" height="300px" /> </div>
   <div class="images"> <img src="./assets/addclient.png" height="300px" /> </div>
-  <div class="images"> <img src="./assets/allclients.png" height="700px" /> </div>
-  <div class="images"> <img src="./assets/clientdetail.png"  /> </div>
-  <div class="images"> <img src="./assets/edit.png" height="100px" /> </div>
+  <div class="images"> <img src="./assets/allclients.png" height="300px" /> </div>
+  <div class="images"> <img src="./assets/clientdetail.png" height="300px" /> </div>
+  <div class="images"> <img src="./assets/edit.png" height="300px" /> </div>
 </div>
 
 [Have a look!](http://e-money-lender.vercel.app/)
