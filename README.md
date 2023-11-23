@@ -26,7 +26,7 @@ Welcome to this project! This is a project to be used by Money Lenders to keep r
 7. nodemon
 
 
-Project Plan :
-<img src="./assets/projectPlan.jpg" height="700px" />
+###Project Plan :###
+<img src="./assets/projectPlan.jpg" height="1000px" />
 
 [Have a look!](http://e-money-lender.vercel.app/)
