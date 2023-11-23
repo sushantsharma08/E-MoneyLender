@@ -34,10 +34,10 @@ Welcome to this project! This is a project to be used by Money Lenders to keep r
 
 <div style="display:flex">
 <!--   <div class="images> <img src="./assets/.png" height="100px" /> </div> -->
-  <div class="images"> <img src="./assets/register.png" height="100px" /> </div>
-  <div class="images"> <img src="./assets/home.png" height="100px" /> </div>
-  <div class="images"> <img src="./assets/addclient.png" height="100px" /> </div>
-  <div class="images"> <img src="./assets/allclients.png" height="100px" /> </div>
+  <div class="images"> <img src="./assets/register.png" height="500px" /> </div>
+  <div class="images"> <img src="./assets/home.png" height="200px" /> </div>
+  <div class="images"> <img src="./assets/addclient.png" height="300px" /> </div>
+  <div class="images"> <img src="./assets/allclients.png" height="700px" /> </div>
   <div class="images"> <img src="./assets/clientdetail.png" height="100px" /> </div>
   <div class="images"> <img src="./assets/edit.png" height="100px" /> </div>
 </div>
