@@ -34,37 +34,44 @@ Welcome to this project! This is a project to be used by Money Lenders to keep r
 
 <div style="display:flex;flex-direction:row">
   <div class="images"> 
-   <span>login Page</span>  
+   <span>login Page</span>
+   <br/>  
    <img src="./assets/login.png" height="300px" /> 
    <br/>
   </div>
   <div class="images"> 
-  <span>Register Yourself as a Lender</span> 
+  <span>Register Yourself as a Lender</span>
+  <br/> 
   <img src="./assets/register.png" height="300px" /> 
   <br/> 
   </div>
   <div class="images"> 
-  <span>Home Page has all the lender's data</span> 
+  <span>Home Page has all the lender's data</span>
+  <br/> 
   <img src="./assets/home.png" height="300px" />  
   <br/>  
    </div>
   <div class="images"> 
-  <span>add your new clients data </span> 
+  <span>add your new clients data </span>
+  <br/> 
   <img src="./assets/addclient.png" height="300px" />   
   <br/>   
   </div>
   <div class="images"> 
-  <span>Have the data for all clients at one place</span> 
+  <span>Have the data for all clients at one place</span>
+  <br/> 
   <img src="./assets/allclients.png" height="300px" />  
    <br/>   
    </div>
   <div class="images"> 
-  <span>Detailed form view of Clients</span>  
+  <span>Detailed form view of Clients</span>
+  <br/>  
   <img src="./assets/clientdetail.png" height="300px" />  
    <br/>  
    </div>
   <div class="images">  
-  <span>Form to edit client's details</span>  
+  <span>Form to edit client's details</span>
+  <br/>  
   <img src="./assets/edit.png" height="300px" />  
    <br/> 
    </div>
