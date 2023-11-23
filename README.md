@@ -36,7 +36,7 @@ Welcome to this project! This is a project to be used by Money Lenders to keep r
   <div class="images"> 
    <span>login Page</span>
    <br/>  
-   <img src="./assets/login.png" height="300px" /> 
+   <img src="./assets/login.png" height="300px" width="400px"/> 
    <br/>
   </div>
   <div class="images"> 
