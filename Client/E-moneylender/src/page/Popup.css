@@ -24,10 +24,10 @@
 }
 .popup__tabledata{
     text-align: left;
-    height: 40px;
+    height: 20px;
     border-bottom:1px solid gray;
     border-right:  1px solid rgba(0, 0, 0, 0.194);
-    padding-inline: 12px;
+    padding-inline: 5px;
 }
 .popup__btn{
     border: 1px solid rgba(245, 227, 227, 0.241);

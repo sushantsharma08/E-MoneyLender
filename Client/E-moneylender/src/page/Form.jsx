@@ -6,9 +6,12 @@ import toast, { Toaster } from 'react-hot-toast';
 
 const Form = () => {
 
+    // setStates for each entry
+
     const [name, setName] = useState();
     const [fathername, setFathersname] = useState();
     const [adhaar, setAdhaar] = useState(0);
+    const [PassportImage, setPassportImage] = useState("");
     const [gender, setGender] = useState();
     const [loanAmount, setLoanAmount] = useState(0);
     const [monthlyInstalment, setMonthlyInstalment] = useState(0);
@@ -18,11 +21,13 @@ const Form = () => {
     const [Interest, setInterest] = useState();
     const LenderId = useGetUserId();
 
+
+// call for current Interest Rates
     useEffect(() => {
         const getLender = axios.get(`https://e-money-lender-back.vercel.app/auth/user/${LenderId}`).then((res)=>setInterest(res.data.interestRate));
     }, [])
 
-
+// loan calculations
     const setValues = (amount) => {
         let P = Number(amount.target.value);
         let T = 1;
@@ -34,6 +39,28 @@ const Form = () => {
         setMissedInstalment(((10 / 100) * emi) + emi)
     }
 
+    // img upload
+    const ConvertToBase = (file) => {
+        return new Promise((resolve, reject) => {
+            const filereader = new FileReader();
+            filereader.readAsDataURL(file)
+            filereader.onload = () => {
+                resolve(filereader.result)
+            }
+            filereader.onerror = (error) => {
+                reject(error)
+            }
+        })
+    }
+
+    const handleImg = async (e) => {
+        const file = e.target.files[0];
+        const Base64 = await ConvertToBase(file);
+        setPassportImage(Base64);
+        console.log(Base64);
+    }
+
+    // submit handler
     const onSubmit = async (event) => {
         event.preventDefault();
         toast.loading('Adding Client', {
@@ -47,7 +74,8 @@ const Form = () => {
                 fathername,
                 gender: gender,
                 phone,
-                adhaar: adhaar,
+                adhaar,
+                PassportImage,
                 loanamount: loanAmount,
                 Instalment: monthlyInstalment,
                 InstalmentsDone: 0,
@@ -69,28 +97,7 @@ const Form = () => {
                 })
             }
         } catch (error) {
-        }
-        try {
-            const url = `https://e-money-lender-back.vercel.app/auth/addCapital/${LenderId}`
-            // const url=`http://localhost:3001/auth/addCapital/${LenderId}`
-            const response = await axios.post(url, {
-                totalCapital: loanAmount,
-            });
-            if (response.data.status === 400) {
-                toast(response.data.message, {
-                    style: {
-                        backgroundColor: "rgba(241, 170, 170,1)"
-                    }
-                })
-            } else if (response.data.status === 202) {
-                toast(response.data.message, {
-                    style: {
-                        backgroundColor: "greenyellow"
-                    }
-                })
-            }
-        } catch (error) {
-            
+            console.log(error);
         }
     }
 
@@ -167,7 +174,13 @@ const Form = () => {
                                 <input type="number" className='addClient__Input' name="AdhaarNumber" id="adhaar" onChange={(e) => { setAdhaar(e.target.value) }} />
                             </div>
                         </div>
-
+                        
+                        <div className="Form__row">
+                            <label className='label' htmlFor="adhaar">Client Photo</label>
+                            <div className='inputField'>
+                                <input type="file" className='addClient__Input' name="passportImg" id="passportImg" onChange={(e) => {handleImg(e)}} />
+                            </div>
+                        </div>
 
                         <div className="Form__row">
                             <label className='label' htmlFor="Amount">Loan Amount</label>
@@ -207,53 +220,6 @@ const Form = () => {
                     </div>
 
                 </form>
-
-                {/* <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-6">
-                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                        <tbody>
-                            <tr class="border-b border-gray-200 ">
-                                <th scope="row" class="py-4 px-14 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white bg-black/60 text-lg">
-                                    Name
-                                </th>
-                                <td class="py-4 px-14 bg-gray-50 bg-black/60 text-lg">
-                                    <input id='name' type="text" className='addClient__Input' onChange={(e) => { setName(e.target.value.toLowerCase().trim()) }} />
-                                </td>
-                            </tr>
-                            <tr class="border-b border-gray-200 ">
-                                <th scope="row" class="py-4 px-14 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white bg-black/60 text-lg">
-                                    Microsoft Surface Pro
-                                </th>
-                                <td class="py-4 px-14 bg-gray-50 bg-black/60 text-lg">
-                                    Laptop PC
-                                </td>
-                            </tr>
-                            <tr class="border-b border-gray-200 ">
-                                <th scope="row" class="py-4 px-14 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white bg-black/60 text-lg">
-                                    Magic Mouse 2
-                                </th>
-                                <td class="py-4 px-14 bg-gray-50 bg-black/60 text-lg">
-                                    Accessories
-                                </td>
-                            </tr>
-                            <tr class="border-b border-gray-200 ">
-                                <th scope="row" class="py-4 px-14 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white bg-black/60 text-lg">
-                                    Google Pixel Phone
-                                </th>
-                                <td class="py-4 px-14 bg-gray-50 bg-black/60 text-lg">
-                                    Phone
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row" class="py-4 px-14 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white bg-black/60 text-lg">
-                                    Apple Watch 5
-                                </th>
-                                <td class="py-4 px-14 bg-gray-50 bg-black/60 text-lg">
-                                    Wearables
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div> */}
 
             </div>
             <Toaster />

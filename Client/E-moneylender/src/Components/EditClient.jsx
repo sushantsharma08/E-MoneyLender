@@ -236,7 +236,79 @@ const EditClient = (props = { show: Boolean, clientName: String }) => {
                                     <input className='h-10 p-3 w-full' type="number" name="" id="" placeholder="Enter Newly Taken Principle Amount" onChange={(e) => ChangeLoanDetails(e.target.value)} />
                                 </td>
                             </tr>
-                            <td className={`${classes} border border-slate-800 old`}>
+
+
+
+                            <tr className='border-b border-slate-800 '>
+                                <td
+                                    variant="small"
+                                    color="blue-gray"
+                                    className=" leading-none opacity-70 px-4 old"
+                                >
+                                    *New Loan Amount
+                                </td>
+                                <td className={`${classes} border border-slate-800 old`}>
+                                    <span variant="small" color="blue-gray" className=" flex items-center">{UpdatedPrinciple}</span>
+                                </td>
+                                <td className={`${classes} border border-slate-800`}>
+                                    {/* <input className='h-10 p-3 w-full' type="number" name="" id="" placeholder="Enter Newly Taken Principle Amount" onChange={(e) => ChangeLoanDetails(e.target.value)} /> */}
+                                </td>
+                            </tr>
+
+
+                            <tr className='border-b border-slate-800 '>
+                                <td
+                                    variant="small"
+                                    color="blue-gray"
+                                    className=" leading-none opacity-70 px-4 old"
+                                >
+                                    *New Total Amount (with Profit)
+                                </td>
+                                <td className={`${classes} border border-slate-800 old`}>
+                                    <span variant="small" color="blue-gray" className=" flex items-center">{UpdatedTotalAmount}</span>
+                                </td>
+                                <td className={`${classes} border border-slate-800`}>
+                                    {/* <input className='h-10 p-3 w-full' type="number" name="" id="" placeholder="Enter Newly Taken Principle Amount" onChange={(e) => ChangeLoanDetails(e.target.value)} /> */}
+                                </td>
+                            </tr>
+
+
+                            <tr className='border-b border-slate-800 '>
+                                <td
+                                    variant="small"
+                                    color="blue-gray"
+                                    className=" leading-none opacity-70 px-4 old"
+                                >
+                                    *New Remaining Amount
+                                </td>
+                                <td className={`${classes} border border-slate-800 old`}>
+                                    <span variant="small" color="blue-gray" className=" flex items-center">{UpdatedRemaingAmount}</span>
+                                </td>
+                                <td className={`${classes} border border-slate-800`}>
+                                    {/* <input className='h-10 p-3 w-full' type="number" name="" id="" placeholder="Enter Newly Taken Principle Amount" onChange={(e) => ChangeLoanDetails(e.target.value)} /> */}
+                                </td>
+                            </tr>
+                            <tr className='border-b border-slate-800 '>
+                                <td
+                                    variant="small"
+                                    color="blue-gray"
+                                    className=" leading-none opacity-70 px-4 old"
+                                >
+                                    *New Insatlment 
+                                </td>
+                                <td className={`${classes} border border-slate-800 old`}>
+                                    <span variant="small" color="blue-gray" className=" flex items-center">{UpdatedInstalment}</span>
+                                </td>
+                                <td className={`${classes} border border-slate-800`}>
+                                    {/* <input className='h-10 p-3 w-full' type="number" name="" id="" placeholder="Enter Newly Taken Principle Amount" onChange={(e) => ChangeLoanDetails(e.target.value)} /> */}
+                                </td>
+                            </tr>
+
+
+
+
+
+                            {/* <td className={`${classes} border border-slate-800 old`}>
                                 <span variant="small" color="blue-gray" className=" flex items-center">{UpdatedPrinciple}</span>
                             </td>
                             <td className={`${classes} border border-slate-800 old`}>
@@ -245,6 +317,9 @@ const EditClient = (props = { show: Boolean, clientName: String }) => {
                             <td className={`${classes} border border-slate-800 old`}>
                                 <span variant="small" color="blue-gray" className=" flex items-center">{UpdatedTotalAmount}</span>
                             </td>
+                            <td className={`${classes} border border-slate-800 old`}>
+                                <span variant="small" color="blue-gray" className=" flex items-center">{UpdatedInstalment}</span>
+                            </td> */}
 
                             {/* <tr className='border-b border-slate-800 '>
                                 <td

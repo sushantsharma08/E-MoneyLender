@@ -23,9 +23,10 @@ app.use(cors(corsOptions))
 app.use("/auth", UserRouter)
 app.use("/client", ClientRouter)
 
-const port =process.env.PORT;
+const port =process.env.PORT||3001;
 
-mongoose.connect(`mongodb+srv://${process.env.USERNAME_DB}:${process.env.PASSWORD_DB}@moneylender.ejybvtr.mongodb.net/?retryWrites=true&w=majority`)
+// mongoose.connect(`mongodb+srv://${process.env.USERNAME_DB}:${process.env.PASSWORD_DB}@moneylender.ejybvtr.mongodb.net/?retryWrites=true&w=majority`)
+mongoose.connect(`mongodb+srv://sushantsharmadev:moneylenderkapassword@moneylender.ejybvtr.mongodb.net/?retryWrites=true&w=majority`)
 
 
 app.listen(port,()=>{

@@ -13,6 +13,8 @@ import { ClientExtraLoanModel } from "../models/ExtraLoan.js";
 
 const router = express.Router();
 
+
+// adding client
 router.post("/add_client", async (req, res) => {
     const {
         name,
@@ -20,6 +22,7 @@ router.post("/add_client", async (req, res) => {
         gender,
         phone,
         adhaar,
+        PassportImage,
         loanamount,
         Instalment,
         InstalmentsDone,
@@ -40,6 +43,7 @@ router.post("/add_client", async (req, res) => {
         gender,
         phone,
         adhaar,
+        PassportImage,
         loanamount,
         Instalment,
         InstalmentsDone,

@@ -76,129 +76,136 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
                     <div className='text-center'>
                         <h1 className='mt-14 mb-6 text-3xl font-bold text-neutral-700'>Client Details</h1>
                     </div>
-                    <table className="tabled w-full min-w-max table-auto text-left font-bold text-base border-slate-800 text-gray-950">
-                        <tbody>
+                    <div className="clientDetails border border-sky-900 px-12 ">
+                        <div className="head" style={{ display: "flex", justifyContent: "end" }}>
+                            <img src={Data?.PassportImage} alt="Profile Picture" height="200px" width="200px" />
+                        </div>
+                        <table className="tabled w-full min-w-max table-auto text-left font-bold text-base border-red-800 text-gray-950">
+                            <tbody>
 
-                            <tr className='border-b border-slate-800 ' >
+                                <tr className='border-b border-slate-800 ' >
 
-                                <td
-                                    variant="small"
-                                    color="blue-gray"
-                                    className=" leading-none opacity-70 px-4"
-                                >
-                                    Name
-                                </td>
-                                <td className={`${classes} border border-slate-800`}>
-                                    <span variant="small" color="blue-gray" className="">
-                                        {Data?.name}
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr className='border-b border-slate-800 '>
-                                <td
-                                    variant="small"
-                                    color="blue-gray"
-                                    className=" leading-none opacity-70 px-4"
-                                >
-                                    Father's Name
-                                </td>
-                                <td className={`${classes} border border-slate-800`}>
-                                    <span variant="small" color="blue-gray" className=" flex items-center">
-                                        {Data?.fathername}</span>
-                                </td>
-                            </tr>
-                            <tr className='border-b border-slate-800 '>
-                                <td
-                                    variant="small"
-                                    color="blue-gray"
-                                    className=" leading-none opacity-70 px-4"
-                                >
-                                    Adhaar Number
-                                </td>
-                                <td className={`${classes} border border-slate-800`}>
-                                    <span variant="small" color="blue-gray" className=" flex items-center">{Data?.adhaar}</span>
-                                </td>
-                            </tr>
-                            <tr className='border-b border-slate-800 '>
-                                <td
-                                    variant="small"
-                                    color="blue-gray"
-                                    className=" leading-none opacity-70 px-4"
-                                >
-                                    Phone number
-                                </td>
-                                <td className={`${classes} border border-slate-800`}>
-                                    <span variant="small" color="blue-gray" className=" flex items-center">
-                                        <img src="/images/phone.png" alt="" width="12px" className='mx-1' />{Data?.phone}</span>
-                                </td>
-                            </tr>
-                            <tr className='border-b border-slate-800 '>
-                                <td
-                                    variant="small"
-                                    color="blue-gray"
-                                    className=" leading-none opacity-70 px-4"
-                                >
-                                    Loan Principle Amount
-                                </td>
-                                <td className={`${classes} border border-slate-800`}>
-                                    <span variant="small" color="blue-gray" className=" flex items-center">{Data?.loanamount}</span>
-                                </td>
-                            </tr>
-                            <tr className='border-b border-slate-800 '>
-                                <td
-                                    variant="small"
-                                    color="blue-gray"
-                                    className=" leading-none opacity-70 px-4"
-                                >
-                                    Total Amount
-                                </td>
-                                <td className={`${classes} border border-slate-800`}>
-                                    <span variant="small" color="blue-gray" className=" flex items-center">
-                                        {Data?.totalAmount}
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr className='border-b border-slate-800 '>
-                                <td
-                                    variant="small"
-                                    color="blue-gray"
-                                    className=" leading-none opacity-70 px-4"
-                                >
-                                    Monthly Instalment amount
-                                </td>
-                                <td className={`${classes} border border-slate-800`}>
-                                    <span variant="small" color="blue-gray" className=" flex items-center">{Data?.Instalment}</span>
-                                </td>
-                            </tr>
-                            <tr className='border-b border-slate-800 '>
-                                <td
-                                    variant="small"
-                                    color="blue-gray"
-                                    className=" leading-none opacity-70 px-4"
-                                >
-                                    Number of Instalments done
-                                </td>
-                                <td className={`${classes} border border-slate-800`}>
-                                    <span variant="small" color="blue-gray" className=" flex items-center">
-                                        {Data?.InstalmentsDone}</span>
-                                </td>
-                            </tr>
-                            <tr className='border-b border-slate-800 '>
-                                <td
-                                    variant="small"
-                                    color="blue-gray"
-                                    className=" leading-none opacity-70 px-4"
-                                >
-                                    Total Remaining Amount
-                                </td>
-                                <td className={`${classes} border border-slate-800`}>
-                                    <span variant="small" color="blue-gray" className=" flex items-center">
-                                        {Data?.remainingamount}
-                                    </span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                                    <td
+                                        variant="small"
+                                        color="blue-gray"
+                                        className=" leading-none opacity-70 px-4"
+                                    >
+                                        Name
+                                    </td>
+                                    <td className={`${classes} border border-slate-800`}>
+                                        <span variant="small" color="blue-gray" className="">
+                                            {Data?.name}
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr className='border-b border-slate-800 '>
+                                    <td
+                                        variant="small"
+                                        color="blue-gray"
+                                        className=" leading-none opacity-70 px-4"
+                                    >
+                                        Father's Name
+                                    </td>
+                                    <td className={`${classes} border border-slate-800`}>
+                                        <span variant="small" color="blue-gray" className=" flex items-center">
+                                            {Data?.fathername}</span>
+                                    </td>
+                                </tr>
+                                <tr className='border-b border-slate-800 '>
+                                    <td
+                                        variant="small"
+                                        color="blue-gray"
+                                        className=" leading-none opacity-70 px-4"
+                                    >
+                                        Adhaar Number
+                                    </td>
+                                    <td className={`${classes} border border-slate-800`}>
+                                        <span variant="small" color="blue-gray" className=" flex items-center">{Data?.adhaar}</span>
+                                    </td>
+                                </tr>
+                                <tr className='border-b border-slate-800 '>
+                                    <td
+                                        variant="small"
+                                        color="blue-gray"
+                                        className=" leading-none opacity-70 px-4"
+                                    >
+                                        Phone number
+                                    </td>
+                                    <td className={`${classes} border border-slate-800`}>
+                                        <span variant="small" color="blue-gray" className=" flex items-center">
+                                            <img src="/images/phone.png" alt="" width="12px" className='mx-1' />{Data?.phone}</span>
+                                    </td>
+                                </tr>
+                                <tr className='border-b border-slate-800 '>
+                                    <td
+                                        variant="small"
+                                        color="blue-gray"
+                                        className=" leading-none opacity-70 px-4"
+                                    >
+                                        Loan Principle Amount
+                                    </td>
+                                    <td className={`${classes} border border-slate-800`}>
+                                        <span variant="small" color="blue-gray" className=" flex items-center">{Data?.loanamount}</span>
+                                    </td>
+                                </tr>
+                                <tr className='border-b border-slate-800 '>
+                                    <td
+                                        variant="small"
+                                        color="blue-gray"
+                                        className=" leading-none opacity-70 px-4"
+                                    >
+                                        Total Amount
+                                    </td>
+                                    <td className={`${classes} border border-slate-800`}>
+                                        <span variant="small" color="blue-gray" className=" flex items-center">
+                                            {Data?.totalAmount}
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr className='border-b border-slate-800 '>
+                                    <td
+                                        variant="small"
+                                        color="blue-gray"
+                                        className=" leading-none opacity-70 px-4"
+                                    >
+                                        Monthly Instalment amount
+                                    </td>
+                                    <td className={`${classes} border border-slate-800`}>
+                                        <span variant="small" color="blue-gray" className=" flex items-center">{Data?.Instalment}</span>
+                                    </td>
+                                </tr>
+                                <tr className='border-b border-slate-800 '>
+                                    <td
+                                        variant="small"
+                                        color="blue-gray"
+                                        className=" leading-none opacity-70 px-4"
+                                    >
+                                        Number of Instalments done
+                                    </td>
+                                    <td className={`${classes} border border-slate-800`}>
+                                        <span variant="small" color="blue-gray" className=" flex items-center">
+                                            {Data?.InstalmentsDone}</span>
+                                    </td>
+                                </tr>
+                                <tr className='border-b border-slate-800 '>
+                                    <td
+                                        variant="small"
+                                        color="blue-gray"
+                                        className=" leading-none opacity-70 px-4"
+                                    >
+                                        Total Remaining Amount
+                                    </td>
+                                    <td className={`${classes} border border-slate-800`}>
+                                        <span variant="small" color="blue-gray" className=" flex items-center">
+                                            {Data?.remainingamount}
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
                 </div>
             </div>
             <div className="flex flex-col justify-center items-center">
