@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
+import { IoPersonSharp } from "react-icons/io5";
 
 
 const EditClient = (props = { show: Boolean, clientName: String }) => {
     const [Data, setData] = useState();
+    const [ChangeImageDialoge, setChangeImageDialoge] = useState(false);
     const [UpdatedName, setUpdatedName] = useState();
+    const [UpdatedImage, setUpdatedImage] = useState();
     const [UpdatedFathersname, setUpdatedFathersname] = useState();
     const [UpdatedAdhaar, setUpdatedAdhaar] = useState();
     const [UpdatedPhone, setUpdatedPhone] = useState();
@@ -46,6 +49,36 @@ const EditClient = (props = { show: Boolean, clientName: String }) => {
             UpdatedInstalment,
             UpdatedRemaingAmount,
             UpdatedTotalAmount);
+    }
+
+    // img handle
+    const ConvertToBase = (file) => {
+        return new Promise((resolve, reject) => {
+            const filereader = new FileReader();
+            filereader.readAsDataURL(file)
+            filereader.onload = () => {
+                resolve(filereader.result)
+            }
+            filereader.onerror = (error) => {
+                reject(error)
+            }
+        })
+    }
+
+    const handleImg = async (e) => {
+        const file = e.target.files[0];
+        const Base64 = await ConvertToBase(file);
+        setUpdatedImage(Base64);
+        console.log(UpdatedImage);
+    }
+
+    const ChangeImage = async () =>{
+        const response = await axios.patch(`http://localhost:3001/client/changeImage/${Data?.name}`,{
+            PassportImage : UpdatedImage
+        });
+        console.log("mage updated");
+        console.log(UpdatedImage);
+        console.log(response);
     }
 
     const patchClientUpdate = async () => {
@@ -145,14 +178,34 @@ const EditClient = (props = { show: Boolean, clientName: String }) => {
             </button>
 
             <div id='printablediv'>
-                <div className=" h-full w-3/4 mx-auto sm:w-3/4 overflow-scroll  md:overflow-hidden  mt-28 ">
-                    <div className='text-center'>
-                        <h1 className=' mb-28 text-3xl font-bold text-neutral-700'>Edit Client Details</h1>
+                <div className=" h-full w-3/4 mx-auto sm:w-3/4 overflow-scroll  md:overflow-hidden ">
+                    <div className='flex relative justify-center py-20'>
+                        <h1 className=' py-16 text-3xl font-bold text-neutral-700'>Edit Client Details</h1>
+                        <div className="head absolute right-10" style={{ display: "flex", justifyContent: "end",}}>
+                            <div onMouseEnter={() => setChangeImageDialoge(true)} onMouseLeave={() => setChangeImageDialoge(false)} >
+                                {
+                                    Data?.PassportImage ?
+                                        <img src={Data?.PassportImage} alt="Profile Picture" height="200px" width="200px" style={{ border: "1px solid black", borderRadius: "55%", maxHeight:"200px", maxWidth:"200px" }} /> :
+                                        // {
+                                        // UpdatedImage ? 
+                                        // <img src={UpdatedImage} alt="Profile Picture" height="200px" width="200px" style={{ border: "1px solid black", borderRadius: "55%" }} /> :
+                                        <IoPersonSharp size="200px" style={{ border: "1px solid black", borderRadius: "55%", }} />
+                                    // }
+                                    // <IoPersonSharp size="200px" style={{ border: "1px solid black", borderRadius: "55%", }} />
+                                }
+                                <div className='h-48 w-48 absolute bottom-1 right-1 flex-col justify-center items-center rounded-full opacity-80 bg-red-50' style={{ display: ChangeImageDialoge ? "flex" : "none" }}>
+                                    <input type="file" name="PassportImage" id="passportImage" onChange={handleImg} />
+                                    <button className='text-black border-2 border-zinc-400 p-2 px-4' onClick={()=>ChangeImage(UpdatedImage)}>Change Image</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+
                     <table className="w-full min-w-max table-auto text-left font-bold text-base border-slate-800 text-gray-950">
                         <tbody>
 
-                            <tr className='border-b border-slate-800' >
+                            <tr className='h-4 border-b border-slate-800' >
                                 <td
                                     variant="small"
                                     color="blue-gray"
@@ -294,7 +347,7 @@ const EditClient = (props = { show: Boolean, clientName: String }) => {
                                     color="blue-gray"
                                     className=" leading-none opacity-70 px-4 old"
                                 >
-                                    *New Insatlment 
+                                    *New Insatlment
                                 </td>
                                 <td className={`${classes} border border-slate-800 old`}>
                                     <span variant="small" color="blue-gray" className=" flex items-center">{UpdatedInstalment}</span>

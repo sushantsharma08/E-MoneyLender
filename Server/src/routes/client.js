@@ -120,13 +120,24 @@ router.get("/getallloans/:userid", async (req, res) => {
 
 router.patch("/instalmentDone/:username", async (req, res) => {
     const { InstalmentsDone, remainingamount } = req.body;
-    const user = await ClientModel.findOneAndUpdate({ name: req.params.username }, req.body)
     try {
+        const user = await ClientModel.findOneAndUpdate({ name: req.params.username }, req.body)
         res.json(user)
     } catch (error) {
         res.json(error)
     }
 })
+
+router.patch("/changeImage/:username",async(req,res)=>{
+    const { PassportImage } = req.body;
+    try {
+        const user = await ClientModel.findOneAndUpdate({ name: req.params.username }, req.body)
+        res.json(user)
+    } catch (error) {
+        res.json(error)
+    }
+})
+
 router.patch("/update_client_PersonalDetails/:username", async (req, res) => {
     const {
         name,

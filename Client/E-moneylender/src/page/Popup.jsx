@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios'
 import "./Popup.css"
+import { IoPersonSharp } from "react-icons/io5";
 
 const Popup = (props = { show: Boolean, clientName: String }) => {
     const [Data, setData] = useState();
@@ -13,7 +14,8 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
     useEffect(() => {
         setmodalStatus(props.show);
         axios.get(`https://e-money-lender-back.vercel.app/client/searchbyname/${props.clientName}`).then((res) => {
-            setData(res.data)
+            setData(res.data);
+            console.log(Data?.PassportImage);
         });
 
         // if (Data?.remainingamount <= 0) {
@@ -64,7 +66,7 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
 
     return (
 
-        <div className='sticky bottom-full left-12 bg-slate-300 '
+        <div className='sticky bottom-full left-12 bg-slate-200 pb-16'
             style={{ display: modalStatus ? "block" : "none" }}>
 
             <button className='absolute right-4 top-4 hover:bg-rose-500' onClick={(e) => closeModal(e)} >
@@ -73,17 +75,23 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
 
             <div id='printablediv'>
                 <div className=" h-full w-3/4 mx-auto sm:w-1/2 overflow-scroll  md:overflow-hidden  mt-28 ">
-                    <div className='text-center'>
-                        <h1 className='mt-14 mb-6 text-3xl font-bold text-neutral-700'>Client Details</h1>
+                    <div className=' flex relative justify-center py-20'>
+                        <h1 className='  mt-14 mb-6 text-3xl font-bold text-neutral-700'>Client Details</h1>
+                        <span className="head absolute right-8 " style={{ display: "flex", justifyContent: "end",}}>
+                            {
+                            Data?.PassportImage ?
+                            <img src={Data?.PassportImage} alt="Profile Picture"  height="200px" width="200px" style={{ border: "1px solid black", borderRadius: "55%", maxHeight:"200px", maxWidth:"200px" }} /> : 
+                            <IoPersonSharp size="200px" style={{border:"1px solid black", borderRadius:"55%", }}/>
+                            }
+                        </span>
                     </div>
-                    <div className="clientDetails border border-sky-900 px-12 ">
-                        <div className="head" style={{ display: "flex", justifyContent: "end" }}>
-                            <img src={Data?.PassportImage} alt="Profile Picture" height="200px" width="200px" />
-                        </div>
-                        <table className="tabled w-full min-w-max table-auto text-left font-bold text-base border-red-800 text-gray-950">
+                    {/* <hr className='border border-slate-500'/> */}
+                    <div className="clientDetails  px-12 min-w-max">
+ 
+                        <table className=" w-full min-w-max table-auto text-left font-bold text-base border-slate-800 text-gray-950">
                             <tbody>
 
-                                <tr className='border-b border-slate-800 ' >
+                                <tr className='border border-slate-800 ' >
 
                                     <td
                                         variant="small"
@@ -98,7 +106,7 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
                                         </span>
                                     </td>
                                 </tr>
-                                <tr className='border-b border-slate-800 '>
+                                <tr className='border border-slate-800 '>
                                     <td
                                         variant="small"
                                         color="blue-gray"
@@ -111,7 +119,7 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
                                             {Data?.fathername}</span>
                                     </td>
                                 </tr>
-                                <tr className='border-b border-slate-800 '>
+                                <tr className='border border-slate-800 '>
                                     <td
                                         variant="small"
                                         color="blue-gray"
@@ -123,7 +131,7 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
                                         <span variant="small" color="blue-gray" className=" flex items-center">{Data?.adhaar}</span>
                                     </td>
                                 </tr>
-                                <tr className='border-b border-slate-800 '>
+                                <tr className='border border-slate-800 '>
                                     <td
                                         variant="small"
                                         color="blue-gray"
@@ -136,7 +144,7 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
                                             <img src="/images/phone.png" alt="" width="12px" className='mx-1' />{Data?.phone}</span>
                                     </td>
                                 </tr>
-                                <tr className='border-b border-slate-800 '>
+                                <tr className='border border-slate-800 '>
                                     <td
                                         variant="small"
                                         color="blue-gray"
@@ -148,7 +156,7 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
                                         <span variant="small" color="blue-gray" className=" flex items-center">{Data?.loanamount}</span>
                                     </td>
                                 </tr>
-                                <tr className='border-b border-slate-800 '>
+                                <tr className='border border-slate-800 '>
                                     <td
                                         variant="small"
                                         color="blue-gray"
@@ -162,7 +170,7 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
                                         </span>
                                     </td>
                                 </tr>
-                                <tr className='border-b border-slate-800 '>
+                                <tr className='border border-slate-800 '>
                                     <td
                                         variant="small"
                                         color="blue-gray"
@@ -174,7 +182,7 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
                                         <span variant="small" color="blue-gray" className=" flex items-center">{Data?.Instalment}</span>
                                     </td>
                                 </tr>
-                                <tr className='border-b border-slate-800 '>
+                                <tr className='border border-slate-800 '>
                                     <td
                                         variant="small"
                                         color="blue-gray"
@@ -187,7 +195,7 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
                                             {Data?.InstalmentsDone}</span>
                                     </td>
                                 </tr>
-                                <tr className='border-b border-slate-800 '>
+                                <tr className='border border-slate-800 '>
                                     <td
                                         variant="small"
                                         color="blue-gray"
