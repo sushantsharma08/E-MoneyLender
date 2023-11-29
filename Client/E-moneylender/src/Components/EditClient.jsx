@@ -73,7 +73,7 @@ const EditClient = (props = { show: Boolean, clientName: String }) => {
     }
 
     const ChangeImage = async () =>{
-        const response = await axios.patch(`http://localhost:3001/client/changeImage/${Data?.name}`,{
+        const response = await axios.patch(`https://e-money-lender-back.vercel.app/client/changeImage/${Data?.name}`,{
             PassportImage : UpdatedImage
         });
         console.log("mage updated");
