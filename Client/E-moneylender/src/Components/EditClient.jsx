@@ -185,15 +185,15 @@ const EditClient = (props = { show: Boolean, clientName: String }) => {
                             <div onMouseEnter={() => setChangeImageDialoge(true)} onMouseLeave={() => setChangeImageDialoge(false)} >
                                 {
                                     Data?.PassportImage ?
-                                        <img src={Data?.PassportImage} alt="Profile Picture" height="200px" width="200px" style={{ border: "1px solid black", borderRadius: "55%", maxHeight:"200px", maxWidth:"200px" }} /> :
+                                        <img src={Data?.PassportImage} alt="Profile Picture" height="200px" width="200px" style={{ border: "1px solid black",  maxWidth:"100%",aspectRatio:"1/1",objectFit:"cover" }} /> :
                                         // {
                                         // UpdatedImage ? 
                                         // <img src={UpdatedImage} alt="Profile Picture" height="200px" width="200px" style={{ border: "1px solid black", borderRadius: "55%" }} /> :
-                                        <IoPersonSharp size="200px" style={{ border: "1px solid black", borderRadius: "55%", }} />
+                                        <IoPersonSharp size="200px" style={{ border: "1px solid black", maxWidth:"100%",aspectRatio:"1/1",objectFit:"cover"  }} />
                                     // }
                                     // <IoPersonSharp size="200px" style={{ border: "1px solid black", borderRadius: "55%", }} />
                                 }
-                                <div className='h-48 w-48 absolute bottom-1 right-1 flex-col justify-center items-center rounded-full opacity-80 bg-red-50' style={{ display: ChangeImageDialoge ? "flex" : "none" }}>
+                                <div className='h-48 w-48 absolute bottom-1 right-1 flex-col justify-center items-center opacity-80 bg-red-50' style={{ display: ChangeImageDialoge ? "flex" : "none" }}>
                                     <input type="file" name="PassportImage" id="passportImage" onChange={handleImg} />
                                     <button className='text-black border-2 border-zinc-400 p-2 px-4' onClick={()=>ChangeImage(UpdatedImage)}>Change Image</button>
                                 </div>

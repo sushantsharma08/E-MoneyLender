@@ -75,13 +75,13 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
 
             <div id='printablediv'>
                 <div className=" h-full w-3/4 mx-auto sm:w-1/2 overflow-scroll  md:overflow-hidden  mt-28 ">
-                    <div className=' flex relative justify-center py-20'>
+                    <div className=' flex relative justify-center py-28'>
                         <h1 className='  mt-14 mb-6 text-3xl font-bold text-neutral-700'>Client Details</h1>
-                        <span className="head absolute right-8 " style={{ display: "flex", justifyContent: "end",}}>
+                        <span className="head absolute right-12 " style={{ display: "flex", justifyContent: "end",}}>
                             {
                             Data?.PassportImage ?
-                            <img src={Data?.PassportImage} alt="Profile Picture"  height="200px" width="200px" style={{ border: "1px solid black", borderRadius: "55%", maxHeight:"200px", maxWidth:"200px" }} /> : 
-                            <IoPersonSharp size="200px" style={{border:"1px solid black", borderRadius:"55%", }}/>
+                            <img src={Data?.PassportImage} alt="Profile Picture"  height="200px" width="200px" style={{ border: "1px solid black", maxWidth:"100%",aspectRatio:"1/1",objectFit:"cover" }} /> : 
+                            <IoPersonSharp size="200px" style={{border:"1px solid black", maxWidth:"100%",aspectRatio:"1/1",objectFit:"cover" }}/>
                             }
                         </span>
                     </div>
