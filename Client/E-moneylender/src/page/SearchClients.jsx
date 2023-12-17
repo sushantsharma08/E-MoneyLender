@@ -199,7 +199,7 @@ const SearchClients = () => {
               const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
               // const classes =  "p-4 border-b border-blue-gray-50";
               return (
-                <tr key={index} className='border-b text-center' >
+                <tr key={index} className='border-b text-center hover:bg-gray-100' >
                   <td className={`${classes} border-r`}>
                     <span variant="small" color="blue-gray" className="font-normal">
                       {index + 1}

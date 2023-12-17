@@ -149,11 +149,11 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
                                     </span>
                                 </div>
                             </div>
-                            <div className="profilePic border-b-2  border-slate-900 p-1  ">
+                            <div className="profilePic border-b-2 w-68 border-slate-900 p-1  ">
                                 <span className="head ">
                                     {
                                         Data?.PassportImage ?
-                                            <img src={Data?.PassportImage} alt="Profile Picture" height="200px" width="200px" style={{ border: "2px solid black", maxWidth: "100%", aspectRatio: "1/1", objectFit: "cover" }} /> :
+                                            <img src={Data?.PassportImage} alt="Profile Picture" height="200px" width="200px" style={{ border: "2px solid black", minWidth: "200px", aspectRatio: "1/1", objectFit: "cover" }} /> :
                                             <IoPersonSharp size="200px" style={{ border: "1px solid black", maxWidth: "100%", aspectRatio: "1/1", objectFit: "cover" }} />
                                     }
                                 </span>
@@ -218,14 +218,17 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
                             <span></span>
                         </div>
 
-                        <div className="border border-slate-800 bg-sky-200 flex">
+                        <div className="InstallmentChart border border-slate-800 bg-sky-200 flex">
                             <span className='text-center heading w-1/3 p-2 border-x border-slate-900'>Installments</span>
                             <span className='text-center heading w-1/3 p-2 border-x border-slate-900'>Amount</span>
                             <span className='text-center heading w-1/3 p-2 border-x border-slate-900'>Date</span>
                         </div>
                         
-
-                        <div className="instalmentsData"></div>
+                        <div className="InstallmentChart border border-slate-800  flex">
+                            <span className='text-center  w-1/3 p-1 border-x border-slate-900'>{Data?.InstalmentsDone}</span>
+                            <span className='text-center  w-1/3 p-1 border-x border-slate-900'>ZZZZ-ZZZZ</span>
+                            <span className='text-center  w-1/3 p-1 border-x border-slate-900'>DD/MM/YYYY</span>
+                        </div>
 
                         </div>
                         {/* <table className=" w-full min-w-max table-auto text-left font-bold text-base border-slate-800 text-gray-950">
