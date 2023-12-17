@@ -41,3 +41,11 @@
     background-color: rgb(200, 200, 200);
     color: rgb(90, 91, 91);
 }
+.heading{
+    font-weight: 500;
+    font-size: large;
+}
+.semi-heading{
+    font-weight: 400;
+    font-size: large;
+}

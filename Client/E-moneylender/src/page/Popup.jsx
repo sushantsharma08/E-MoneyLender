@@ -75,113 +75,159 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
 
             <div id='printablediv'>
                 <div className=" h-full w-3/4 mx-auto sm:w-1/2 overflow-scroll  md:overflow-hidden  mt-28 ">
-                    <div className=' flex relative justify-center py-28'>
-                        <h1 className='  mt-14 mb-6 text-3xl font-bold text-neutral-700'>Client Details</h1>
-                        <span className="head absolute right-12 " style={{ display: "flex", justifyContent: "end",}}>
-                            {
-                            Data?.PassportImage ?
-                            <img src={Data?.PassportImage} alt="Profile Picture"  height="200px" width="200px" style={{ border: "1px solid black", maxWidth:"100%",aspectRatio:"1/1",objectFit:"cover" }} /> : 
-                            <IoPersonSharp size="200px" style={{border:"1px solid black", maxWidth:"100%",aspectRatio:"1/1",objectFit:"cover" }}/>
-                            }
-                        </span>
-                    </div>
+                    <h1 className=' text-center mt-14 mb-6 text-3xl font-bold text-neutral-700'>Client Details</h1>
+
                     {/* <hr className='border border-slate-500'/> */}
-                    <div className="clientDetails  px-12 min-w-max">
- 
-                        <table className=" w-full min-w-max table-auto text-left font-bold text-base border-slate-800 text-gray-950">
-                            <tbody>
+                    <div className="my-10">
 
-                                <tr className='border border-slate-800 ' >
-
-                                    <td
+                        <div className="personalData flex ">
+                            <div className="data border flex-1 border-slate-900">
+                                <div className='flex  border border-slate-950 ' >
+                                    <span
                                         variant="small"
                                         color="blue-gray"
-                                        className=" leading-none opacity-70 px-4"
+                                        className="heading p-2 border-r-2 border-stone-900 w-40"
                                     >
                                         Name
-                                    </td>
-                                    <td className={`${classes} border border-slate-800`}>
-                                        <span variant="small" color="blue-gray" className="">
-                                            {Data?.name}
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr className='border border-slate-800 '>
-                                    <td
+                                    </span>
+                                    <span variant="small" color="blue-gray" className="p-2 semi-heading">
+                                        {Data?.name}
+                                    </span>
+                                </div>
+                                <div className='flex border border-slate-950 '>
+                                    <span
                                         variant="small"
                                         color="blue-gray"
-                                        className=" leading-none opacity-70 px-4"
+                                        className="heading p-2 border-r-2 border-stone-900 w-40"
                                     >
                                         Father's Name
-                                    </td>
-                                    <td className={`${classes} border border-slate-800`}>
-                                        <span variant="small" color="blue-gray" className=" flex items-center">
+                                    </span>
+                                    <span  >
+                                        <span variant="small" color="blue-gray" className="p-2 semi-heading flex items-center">
                                             {Data?.fathername}</span>
-                                    </td>
-                                </tr>
-                                <tr className='border border-slate-800 '>
-                                    <td
+                                    </span>
+                                </div>
+                                <div className='flex border border-slate-950 '>
+                                    <span
                                         variant="small"
                                         color="blue-gray"
-                                        className=" leading-none opacity-70 px-4"
+                                        className="heading p-2 border-r-2 border-stone-900 w-40"
                                     >
                                         Adhaar Number
-                                    </td>
-                                    <td className={`${classes} border border-slate-800`}>
-                                        <span variant="small" color="blue-gray" className=" flex items-center">{Data?.adhaar}</span>
-                                    </td>
-                                </tr>
-                                <tr className='border border-slate-800 '>
-                                    <td
+                                    </span>
+                                    <span  >
+                                        <span variant="small" color="blue-gray" className="p-2 semi-heading flex items-center">{Data?.adhaar}</span>
+                                    </span>
+                                </div>
+                                <div className='flex border border-slate-950 '>
+                                    <span
                                         variant="small"
                                         color="blue-gray"
-                                        className=" leading-none opacity-70 px-4"
+                                        className="heading p-2 border-r-2 border-stone-900 w-40"
                                     >
                                         Phone number
-                                    </td>
-                                    <td className={`${classes} border border-slate-800`}>
-                                        <span variant="small" color="blue-gray" className=" flex items-center">
+                                    </span>
+                                    <span  >
+                                        <span variant="small" color="blue-gray" className="p-2 semi-heading flex items-center">
                                             <img src="/images/phone.png" alt="" width="12px" className='mx-1' />{Data?.phone}</span>
-                                    </td>
-                                </tr>
-                                <tr className='border border-slate-800 '>
-                                    <td
+                                    </span>
+                                </div>
+                                <div className='flex border border-slate-950 '>
+                                    <span
                                         variant="small"
                                         color="blue-gray"
-                                        className=" leading-none opacity-70 px-4"
+                                        className="heading border-r-2 border-stone-900 w-40 px-2 py-1"
                                     >
-                                        Loan Principle Amount
-                                    </td>
-                                    <td className={`${classes} border border-slate-800`}>
-                                        <span variant="small" color="blue-gray" className=" flex items-center">{Data?.loanamount}</span>
-                                    </td>
-                                </tr>
-                                <tr className='border border-slate-800 '>
-                                    <td
-                                        variant="small"
-                                        color="blue-gray"
-                                        className=" leading-none opacity-70 px-4"
-                                    >
-                                        Total Amount
-                                    </td>
-                                    <td className={`${classes} border border-slate-800`}>
-                                        <span variant="small" color="blue-gray" className=" flex items-center">
-                                            {Data?.totalAmount}
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr className='border border-slate-800 '>
-                                    <td
-                                        variant="small"
-                                        color="blue-gray"
-                                        className=" leading-none opacity-70 px-4"
-                                    >
-                                        Monthly Instalment amount
-                                    </td>
-                                    <td className={`${classes} border border-slate-800`}>
-                                        <span variant="small" color="blue-gray" className=" flex items-center">{Data?.Instalment}</span>
-                                    </td>
-                                </tr>
+                                        Interest Rate
+                                    </span>
+                                    <span  >
+                                        <span variant="small" color="blue-gray" className="p-1 semi-heading flex items-center">
+                                            {Data?.rate}%</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div className="profilePic border-y-2 border-r-2 border-slate-900 p-1  bg-yellow-50 ">
+                                <span className="head ">
+                                    {
+                                        Data?.PassportImage ?
+                                            <img src={Data?.PassportImage} alt="Profile Picture" height="200px" width="200px" style={{ border: "2px solid black", maxWidth: "100%", aspectRatio: "1/1", objectFit: "cover" }} /> :
+                                            <IoPersonSharp size="200px" style={{ border: "1px solid black", maxWidth: "100%", aspectRatio: "1/1", objectFit: "cover" }} />
+                                    }
+                                </span>
+                            </div>
+                        </div>
+
+                        <div className="loanDetails">
+                            <div className='flex border border-slate-800 '>
+                                <span
+                                    variant="small"
+                                    color="blue-gray"
+                                    className="  w-1/4 heading p-2 text-center border-x border-slate-800"
+                                >
+                                    Loan Principle Amount
+                                </span>
+                                <span
+                                    variant="small"
+                                    color="blue-gray"
+                                    className="  w-1/4 heading p-2 text-center border-x border-slate-800"
+                                >
+                                    Total Amount
+                                </span>
+                                <span
+                                    variant="small"
+                                    color="blue-gray"
+                                    className="  w-1/4 heading p-2 text-center border-x border-slate-800"
+                                >
+                                    Monthly Installment amount
+                                </span>
+                                <span
+                                    variant="small"
+                                    color="blue-gray"
+                                    className="  w-1/4 heading p-2 text-center border-x border-slate-800"
+                                >
+                                    Total Remaining Amount
+                                </span>
+
+
+                            </div>
+                            <div className='flex border border-slate-800 '>
+
+                                <span className={`w-1/4 text-center p-2 border-x border-slate-800`}>
+                                    {Data?.loanamount}
+                                </span>
+                                <span className={`w-1/4 text-center p-2 border-x border-slate-800`}>
+
+                                    {Data?.totalAmount}
+
+                                </span>
+                                <span className={`w-1/4 text-center p-2 border-x border-slate-800`}>
+                                    {Data?.Instalment}</span>
+
+                                <span className={`w-1/4 text-center p-2 border-x border-slate-800`}>
+
+                                    {Data?.remainingamount}
+
+                                </span>
+                            </div>
+                        </div>
+
+                        <div className="border border-slate-800 p-4">
+                            <span></span>
+                        </div>
+
+                        <div className="border border-slate-800  flex">
+                            <span className='text-center heading w-1/3 p-2 border-x border-slate-900'>Installments</span>
+                            <span className='text-center heading w-1/3 p-2 border-x border-slate-900'>Amount</span>
+                            <span className='text-center heading w-1/3 p-2 border-x border-slate-900'>Date</span>
+                        </div>
+                        
+
+                        <div className="instalmentsData"></div>
+                        {/* <table className=" w-full min-w-max table-auto text-left font-bold text-base border-slate-800 text-gray-950">
+                            <tbody>
+
+
+
                                 <tr className='border border-slate-800 '>
                                     <td
                                         variant="small"
@@ -196,21 +242,10 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
                                     </td>
                                 </tr>
                                 <tr className='border border-slate-800 '>
-                                    <td
-                                        variant="small"
-                                        color="blue-gray"
-                                        className=" leading-none opacity-70 px-4"
-                                    >
-                                        Total Remaining Amount
-                                    </td>
-                                    <td className={`${classes} border border-slate-800`}>
-                                        <span variant="small" color="blue-gray" className=" flex items-center">
-                                            {Data?.remainingamount}
-                                        </span>
-                                    </td>
+
                                 </tr>
                             </tbody>
-                        </table>
+                        </table> */}
 
                     </div>
 
