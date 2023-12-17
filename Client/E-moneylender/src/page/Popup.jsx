@@ -66,7 +66,7 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
 
     return (
 
-        <div className='sticky bottom-full left-12 bg-slate-200 pb-16'
+        <div className='sticky bottom-full left-12 bg-neutral-100 border-2 border-neutral-950 pb-16'
             style={{ display: modalStatus ? "block" : "none" }}>
 
             <button className='absolute right-4 top-4 hover:bg-rose-500' onClick={(e) => closeModal(e)} >
@@ -74,15 +74,18 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
             </button>
 
             <div id='printablediv'>
-                <div className=" h-full w-3/4 mx-auto sm:w-1/2 overflow-scroll  md:overflow-hidden  mt-28 ">
-                    <h1 className=' text-center mt-14 mb-6 text-3xl font-bold text-neutral-700'>Client Details</h1>
+                <div className=" h-full w-3/4 mx-auto sm:w-1/2 overflow-scroll  md:overflow-hidden mt-16">
+                    <h1 className=' text-center mt-14 mb-6 text-4xl font-bold text-neutral-700'>Client Details</h1>
 
                     {/* <hr className='border border-slate-500'/> */}
-                    <div className="my-10">
+                    <div className=" my-16 bg-slate-50">
+                        <div className="p-1 border-2 border-slate-900">
+
+                        
 
                         <div className="personalData flex ">
                             <div className="data border flex-1 border-slate-900">
-                                <div className='flex  border border-slate-950 ' >
+                                <div className='flex bg-orange-300 border border-slate-950 ' >
                                     <span
                                         variant="small"
                                         color="blue-gray"
@@ -107,7 +110,7 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
                                             {Data?.fathername}</span>
                                     </span>
                                 </div>
-                                <div className='flex border border-slate-950 '>
+                                <div className='flex bg-indigo-200 border border-slate-950 '>
                                     <span
                                         variant="small"
                                         color="blue-gray"
@@ -146,7 +149,7 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
                                     </span>
                                 </div>
                             </div>
-                            <div className="profilePic border-y-2 border-r-2 border-slate-900 p-1  bg-yellow-50 ">
+                            <div className="profilePic border-b-2  border-slate-900 p-1  ">
                                 <span className="head ">
                                     {
                                         Data?.PassportImage ?
@@ -158,7 +161,7 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
                         </div>
 
                         <div className="loanDetails">
-                            <div className='flex border border-slate-800 '>
+                            <div className='flex border border-slate-800 bg-slate-300'>
                                 <span
                                     variant="small"
                                     color="blue-gray"
@@ -190,7 +193,7 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
 
 
                             </div>
-                            <div className='flex border border-slate-800 '>
+                            <div className='flex border border-slate-800 bg-slate-200'>
 
                                 <span className={`w-1/4 text-center p-2 border-x border-slate-800`}>
                                     {Data?.loanamount}
@@ -215,7 +218,7 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
                             <span></span>
                         </div>
 
-                        <div className="border border-slate-800  flex">
+                        <div className="border border-slate-800 bg-sky-200 flex">
                             <span className='text-center heading w-1/3 p-2 border-x border-slate-900'>Installments</span>
                             <span className='text-center heading w-1/3 p-2 border-x border-slate-900'>Amount</span>
                             <span className='text-center heading w-1/3 p-2 border-x border-slate-900'>Date</span>
@@ -223,6 +226,8 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
                         
 
                         <div className="instalmentsData"></div>
+
+                        </div>
                         {/* <table className=" w-full min-w-max table-auto text-left font-bold text-base border-slate-800 text-gray-950">
                             <tbody>
 
