@@ -148,6 +148,7 @@ router.patch("/update_client_PersonalDetails/:username", async (req, res) => {
         Instalment,
         remainingamount,
         totalAmount,
+        InstallmentRecord,
     } = req.body;
     try {
         const user = await ClientModel.findOneAndUpdate({ name: req.params.username }, req.body)

@@ -12,7 +12,8 @@ const ClientSchema = new mongoose.Schema({
     InstalmentsDone:{type:Number,required:true},
     remainingamount: { type: Number, required: true, },
     totalAmount:{ type: Number, required: true, },
-    LenderId:{type:String, required: true}
+    LenderId:{type:String, required: true},
+    InstallmentRecord: {type:Array}
 });
 
 export const ClientModel = mongoose.model("clients", ClientSchema)
