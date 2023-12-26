@@ -8,15 +8,23 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
     const [Data, setData] = useState();
     const [modalStatus, setmodalStatus] = useState();
     const [text, setText] = useState();
+    const [InstallmentRec, setInstallmentRec] = useState()
     const isLast = 3;
+    const Arrayrec =[]
     const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
 
     useEffect(() => {
         setmodalStatus(props.show);
-        axios.get(`https://e-money-lender-back.vercel.app/client/searchbyname/${props.clientName}`).then((res) => {
+        axios.get(`https://e-money-lender-back.vercel.app/client/searchbyname/${props.clientName}`).then(async (res) => {
             setData(res.data);
             console.log(Data?.PassportImage);
+            await Data?.InstallmentRecord.map((q) => Arrayrec.push(Object.values(q)))
+            
+            console.log(Data?.InstallmentRecord);
         });
+
+
+        
 
         // if (Data?.remainingamount <= 0) {
         //     setText('Loan Complete please close account')
@@ -81,154 +89,157 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
                     <div className=" my-16 bg-slate-50">
                         <div className="p-1 border-2 border-slate-900">
 
-                        
 
-                        <div className="personalData flex ">
-                            <div className="data border flex-1 border-slate-900">
-                                <div className='flex bg-orange-300 border border-slate-950 ' >
-                                    <span
-                                        variant="small"
-                                        color="blue-gray"
-                                        className="heading p-2 border-r-2 border-stone-900 w-40"
-                                    >
-                                        Name
-                                    </span>
-                                    <span variant="small" color="blue-gray" className="p-2 semi-heading">
-                                        {Data?.name}
-                                    </span>
+
+                            <div className="personalData flex ">
+                                <div className="data border flex-1 border-slate-900">
+                                    <div className='flex bg-orange-300 border border-slate-950 ' >
+                                        <span
+                                            variant="small"
+                                            color="blue-gray"
+                                            className="heading p-2 border-r-2 border-stone-900 w-40"
+                                        >
+                                            Name
+                                        </span>
+                                        <span variant="small" color="blue-gray" className="p-2 semi-heading">
+                                            {Data?.name}
+                                        </span>
+                                    </div>
+                                    <div className='flex border border-slate-950 '>
+                                        <span
+                                            variant="small"
+                                            color="blue-gray"
+                                            className="heading p-2 border-r-2 border-stone-900 w-40"
+                                        >
+                                            Father's Name
+                                        </span>
+                                        <span  >
+                                            <span variant="small" color="blue-gray" className="p-2 semi-heading flex items-center">
+                                                {Data?.fathername}</span>
+                                        </span>
+                                    </div>
+                                    <div className='flex bg-indigo-200 border border-slate-950 '>
+                                        <span
+                                            variant="small"
+                                            color="blue-gray"
+                                            className="heading p-2 border-r-2 border-stone-900 w-40"
+                                        >
+                                            Adhaar Number
+                                        </span>
+                                        <span  >
+                                            <span variant="small" color="blue-gray" className="p-2 semi-heading flex items-center">{Data?.adhaar}</span>
+                                        </span>
+                                    </div>
+                                    <div className='flex border border-slate-950 '>
+                                        <span
+                                            variant="small"
+                                            color="blue-gray"
+                                            className="heading p-2 border-r-2 border-stone-900 w-40"
+                                        >
+                                            Phone number
+                                        </span>
+                                        <span  >
+                                            <span variant="small" color="blue-gray" className="p-2 semi-heading flex items-center">
+                                                <img src="/images/phone.png" alt="" width="12px" className='mx-1' />{Data?.phone}</span>
+                                        </span>
+                                    </div>
+                                    <div className='flex border border-slate-950 '>
+                                        <span
+                                            variant="small"
+                                            color="blue-gray"
+                                            className="heading border-r-2 border-stone-900 w-40 px-2 py-1"
+                                        >
+                                            Interest Rate
+                                        </span>
+                                        <span  >
+                                            <span variant="small" color="blue-gray" className="p-1 semi-heading flex items-center">
+                                                {Data?.rate}%</span>
+                                        </span>
+                                    </div>
                                 </div>
-                                <div className='flex border border-slate-950 '>
-                                    <span
-                                        variant="small"
-                                        color="blue-gray"
-                                        className="heading p-2 border-r-2 border-stone-900 w-40"
-                                    >
-                                        Father's Name
-                                    </span>
-                                    <span  >
-                                        <span variant="small" color="blue-gray" className="p-2 semi-heading flex items-center">
-                                            {Data?.fathername}</span>
-                                    </span>
-                                </div>
-                                <div className='flex bg-indigo-200 border border-slate-950 '>
-                                    <span
-                                        variant="small"
-                                        color="blue-gray"
-                                        className="heading p-2 border-r-2 border-stone-900 w-40"
-                                    >
-                                        Adhaar Number
-                                    </span>
-                                    <span  >
-                                        <span variant="small" color="blue-gray" className="p-2 semi-heading flex items-center">{Data?.adhaar}</span>
-                                    </span>
-                                </div>
-                                <div className='flex border border-slate-950 '>
-                                    <span
-                                        variant="small"
-                                        color="blue-gray"
-                                        className="heading p-2 border-r-2 border-stone-900 w-40"
-                                    >
-                                        Phone number
-                                    </span>
-                                    <span  >
-                                        <span variant="small" color="blue-gray" className="p-2 semi-heading flex items-center">
-                                            <img src="/images/phone.png" alt="" width="12px" className='mx-1' />{Data?.phone}</span>
-                                    </span>
-                                </div>
-                                <div className='flex border border-slate-950 '>
-                                    <span
-                                        variant="small"
-                                        color="blue-gray"
-                                        className="heading border-r-2 border-stone-900 w-40 px-2 py-1"
-                                    >
-                                        Interest Rate
-                                    </span>
-                                    <span  >
-                                        <span variant="small" color="blue-gray" className="p-1 semi-heading flex items-center">
-                                            {Data?.rate}%</span>
+                                <div className="profilePic border-b-2 w-68 border-slate-900 p-1  ">
+                                    <span className="head ">
+                                        {
+                                            Data?.PassportImage ?
+                                                <img src={Data?.PassportImage} alt="Profile Picture" height="200px" width="200px" style={{ border: "2px solid black", minWidth: "200px", aspectRatio: "1/1", objectFit: "cover" }} /> :
+                                                <IoPersonSharp size="200px" style={{ border: "1px solid black", maxWidth: "100%", aspectRatio: "1/1", objectFit: "cover" }} />
+                                        }
                                     </span>
                                 </div>
                             </div>
-                            <div className="profilePic border-b-2 w-68 border-slate-900 p-1  ">
-                                <span className="head ">
-                                    {
-                                        Data?.PassportImage ?
-                                            <img src={Data?.PassportImage} alt="Profile Picture" height="200px" width="200px" style={{ border: "2px solid black", minWidth: "200px", aspectRatio: "1/1", objectFit: "cover" }} /> :
-                                            <IoPersonSharp size="200px" style={{ border: "1px solid black", maxWidth: "100%", aspectRatio: "1/1", objectFit: "cover" }} />
-                                    }
-                                </span>
+
+                            <div className="loanDetails">
+                                <div className='flex border border-slate-800 bg-slate-300'>
+                                    <span
+                                        variant="small"
+                                        color="blue-gray"
+                                        className="  w-1/4 heading p-2 text-center border-x border-slate-800"
+                                    >
+                                        Loan Principle Amount
+                                    </span>
+                                    <span
+                                        variant="small"
+                                        color="blue-gray"
+                                        className="  w-1/4 heading p-2 text-center border-x border-slate-800"
+                                    >
+                                        Total Amount
+                                    </span>
+                                    <span
+                                        variant="small"
+                                        color="blue-gray"
+                                        className="  w-1/4 heading p-2 text-center border-x border-slate-800"
+                                    >
+                                        Monthly Installment amount
+                                    </span>
+                                    <span
+                                        variant="small"
+                                        color="blue-gray"
+                                        className="  w-1/4 heading p-2 text-center border-x border-slate-800"
+                                    >
+                                        Total Remaining Amount
+                                    </span>
+
+
+                                </div>
+                                <div className='flex border border-slate-800 bg-slate-200'>
+
+                                    <span className={`w-1/4 text-center p-2 border-x border-slate-800`}>
+                                        {Data?.loanamount}
+                                    </span>
+                                    <span className={`w-1/4 text-center p-2 border-x border-slate-800`}>
+
+                                        {Data?.totalAmount}
+
+                                    </span>
+                                    <span className={`w-1/4 text-center p-2 border-x border-slate-800`}>
+                                        {Data?.Instalment}</span>
+
+                                    <span className={`w-1/4 text-center p-2 border-x border-slate-800`}>
+
+                                        {Data?.remainingamount}
+
+                                    </span>
+                                </div>
                             </div>
-                        </div>
 
-                        <div className="loanDetails">
-                            <div className='flex border border-slate-800 bg-slate-300'>
-                                <span
-                                    variant="small"
-                                    color="blue-gray"
-                                    className="  w-1/4 heading p-2 text-center border-x border-slate-800"
-                                >
-                                    Loan Principle Amount
-                                </span>
-                                <span
-                                    variant="small"
-                                    color="blue-gray"
-                                    className="  w-1/4 heading p-2 text-center border-x border-slate-800"
-                                >
-                                    Total Amount
-                                </span>
-                                <span
-                                    variant="small"
-                                    color="blue-gray"
-                                    className="  w-1/4 heading p-2 text-center border-x border-slate-800"
-                                >
-                                    Monthly Installment amount
-                                </span>
-                                <span
-                                    variant="small"
-                                    color="blue-gray"
-                                    className="  w-1/4 heading p-2 text-center border-x border-slate-800"
-                                >
-                                    Total Remaining Amount
-                                </span>
-
-
+                            <div className="border border-slate-800 p-4">
+                                <span></span>
                             </div>
-                            <div className='flex border border-slate-800 bg-slate-200'>
 
-                                <span className={`w-1/4 text-center p-2 border-x border-slate-800`}>
-                                    {Data?.loanamount}
-                                </span>
-                                <span className={`w-1/4 text-center p-2 border-x border-slate-800`}>
-
-                                    {Data?.totalAmount}
-
-                                </span>
-                                <span className={`w-1/4 text-center p-2 border-x border-slate-800`}>
-                                    {Data?.Instalment}</span>
-
-                                <span className={`w-1/4 text-center p-2 border-x border-slate-800`}>
-
-                                    {Data?.remainingamount}
-
-                                </span>
+                            <div className="InstallmentChart border border-slate-800 bg-sky-200 flex">
+                                <span className='text-center heading w-1/3 p-2 border-x border-slate-900'>Installments</span>
+                                <span className='text-center heading w-1/3 p-2 border-x border-slate-900'>Amount</span>
+                                <span className='text-center heading w-1/3 p-2 border-x border-slate-900'>Date</span>
                             </div>
-                        </div>
 
-                        <div className="border border-slate-800 p-4">
-                            <span></span>
-                        </div>
 
-                        <div className="InstallmentChart border border-slate-800 bg-sky-200 flex">
-                            <span className='text-center heading w-1/3 p-2 border-x border-slate-900'>Installments</span>
-                            <span className='text-center heading w-1/3 p-2 border-x border-slate-900'>Amount</span>
-                            <span className='text-center heading w-1/3 p-2 border-x border-slate-900'>Date</span>
-                        </div>
-                        
-                        <div className="InstallmentChart border border-slate-800  flex">
-                            <span className='text-center  w-1/3 p-1 border-x border-slate-900'>{Data?.InstalmentsDone}</span>
-                            <span className='text-center  w-1/3 p-1 border-x border-slate-900'>ZZZZ-ZZZZ</span>
-                            <span className='text-center  w-1/3 p-1 border-x border-slate-900'>DD/MM/YYYY</span>
-                        </div>
+                            {Data?.InstallmentRecord?.map((q) =>
+                                <div className="InstallmentChart border border-slate-800  flex">
+                                    <span className='text-center  w-1/3 p-1 border-x border-slate-900'>{q.installmentNumber}</span>
+                                    <span className='text-center  w-1/3 p-1 border-x border-slate-900'>{q.installmentAmount}</span>
+                                    <span className='text-center  w-1/3 p-1 border-x border-slate-900'>{q.installmentDate}</span>
+                                </div>
+                            )}
 
                         </div>
                         {/* <table className=" w-full min-w-max table-auto text-left font-bold text-base border-slate-800 text-gray-950">

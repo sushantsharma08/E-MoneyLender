@@ -92,7 +92,7 @@ const Navbar = () => {
                     <Link className='li -mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50' to="/" onClick={ToggleSmallScreenNavTab}>Home</Link>
                     <Link className='li -mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50' to="/form" onClick={ToggleSmallScreenNavTab}>Add Client</Link>
                     <Link className='li -mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50' to="/search" onClick={ToggleSmallScreenNavTab}>Search Clients</Link>
-                    <button className='logout' onClick={logout}>Logout</button>
+                    <button className='logout mt-7' onClick={logout}>Logout</button>
                   </nav>}
               </div>
             </div>

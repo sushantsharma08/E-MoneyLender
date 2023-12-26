@@ -17,6 +17,9 @@ const EditClient = (props = { show: Boolean, clientName: String }) => {
     const [UpdatedInstalment, setUpdatedInstalment] = useState(0);
     const [UpdatedRemaingAmount, setUpdatedRemaingAmount] = useState(0);
     const [UpdatedTotalAmount, setUpdatedTotalAmount] = useState(0);
+    const [InstallmentRecord, setInstallmentRecord] = useState([
+        // {"installmentNumber":0 , "installmentAmount":0,"installmentDate" : 0}
+    ]);
     const isLast = 3;
     const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
 
@@ -72,13 +75,35 @@ const EditClient = (props = { show: Boolean, clientName: String }) => {
         console.log(UpdatedImage);
     }
 
-    const ChangeImage = async () =>{
-        const response = await axios.patch(`https://e-money-lender-back.vercel.app/client/changeImage/${Data?.name}`,{
-            PassportImage : UpdatedImage
+    const ChangeImage = async () => {
+        const response = await axios.patch(`https://e-money-lender-back.vercel.app/client/changeImage/${Data?.name}`, {
+            PassportImage: UpdatedImage
         });
         console.log("mage updated");
         console.log(UpdatedImage);
         console.log(response);
+    }
+
+    const EditInstallmentRecord = (e) => {
+        switch (e.target.name) {
+
+            case "InstallmentNumber":
+                setInstallmentRecord({ ...InstallmentRecord, "installmentNumber": e.target.value })
+                break;
+
+            case "InstallmentAmount":
+                setInstallmentRecord({ ...InstallmentRecord, "installmentAmount": e.target.value })
+                break;
+
+            case "InstallmentDate":
+                setInstallmentRecord({ ...InstallmentRecord, "installmentDate": e.target.value })
+                break;
+
+            default:
+                break;
+        }
+        console.log(InstallmentRecord);
+        console.log(Data);
     }
 
     const patchClientUpdate = async () => {
@@ -104,6 +129,7 @@ const EditClient = (props = { show: Boolean, clientName: String }) => {
                     Instalment: UpdatedInstalment,
                     remainingamount: UpdatedRemaingAmount,
                     totalAmount: UpdatedTotalAmount,
+                    
                 });
 
                 // const ExtraLoan = axios.post("http://localhost:3001/client/add_ExtraLoanTakers", {
@@ -118,8 +144,6 @@ const EditClient = (props = { show: Boolean, clientName: String }) => {
                     newMonthlyInstalment: UpdatedInstalment,
                     ClientId: Data?._id,
                 })
-
-                console.log('updated loan too');
                 if (response.data.status == 202) {
                     toast.success(response.data.message);
                     setTimeout(() => {
@@ -137,7 +161,7 @@ const EditClient = (props = { show: Boolean, clientName: String }) => {
                         fathername: UpdatedFathersname,
                         adhaar: UpdatedAdhaar,
                         phone: UpdatedPhone,
-
+                        InstallmentRecord : [...Data.InstallmentRecord,InstallmentRecord]
                     })
                 console.log('updated personal only');
                 if (response.data.status == 202) {
@@ -181,21 +205,21 @@ const EditClient = (props = { show: Boolean, clientName: String }) => {
                 <div className=" h-full w-3/4 mx-auto sm:w-3/4 overflow-scroll  md:overflow-hidden ">
                     <div className='flex relative justify-center py-20'>
                         <h1 className=' py-16 text-3xl font-bold text-neutral-700'>Edit Client Details</h1>
-                        <div className="head absolute right-10" style={{ display: "flex", justifyContent: "end",}}>
+                        <div className="head absolute right-10" style={{ display: "flex", justifyContent: "end", }}>
                             <div onMouseEnter={() => setChangeImageDialoge(true)} onMouseLeave={() => setChangeImageDialoge(false)} >
                                 {
                                     Data?.PassportImage ?
-                                        <img src={Data?.PassportImage} alt="Profile Picture" height="200px" width="200px" style={{ border: "1px solid black",  maxWidth:"100%",aspectRatio:"1/1",objectFit:"cover" }} /> :
+                                        <img src={Data?.PassportImage} alt="Profile Picture" height="200px" width="200px" style={{ border: "1px solid black", maxWidth: "100%", aspectRatio: "1/1", objectFit: "cover" }} /> :
                                         // {
                                         // UpdatedImage ? 
                                         // <img src={UpdatedImage} alt="Profile Picture" height="200px" width="200px" style={{ border: "1px solid black", borderRadius: "55%" }} /> :
-                                        <IoPersonSharp size="200px" style={{ border: "1px solid black", maxWidth:"100%",aspectRatio:"1/1",objectFit:"cover"  }} />
+                                        <IoPersonSharp size="200px" style={{ border: "1px solid black", maxWidth: "100%", aspectRatio: "1/1", objectFit: "cover" }} />
                                     // }
                                     // <IoPersonSharp size="200px" style={{ border: "1px solid black", borderRadius: "55%", }} />
                                 }
                                 <div className='h-48 w-48 absolute bottom-1 right-1 flex-col justify-center items-center opacity-80 bg-red-50' style={{ display: ChangeImageDialoge ? "flex" : "none" }}>
                                     <input type="file" name="PassportImage" id="passportImage" onChange={handleImg} />
-                                    <button className='text-black border-2 border-zinc-400 p-2 px-4' onClick={()=>ChangeImage(UpdatedImage)}>Change Image</button>
+                                    <button className='text-black border-2 border-zinc-400 p-2 px-4' onClick={() => ChangeImage(UpdatedImage)}>Change Image</button>
                                 </div>
                             </div>
                         </div>
@@ -358,21 +382,43 @@ const EditClient = (props = { show: Boolean, clientName: String }) => {
                             </tr>
 
 
+                            <tr className='border-b border-slate-800 '>
+
+                                <td className={`${classes} border border-slate-800 old`}>
+                                    <span variant="small" color="blue-gray" className=" flex items-center">Installment Number</span>
+                                </td>
+                                <td className={`${classes} border border-slate-800 old`}>
+                                    <span variant="small" color="blue-gray" className=" flex items-center">Installment Amount</span>
+                                </td>
+                                <td className={`${classes} border border-slate-800 `}>
+                                    <span variant="small" color="blue-gray" className=" flex items-center">Date of Installment</span>
+                                </td>
+
+                            </tr>
 
 
 
-                            {/* <td className={`${classes} border border-slate-800 old`}>
-                                <span variant="small" color="blue-gray" className=" flex items-center">{UpdatedPrinciple}</span>
-                            </td>
-                            <td className={`${classes} border border-slate-800 old`}>
-                                <span variant="small" color="blue-gray" className=" flex items-center">{UpdatedRemaingAmount}</span>
-                            </td>
-                            <td className={`${classes} border border-slate-800 old`}>
-                                <span variant="small" color="blue-gray" className=" flex items-center">{UpdatedTotalAmount}</span>
-                            </td>
-                            <td className={`${classes} border border-slate-800 old`}>
-                                <span variant="small" color="blue-gray" className=" flex items-center">{UpdatedInstalment}</span>
-                            </td> */}
+
+                            <tr className='border-b border-slate-800 '>
+
+                                <td className={`${classes} border border-slate-800 old`}>
+                                    <span variant="small" color="blue-gray" className=" flex items-center">
+                                        <input className='h-10 p-3 w-full' onChange={(e) => EditInstallmentRecord(e)} type="number" name="InstallmentNumber" placeholder='Enter installment number' id="" />
+                                    </span>
+                                </td>
+                                <td className={`${classes} border border-slate-800 old`}>
+                                    <span variant="small" color="blue-gray" className=" flex items-center">
+                                        <input className='h-10 p-3 w-full' onChange={(e) => EditInstallmentRecord(e)} type="number" name="InstallmentAmount" placeholder='Installment Amount' id="" />
+                                    </span>
+                                </td>
+                                <td className={`${classes} border border-slate-800 `}>
+                                    <span variant="small" color="blue-gray" className=" flex items-center">
+                                        <input className='h-10 p-3 w-full' onChange={(e) => EditInstallmentRecord(e)} type="date" name="InstallmentDate" id="" />
+                                    </span>
+                                </td>
+
+                            </tr>
+
 
                             {/* <tr className='border-b border-slate-800 '>
                                 <td
