@@ -7,7 +7,7 @@ import { IoPersonSharp } from "react-icons/io5";
 const Popup = (props = { show: Boolean, clientName: String }) => {
     const [Data, setData] = useState();
     const [modalStatus, setmodalStatus] = useState();
-    const [UpdatedInstalment, setUpdatedInstalment] = useState([]);
+    const [UpdatedInstalment, setUpdatedInstalment] = useState();
     const [ShowEditBtn, setShowEditBtn] = useState();
 
 
@@ -17,26 +17,29 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
         setmodalStatus(props.show);
         axios.get(`https://e-money-lender-back.vercel.app/client/searchbyname/${props.clientName}`).then(async (res) => {
             setData(res.data);
-        console.log("loaded");
+            console.log("loaded", res.data);
         });
-    },[props.clientName]);
+    }, [props.clientName]);
 
     const deleteEntry = (e) => {
-
-        setUpdatedInstalment(Data.InstallmentRecord)
-            console.log("before",UpdatedInstalment);
-            setUpdatedInstalment(UpdatedInstalment.splice(e.target.id,1))
-            console.log({clientid : Data._id});
-            updateRecord();
-
+        setUpdatedInstalment(Data?.InstallmentRecord)
+        console.log(e.target.id);
+        console.log(UpdatedInstalment);
+        console.log("before", UpdatedInstalment);
+        setUpdatedInstalment(UpdatedInstalment.splice(e.target.id, 1))
+        console.log({ clientid: Data._id });
+        updateRecord();
+        console.log("after", UpdatedInstalment);
     }
 
-    const updateRecord = () =>{
-        console.log(" from inside func after",UpdatedInstalment);
-        // axios.patch(`https://e-money-lender-back.vercel.app/client/changeImage/${Data?._id}`,{
-        axios.patch(`http://localhost:3001/client/updateInstallmentRecord/${Data._id}`,{
-            InstallmentRecord : UpdatedInstalment
-        }).then((res)=>console.log(res,InstallmentRecord))
+    const updateRecord = () => {
+        axios.patch(`https://e-money-lender-back.vercel.app/client/updateInstallmentRecord/${Data._id}`,{
+        // axios.patch(`http://localhost:3001/client/updateInstallmentRecord/${Data._id}`, {
+            InstallmentRecord: UpdatedInstalment
+        }).then((res) => console.log(res, InstallmentRecord))
+        setTimeout(()=>{
+            closeModal();
+        },2000)
     }
 
     const closeModal = () => {
@@ -237,20 +240,16 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
                                 <span className='text-center heading w-1/3 p-2 border-x border-slate-900'>Date</span>
                                 <span className='text-center heading w-1/3 p-2 border-x border-slate-900'>edit</span>
                             </div>
-
-
-                            {Data?.InstallmentRecord?.map((q, id) =>
+                            { Data?.InstallmentRecord?.map((q, id) =>
                                 <div className="relative">
                                     <div className="InstallmentChart border border-slate-800  flex " id={id} >
                                         <span className='text-center  w-1/3 p-1 border-x border-slate-900'>{q.installmentNumber}</span>
                                         <span className='text-center  w-1/3 p-1 border-x border-slate-900'>{q.installmentAmount}</span>
                                         <span className='text-center  w-1/3 p-1 border-x border-slate-900'>{q.installmentDate}</span>
                                         <span className='text-center  w-1/3 p-1 border-x border-slate-900'>
-                                            <button id={id} className=' border-2 hover:border-red-600 ' onClick={(e) => deleteEntry(e)} >delete</button>
+                                            <button id={id} className=' border-2 hover:border-red-600 ' onClick={(e) =>{deleteEntry(e)}} >delete</button>
                                         </span>
-
                                     </div>
-
                                 </div>
                             )}
 
