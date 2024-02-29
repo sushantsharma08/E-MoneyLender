@@ -176,6 +176,16 @@ router.patch("/update_client_ExtraLoan/:username", async (req, res) => {
     }
 })
 
+router.patch("/updateInstallmentRecord/:clientid",async(req,res)=>{
+    const {InstallmentRecord} = req.body
+    try {
+        const user = await ClientModel.findOneAndUpdate({_id: req.params.clientid},req.body)
+        res.json({ status: 202, message: "Updated Successfully",user : user})
+    } catch (error) {
+        res.json({ status: 400, message: error })
+    }
+})
+
 // Extra loan takers DataBase
 router.post("/add_ExtraLoanTakers", async (req, res) => {
     const {

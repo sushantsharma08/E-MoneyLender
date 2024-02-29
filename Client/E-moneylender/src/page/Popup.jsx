@@ -7,32 +7,37 @@ import { IoPersonSharp } from "react-icons/io5";
 const Popup = (props = { show: Boolean, clientName: String }) => {
     const [Data, setData] = useState();
     const [modalStatus, setmodalStatus] = useState();
-    const [text, setText] = useState();
-    const [InstallmentRec, setInstallmentRec] = useState()
-    const isLast = 3;
-    const Arrayrec =[]
-    const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
+    const [UpdatedInstalment, setUpdatedInstalment] = useState([]);
+    const [ShowEditBtn, setShowEditBtn] = useState();
+
+
+
 
     useEffect(() => {
         setmodalStatus(props.show);
         axios.get(`https://e-money-lender-back.vercel.app/client/searchbyname/${props.clientName}`).then(async (res) => {
             setData(res.data);
-            console.log(Data?.PassportImage);
-            await Data?.InstallmentRecord.map((q) => Arrayrec.push(Object.values(q)))
-            
-            console.log(Data?.InstallmentRecord);
+        console.log("loaded");
         });
+    },[props.clientName]);
 
+    const deleteEntry = (e) => {
 
-        
+        setUpdatedInstalment(Data.InstallmentRecord)
+            console.log("before",UpdatedInstalment);
+            setUpdatedInstalment(UpdatedInstalment.splice(e.target.id,1))
+            console.log({clientid : Data._id});
+            updateRecord();
 
-        // if (Data?.remainingamount <= 0) {
-        //     setText('Loan Complete please close account')
-        // } else {
-        //     setText(`Instalment for month ${Data?.InstalmentsDone + 1} Done`);
-        // }
+    }
 
-    }, [props.clientName]);
+    const updateRecord = () =>{
+        console.log(" from inside func after",UpdatedInstalment);
+        // axios.patch(`https://e-money-lender-back.vercel.app/client/changeImage/${Data?._id}`,{
+        axios.patch(`http://localhost:3001/client/updateInstallmentRecord/${Data._id}`,{
+            InstallmentRecord : UpdatedInstalment
+        }).then((res)=>console.log(res,InstallmentRecord))
+    }
 
     const closeModal = () => {
         setmodalStatus(false);
@@ -230,14 +235,22 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
                                 <span className='text-center heading w-1/3 p-2 border-x border-slate-900'>Installments</span>
                                 <span className='text-center heading w-1/3 p-2 border-x border-slate-900'>Amount</span>
                                 <span className='text-center heading w-1/3 p-2 border-x border-slate-900'>Date</span>
+                                <span className='text-center heading w-1/3 p-2 border-x border-slate-900'>edit</span>
                             </div>
 
 
-                            {Data?.InstallmentRecord?.map((q) =>
-                                <div className="InstallmentChart border border-slate-800  flex">
-                                    <span className='text-center  w-1/3 p-1 border-x border-slate-900'>{q.installmentNumber}</span>
-                                    <span className='text-center  w-1/3 p-1 border-x border-slate-900'>{q.installmentAmount}</span>
-                                    <span className='text-center  w-1/3 p-1 border-x border-slate-900'>{q.installmentDate}</span>
+                            {Data?.InstallmentRecord?.map((q, id) =>
+                                <div className="relative">
+                                    <div className="InstallmentChart border border-slate-800  flex " id={id} >
+                                        <span className='text-center  w-1/3 p-1 border-x border-slate-900'>{q.installmentNumber}</span>
+                                        <span className='text-center  w-1/3 p-1 border-x border-slate-900'>{q.installmentAmount}</span>
+                                        <span className='text-center  w-1/3 p-1 border-x border-slate-900'>{q.installmentDate}</span>
+                                        <span className='text-center  w-1/3 p-1 border-x border-slate-900'>
+                                            <button id={id} className=' border-2 hover:border-red-600 ' onClick={(e) => deleteEntry(e)} >delete</button>
+                                        </span>
+
+                                    </div>
+
                                 </div>
                             )}
 
