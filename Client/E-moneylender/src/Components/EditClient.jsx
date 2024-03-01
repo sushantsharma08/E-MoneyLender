@@ -167,7 +167,7 @@ const EditClient = (props = { show: Boolean, clientName: String }) => {
                 if (response.data.status == 202) {
                     toast.success(response.data.message);
                     setTimeout(() => {
-                        //   closeModal();  
+                          closeModal();  
                     }, 2000)
                 } else if (response.data.status == 400) {
                     toast.error(response.data.message)
@@ -481,7 +481,7 @@ const EditClient = (props = { show: Boolean, clientName: String }) => {
                 <button className='mt-4 p-4 border border-teal-500/40 bg-indigo-500 font-medium text-md' onClick={() => patchClientUpdate()}>
                     Update Client
                 </button>
-                <button id={Data?._id} className='p-4 py`-2 my-2 flex items-center text-xl bg-red-400' onClick={(e) => CloseAccount(e)} ><span><img src="/images/delete.png" alt="" srcset="" /></span>Delete Client</button>
+                <button id={Data?._id} className='p-4 py-2 my-2 flex items-center text-xl bg-red-400' onClick={(e) => CloseAccount(e)} ><span><img src="/images/delete.png" alt="" srcset="" /></span>Delete Client</button>
             </div>
             <Toaster />
         </div>

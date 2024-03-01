@@ -17,19 +17,19 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
         setmodalStatus(props.show);
         axios.get(`https://e-money-lender-back.vercel.app/client/searchbyname/${props.clientName}`).then(async (res) => {
             setData(res.data);
-            console.log("loaded", res.data);
+            // console.log("loaded", res.data);
         });
     }, [props.clientName]);
 
     const deleteEntry = (e) => {
         setUpdatedInstalment(Data?.InstallmentRecord)
-        console.log(e.target.id);
-        console.log(UpdatedInstalment);
-        console.log("before", UpdatedInstalment);
+        // console.log(e.target.id);
+        // console.log(UpdatedInstalment);
+        // console.log("before", UpdatedInstalment);
         setUpdatedInstalment(UpdatedInstalment.splice(e.target.id, 1))
-        console.log({ clientid: Data._id });
+        // console.log({ clientid: Data._id });
         updateRecord();
-        console.log("after", UpdatedInstalment);
+        // console.log("after", UpdatedInstalment);
     }
 
     const updateRecord = () => {
@@ -247,7 +247,7 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
                                         <span className='text-center  w-1/3 p-1 border-x border-slate-900'>{q.installmentAmount}</span>
                                         <span className='text-center  w-1/3 p-1 border-x border-slate-900'>{q.installmentDate}</span>
                                         <span className='text-center  w-1/3 p-1 border-x border-slate-900'>
-                                            <button id={id} className=' border-2 hover:border-red-600 ' onClick={(e) =>{deleteEntry(e)}} >delete</button>
+                                            <button id={id} className=' rounded-md border-2 px-4 hover:bg-red-300 hover:border-red-300 ' onClick={(e) =>{deleteEntry(e)}} >Delete</button>
                                         </span>
                                     </div>
                                 </div>
