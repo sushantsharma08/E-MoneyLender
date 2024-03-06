@@ -30,7 +30,7 @@ const Authentication = () => {
                 window.localStorage.setItem("userId", userID);
                 setTimeout(() => {
                     navigate("/");
-                }, 1000);
+                }, 300);
             } else {
                 toast.error(response.data.message, {
                     style: { backgroundColor: "rgba(241, 170, 170,1)", fontWeight: "400" }
