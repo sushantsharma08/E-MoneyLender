@@ -27,8 +27,6 @@ Welcome to this project! This is a project to be used by Money Lenders to keep r
 
 
 ## Project Plan :
-
-<img src="./assets/projectPlan.jpg" height="1000px" />
 <img src="./assets/workflow.png" height="1000px" />
 
 
