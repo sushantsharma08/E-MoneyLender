@@ -12,6 +12,9 @@ import Authentication from './page/Authentication'
 import AuthRegister from './page/AuthRegister'
 import Home from './page/Home'
 import { useCookies } from "react-cookie"
+import ClosedAccounts from './page/ClosedAccounts'
+import Certificate from './page/Certificate'
+import ConditionalNav from './Components/ConditionalNav'
 
 
 const queryClient = new QueryClient()
@@ -24,9 +27,9 @@ function App() {
 
       <Router>
         <QueryClientProvider client={queryClient}>
-          <div className="navbar">
+          <ConditionalNav className="navbar">
             <Navbar />
-          </div>
+          </ConditionalNav>
           <div className="main mt-20">
             <Routes>
               <Route path='/'
@@ -36,6 +39,8 @@ function App() {
               <Route path='/auth_register' element={<AuthRegister />} />
               <Route path='/form' element={!cookies.access_token ? <Navigate to="/auth_login" /> : <Form />} />
               <Route path='/search' element={!cookies.access_token ? <Navigate to="/auth_login" /> : <SearchClients />} />
+              <Route path='/closedAccounts' element={!cookies.access_token ? <Navigate to="/auth_login" /> : <ClosedAccounts />} />
+              <Route path='/certificate' element={!cookies.access_token ? <Navigate to="/auth_login" /> : <Certificate />} />
             </Routes>
           </div>
         </QueryClientProvider>

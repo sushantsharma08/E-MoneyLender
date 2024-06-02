@@ -1,120 +1,10 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import Popup from './Popup';
-import { useGetUserId } from '../hooks/useGetUserId';
-import {
-  QueryClient,
-  QueryClientProvider,
-  useQuery,
-} from '@tanstack/react-query'
-import EditClient from '../Components/EditClient';
-import { Toaster, toast } from 'react-hot-toast';
+import React from 'react'
 
-const queryClient = new QueryClient()
+const ClosedAccounts = () => {
+    return (
+        <div>
 
-const SearchClients = () => {
-
-  // Hooks
-
-  const [SearchName, setSearchName] = useState()
-  const [showClientDetailsModal, setShowClientDetailsModal] = useState(false)
-  const [showEditModal, setShowEditModal] = useState(false)
-  const userID = useGetUserId();
-
-
-  const { isLoading, error, data: lenderClients } = useQuery({
-    queryKey: ['repoData'],
-    queryFn: () =>
-      fetch(`https://e-money-lender-back.vercel.app/client/loadClients/${userID}`).then(
-        // fetch(`http://localhost:3001/client/loadClients/${userID}`).then(
-        (res) => res.json()
-      ),
-  });
-
-  // Functions
-
-  const OpenUserDetails = (e) => {
-    setSearchName(e);
-    setShowClientDetailsModal(true)
-  }
-
-  const OpenClientEdit = (e) => {
-    setSearchName(e);
-    // setSearchName(e);
-    setShowEditModal(true)
-  }
-
-  const CloseAccount = (e) => {
-    toast.loading('Deleting Client', {
-      duration: 1000,
-    });
-    const id = e.target.id;
-    axios.patch(`http://localhost:3001/client/removeClient/${id}`,{isOpen:false});
-    setTimeout(() => {
-
-      toast.success("deleted Successfully")
-      // window.location.reload();
-      clearTimeout()
-    }, 1000);
-
-    // axios.delete(`https://e-money-lender-back.vercel.app/client/removeClient/${id}`);
-    // setTimeout(() => {
-    //   toast.success("deleted Successfully")
-    //   window.location.reload();
-    //   clearTimeout()
-    // }, 1000);
-  }
-
-  //dynamic UI from useQuery output
-
-  if (isLoading) return (
-    <section id='client' style={{ position: "relative" }}>
-      <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", paddingTop: "100px" }}>
-        <div className="userdatadiv">
-          <div id="wifi-loader">
-            <svg className="circle-outer" viewBox="0 0 86 86">
-              <circle className="back" cx="43" cy="43" r="40"></circle>
-              <circle className="front" cx="43" cy="43" r="40"></circle>
-              <circle className="new" cx="43" cy="43" r="40"></circle>
-            </svg>
-            <svg className="circle-middle" viewBox="0 0 60 60">
-              <circle className="back" cx="30" cy="30" r="27"></circle>
-              <circle className="front" cx="30" cy="30" r="27"></circle>
-            </svg>
-            <svg className="circle-inner" viewBox="0 0 34 34">
-              <circle className="back" cx="17" cy="17" r="14"></circle>
-              <circle className="front" cx="17" cy="17" r="14"></circle>
-            </svg>
-            <div className="text" data-text="Loading..."></div>
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-
-  if (error) return <section id='client' style={{ position: "relative" }}>
-    <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
-      <div className="userdatadiv">
-        <h2>An error has occurred: <b>{error.message}</b></h2>
-      </div>
-    </div>
-  </section>
-
-  // Main 
-  // console.log(lenderClients);
-  // const sum = ()=>{
-  //   let sumall =0;
-  //   lenderClients.forEach(client => {
-  //     sumall+=client.loanamount;
-  //   });
-  //   console.log(sumall);
-  // }
-  // sum()
-
-  return (
-    <div id='client' className='w-screen sm:w-[95vw] mx-auto' >
-
-      <div className="tabled  w-full overflow-scroll">
+<div className="tabled  w-full overflow-scroll">
         <table className=" w-full min-w-max table-auto text-left">
           <thead>
             <tr className='bg-orange-300 text-md text-center font-bold sticky top-0'>
@@ -264,13 +154,8 @@ const SearchClients = () => {
         </table>
       </div>
 
-      <Popup show={showClientDetailsModal} clientName={SearchName} />
-      <EditClient show={showEditModal} clientName={SearchName} />
-      <Toaster />
-
-    </div>
-  )
-
+        </div>
+    )
 }
 
-export default SearchClients
+export default ClosedAccounts

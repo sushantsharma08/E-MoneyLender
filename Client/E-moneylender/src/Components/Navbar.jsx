@@ -51,6 +51,7 @@ const Navbar = () => {
               <Link className='li' to="/" >Home</Link>
               <Link className='li' to="/form" >Add Client</Link>
               <Link className='li' to="/search" >All Clients</Link>
+              <Link className='li' to="/closedAccounts">Closed Acounts</Link>
             </div>}
         </div>
         {
@@ -92,6 +93,7 @@ const Navbar = () => {
                     <Link className='li -mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50' to="/" onClick={ToggleSmallScreenNavTab}>Home</Link>
                     <Link className='li -mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50' to="/form" onClick={ToggleSmallScreenNavTab}>Add Client</Link>
                     <Link className='li -mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50' to="/search" onClick={ToggleSmallScreenNavTab}>Search Clients</Link>
+                    <Link className='li -mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50' to="/closedAccounts" onClick={ToggleSmallScreenNavTab}>Closed Accounts</Link>
                     <button className='logout mt-7' onClick={logout}>Logout</button>
                   </nav>}
               </div>
