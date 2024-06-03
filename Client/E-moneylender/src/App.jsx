@@ -30,7 +30,7 @@ function App() {
           <ConditionalNav className="navbar">
             <Navbar />
           </ConditionalNav>
-          <div className="main mt-20">
+          <div className="main mt-20 ">
             <Routes>
               <Route path='/'
                 // render={data=>Authentication.} 

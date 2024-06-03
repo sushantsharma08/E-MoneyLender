@@ -1,6 +1,7 @@
 import express from "express";
 import { ClientModel } from "../models/Client.js";
 import { ClientExtraLoanModel } from "../models/ExtraLoan.js";
+import { ClosedAccountsModel } from "../models/ClosedAccounts.js";
 // import client from ('twilio')("AC0eabea656803bc0bd73addb3b3c845ea", "64d0a8ab1e5bf1d4efd619c4ea5bd43a");
 // import * as Twilio from 'twilio';
 // import * as lib from "lib";
@@ -28,7 +29,8 @@ router.post("/add_client", async (req, res) => {
         InstalmentsDone,
         remainingamount,
         totalAmount,
-        LenderId
+        LenderId,
+        isOpen
     } = req.body;
 
     const client = await ClientModel.findOne({ adhaar });
@@ -49,7 +51,8 @@ router.post("/add_client", async (req, res) => {
         InstalmentsDone,
         remainingamount,
         totalAmount,
-        LenderId
+        LenderId,
+        isOpen
     })
 
     await newClient.save()
@@ -59,6 +62,60 @@ router.post("/add_client", async (req, res) => {
         .catch(err => res.json(err));
 })
 
+//adding client to closed accounts
+router.post("/closedAccounts", async (req,res)=>{
+
+    const {
+        clientId,
+        name,
+        fathername,
+        gender,
+        phone,
+        adhaar,
+        PassportImage,
+        loanamount,
+        Instalment,
+        InstalmentsDone,
+        remainingamount,
+        totalAmount,
+        LenderId,
+        InstallmentRecord,
+        isOpen,
+        certificateNumber
+    } = req.body;
+
+    const client = await ClosedAccountsModel.findOne({ adhaar });
+
+    if (client) {
+        return res.json({ status: 400, message: "user already exists" });
+    }
+
+    const newClosed = new ClosedAccountsModel({
+        clientId,
+        name,
+        fathername,
+        gender,
+        phone,
+        adhaar,
+        PassportImage,
+        loanamount,
+        Instalment,
+        InstalmentsDone,
+        remainingamount,
+        totalAmount,
+        LenderId,
+        InstallmentRecord,
+        isOpen,
+        certificateNumber
+    })
+
+    await newClosed.save()
+
+    .then(() => res.json({ status: 201, message: 'client added' }))
+    .catch(err => res.json(err));
+})
+
+// load all clients
 router.get("/", async (req, res) => {
     try {
         // const users = await ClientModel.findOne({LenderId:req.params.LenderId})
@@ -68,6 +125,8 @@ router.get("/", async (req, res) => {
         res.json(error);
     }
 })
+
+// load clients by lenders
 router.get("/loadClients/:LenderId", async (req, res) => {
     try {
         const users = await ClientModel.find({ LenderId: req.params.LenderId })
@@ -78,6 +137,7 @@ router.get("/loadClients/:LenderId", async (req, res) => {
     }
 })
 
+// get clients by names
 router.get("/searchbyname/:username", async (req, res) => {
     try {
         const userdata = await ClientModel.findOne({ name: req.params.username });
@@ -87,6 +147,27 @@ router.get("/searchbyname/:username", async (req, res) => {
     }
 })
 
+// get clients by id
+router.get("/searchbyid/:id", async (req, res) => {
+    try {
+        const userdata = await ClientModel.findOne({ _id: req.params.id });
+        res.json(userdata)
+    } catch (error) {
+        res.json(error)
+    }
+})
+
+// get closed clients by id
+router.get("/closedclient/:client_id", async (req, res) => {
+    try {
+        const userdata = await ClosedAccountsModel.findOne({ clientId: req.params.client_id});
+        res.json(userdata)
+    } catch (error) {
+        res.json(error)
+    }
+})
+
+// sum total amount from active clients
 router.get("/getallloans/:userid", async (req, res) => {
     const user = await ClientModel.find({ LenderId: req.params.userid });
     const allLoanAmounts = user.map((client) => (client.loanamount)).reduce((accumulator, currentValue) => {
@@ -186,6 +267,7 @@ router.patch("/updateInstallmentRecord/:clientid",async(req,res)=>{
     }
 })
 
+
 // Extra loan takers DataBase
 router.post("/add_ExtraLoanTakers", async (req, res) => {
     const {
@@ -224,9 +306,13 @@ router.post("/add_ExtraLoanTakers", async (req, res) => {
         .catch(err => res.json(err));
 })
 
+// close account delete client from actives list
+// router.delete("/removeClient/:id", async (req, res) => {
+//     const user = await ClientModel.deleteOne({ _id: req.params.id })
 
-router.delete("/removeClient/:id", async (req, res) => {
-    const user = await ClientModel.deleteOne({ _id: req.params.id })
+// })
+router.patch("/removeClient/:id", async (req, res) => {
+    const user = await ClientModel.findOneAndUpdate({ _id: req.params.id },req.body)
 })
 
 export { router as ClientRouter }

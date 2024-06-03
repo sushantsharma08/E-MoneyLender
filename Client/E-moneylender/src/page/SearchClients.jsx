@@ -20,6 +20,7 @@ const SearchClients = () => {
   const [showClientDetailsModal, setShowClientDetailsModal] = useState(false)
   const [showEditModal, setShowEditModal] = useState(false)
   const userID = useGetUserId();
+  const [ClosedUser, setClosedUser] = useState()
 
 
   const { isLoading, error, data: lenderClients } = useQuery({
@@ -44,25 +45,58 @@ const SearchClients = () => {
     setShowEditModal(true)
   }
 
-  const CloseAccount = (e) => {
+  const CloseAccount = async (e) => {
+
     toast.loading('Deleting Client', {
       duration: 1000,
     });
-    const id = e.target.id;
-    axios.patch(`http://localhost:3001/client/removeClient/${id}`,{isOpen:false});
-    setTimeout(() => {
 
+    const id = e.target.id;
+    window.localStorage.setItem("closedId", id);
+
+    ChangeStatus(id);
+
+    setTimeout(() => {
+      axios.get(`https://e-money-lender-back.vercel.app/client/searchbyid/${id}`)
+        .then(async (res) => {
+          setClosedUser(res.data);
+        }).then(
+          axios.post(`https://e-money-lender-back.vercel.app/client/closedAccounts`, {
+
+            clientId: ClosedUser._id,
+            name: ClosedUser.name,
+            fathername: ClosedUser.fathername,
+            gender: ClosedUser.gender,
+            phone: ClosedUser.phone,
+            adhaar: ClosedUser.adhaar,
+            PassportImage: ClosedUser.PassportImage,
+            loanamount: ClosedUser.loanamount,
+            Instalment: ClosedUser.Instalment,
+            InstalmentsDone: ClosedUser.InstalmentsDone,
+            remainingamount: ClosedUser.remainingamount,
+            totalAmount: ClosedUser.totalAmount,
+            LenderId: ClosedUser.LenderId,
+            InstallmentRecord: ClosedUser.InstallmentRecord,
+            isOpen: ClosedUser.isOpen,
+            certificateNumber: ClosedUser._id
+          })
+        )
+    }, 500);
+
+    console.log(closed);
+
+    setTimeout(() => {
       toast.success("deleted Successfully")
       // window.location.reload();
+      console.log(ClosedUser);
       clearTimeout()
     }, 1000);
 
-    // axios.delete(`https://e-money-lender-back.vercel.app/client/removeClient/${id}`);
-    // setTimeout(() => {
-    //   toast.success("deleted Successfully")
-    //   window.location.reload();
-    //   clearTimeout()
-    // }, 1000);
+    window.open("https://e-money-lender.vercel.app/certificate");
+  }
+
+  const ChangeStatus = async (id) => {
+    await axios.patch(`https://e-money-lender-back.vercel.app/client/removeClient/${id}`, { isOpen: false });
   }
 
   //dynamic UI from useQuery output
@@ -247,7 +281,7 @@ const SearchClients = () => {
                       {user.remainingamount > 0
                         ? <span onClick={() => OpenUserDetails(user.name)}
                           className="hover:text-lg" style={{ backgroundColor: "rgba(147, 209, 147, 0.359)" }}>Active</span>
-                        :<span className="hover:text-lg" style={{ backgroundColor: "rgba(241, 170, 170, 0.753)" }} id={user._id} onClick={(e) => CloseAccount(e)}>Close Account</span>
+                        : <span className="hover:text-lg" style={{ backgroundColor: "rgba(241, 170, 170, 0.753)" }} id={user._id} onClick={(e) => CloseAccount(e)}>Close Account</span>
                       }
                     </span>
                   </td>
