@@ -1,10 +1,12 @@
-import React from 'react'
+import React from 'react';
+import axios from 'axios';
+
 
 const ClosedAccounts = () => {
-    return (
-        <div>
+  return (
+    <div>
 
-<div className="tabled  w-full overflow-scroll">
+      <div className="tabled  w-full overflow-scroll">
         <table className=" w-full min-w-max table-auto text-left">
           <thead>
             <tr className='bg-orange-300 text-md text-center font-bold sticky top-0'>
@@ -137,7 +139,7 @@ const ClosedAccounts = () => {
                       {user.remainingamount > 0
                         ? <span onClick={() => OpenUserDetails(user.name)}
                           className="hover:text-lg" style={{ backgroundColor: "rgba(147, 209, 147, 0.359)" }}>Active</span>
-                        :<span className="hover:text-lg" style={{ backgroundColor: "rgba(241, 170, 170, 0.753)" }} id={user._id} onClick={(e) => CloseAccount(e)}>Close Account</span>
+                        : <span className="hover:text-lg" style={{ backgroundColor: "rgba(241, 170, 170, 0.753)" }} id={user._id} onClick={(e) => CloseAccount(e)}>Close Account</span>
                       }
                     </span>
                   </td>
@@ -154,8 +156,8 @@ const ClosedAccounts = () => {
         </table>
       </div>
 
-        </div>
-    )
+    </div>
+  )
 }
 
 export default ClosedAccounts

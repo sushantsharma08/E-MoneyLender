@@ -5,7 +5,7 @@ import * as dotenv from "dotenv";
 
 // const cors=require("cors");
 const corsOptions = {
-   origin: '*',
+   origin: ['*','https://e-money-lender.vercel.app/'],
    credentials: true,            //access-control-allow-credentials:true
    optionSuccessStatus: 200,
 }
@@ -25,7 +25,7 @@ app.use("/client", ClientRouter)
 
 const port =process.env.PORT||3001;
 
-mongoose.connect(`mongodb+srv://${process.env.USERNAME_DB}:${process.env.PASSWORD_DB}@moneylender.ejybvtr.mongodb.net/?retryWrites=true&w=majority`)
+mongoose.connect(`mongodb+srv://${process.env.USERNAME_DB}:${process.env.PASSWORD_DB}@moneylender.ejybvtr.mongodb.net/?retryWrites=true&w=majority`);
 
 
 app.listen(port,()=>{

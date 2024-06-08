@@ -17,20 +17,56 @@ const SearchClients = () => {
   // Hooks
 
   const [SearchName, setSearchName] = useState()
+  const [Active, setActive] = useState(true)
   const [showClientDetailsModal, setShowClientDetailsModal] = useState(false)
   const [showEditModal, setShowEditModal] = useState(false)
   const userID = useGetUserId();
   const [ClosedUser, setClosedUser] = useState()
 
 
-  const { isLoading, error, data: lenderClients } = useQuery({
+  //dynamic UI from useQuery output
+
+  let { isLoading, error, data: lenderClients } = useQuery({
     queryKey: ['repoData'],
     queryFn: () =>
       fetch(`https://e-money-lender-back.vercel.app/client/loadClients/${userID}`).then(
         // fetch(`http://localhost:3001/client/loadClients/${userID}`).then(
         (res) => res.json()
-      ),
+      )
   });
+
+  if (isLoading) return (
+    <section id='client' style={{ position: "relative" }}>
+      <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", paddingTop: "100px" }}>
+        <div className="userdatadiv">
+          <div id="wifi-loader">
+            <svg className="circle-outer" viewBox="0 0 86 86">
+              <circle className="back" cx="43" cy="43" r="40"></circle>
+              <circle className="front" cx="43" cy="43" r="40"></circle>
+              <circle className="new" cx="43" cy="43" r="40"></circle>
+            </svg>
+            <svg className="circle-middle" viewBox="0 0 60 60">
+              <circle className="back" cx="30" cy="30" r="27"></circle>
+              <circle className="front" cx="30" cy="30" r="27"></circle>
+            </svg>
+            <svg className="circle-inner" viewBox="0 0 34 34">
+              <circle className="back" cx="17" cy="17" r="14"></circle>
+              <circle className="front" cx="17" cy="17" r="14"></circle>
+            </svg>
+            <div className="text" data-text="Loading..."></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+
+  if (error) return <section id='client' style={{ position: "relative" }}>
+    <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+      <div className="userdatadiv">
+        <h2>An error has occurred: <b>{error.message}</b></h2>
+      </div>
+    </div>
+  </section>
 
   // Functions
 
@@ -99,54 +135,26 @@ const SearchClients = () => {
     await axios.patch(`https://e-money-lender-back.vercel.app/client/removeClient/${id}`, { isOpen: false });
   }
 
-  //dynamic UI from useQuery output
+  const ShowClosedAccounts = ()=>{
+    setActive(false)
+  }
+  const ShowActiveAccounts = ()=>{
+    setActive(true);
+  }
 
-  if (isLoading) return (
-    <section id='client' style={{ position: "relative" }}>
-      <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", paddingTop: "100px" }}>
-        <div className="userdatadiv">
-          <div id="wifi-loader">
-            <svg className="circle-outer" viewBox="0 0 86 86">
-              <circle className="back" cx="43" cy="43" r="40"></circle>
-              <circle className="front" cx="43" cy="43" r="40"></circle>
-              <circle className="new" cx="43" cy="43" r="40"></circle>
-            </svg>
-            <svg className="circle-middle" viewBox="0 0 60 60">
-              <circle className="back" cx="30" cy="30" r="27"></circle>
-              <circle className="front" cx="30" cy="30" r="27"></circle>
-            </svg>
-            <svg className="circle-inner" viewBox="0 0 34 34">
-              <circle className="back" cx="17" cy="17" r="14"></circle>
-              <circle className="front" cx="17" cy="17" r="14"></circle>
-            </svg>
-            <div className="text" data-text="Loading..."></div>
-          </div>
-        </div>
-      </div>
-    </section>
-  )
 
-  if (error) return <section id='client' style={{ position: "relative" }}>
-    <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
-      <div className="userdatadiv">
-        <h2>An error has occurred: <b>{error.message}</b></h2>
-      </div>
-    </div>
-  </section>
 
-  // Main 
-  // console.log(lenderClients);
-  // const sum = ()=>{
-  //   let sumall =0;
-  //   lenderClients.forEach(client => {
-  //     sumall+=client.loanamount;
-  //   });
-  //   console.log(sumall);
-  // }
-  // sum()
+
+  let ActivelenderClients = lenderClients?.filter((user) => user.isOpen === true);
+  let ClosedlenderClients = lenderClients?.filter((user) => user.isOpen === false);
+  let Data = Active ? ActivelenderClients : ClosedlenderClients;
 
   return (
-    <div id='client' className='w-screen sm:w-[95vw] mx-auto' >
+    <div id='client' className='w-screen sm:w-[95vw] mx-auto'  >
+      <div className='flex justify-center my-4'>
+        <button className=' border-b-2 p-2' style={{borderColor:Active?'greenYellow':'grey', transition:'1s'}} onClick={ShowActiveAccounts} >Active Accounts</button>
+        <button className=' border-b-2 p-2' style={{borderColor:Active?'grey':'red' ,transition:'1s'}} onClick={ShowClosedAccounts}>Closed Accounts</button>
+      </div>
 
       <div className="tabled  w-full overflow-scroll">
         <table className=" w-full min-w-max table-auto text-left">
@@ -236,10 +244,11 @@ const SearchClients = () => {
             </tr>
           </thead>
           <tbody>
-            {lenderClients.map((user, index) => {
-              const isLast = index === lenderClients?.length;
+
+            {Data.map((user, index) => {
+              const isLast = index === Data?.length;
               const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
-              // const classes =  "p-4 border-b border-blue-gray-50";
+
               return (
                 <tr key={index} className='border-b text-center hover:bg-gray-100' >
                   <td className={`${classes} border-r`}>
@@ -293,7 +302,9 @@ const SearchClients = () => {
 
                 </tr>
               );
+
             })}
+
           </tbody>
         </table>
       </div>
