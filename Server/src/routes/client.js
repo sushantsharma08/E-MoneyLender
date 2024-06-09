@@ -318,10 +318,12 @@ router.post("/add_ExtraLoanTakers", async (req, res) => {
 })
 
 // close account delete client from actives list
-// router.delete("/removeClient/:id", async (req, res) => {
-//     const user = await ClientModel.deleteOne({ _id: req.params.id })
+router.delete("/removeClient/:id", async (req, res) => {
+    const user = await ClientModel.findOneAndDelete({ _id: req.params.id })
+    res.json({user})
+})
 
-// })
+
 router.patch("/removeClient/:id", async (req, res) => {
     const user = await ClientModel.findOneAndUpdate({ _id: req.params.id },req.body)
 })
