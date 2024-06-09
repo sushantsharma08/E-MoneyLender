@@ -126,10 +126,21 @@ router.get("/", async (req, res) => {
     }
 })
 
-// load clients by lenders
+// load clients by lenders id
 router.get("/loadClients/:LenderId", async (req, res) => {
     try {
         const users = await ClientModel.find({ LenderId: req.params.LenderId })
+        // const users = await ClientModel.find({});
+        res.json(users)
+    } catch (error) {
+        res.json(error);
+    }
+})
+
+// load Closed clients by lenders id
+router.get("/loadClosedClients/:LenderId", async (req, res) => {
+    try {
+        const users = await ClosedAccountsModel.find({ LenderId: req.params.LenderId })
         // const users = await ClientModel.find({});
         res.json(users)
     } catch (error) {
