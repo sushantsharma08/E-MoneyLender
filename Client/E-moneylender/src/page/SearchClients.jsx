@@ -6,6 +6,7 @@ import {
   QueryClient,
   QueryClientProvider,
   useQuery,
+  useQueries
 } from '@tanstack/react-query'
 import EditClient from '../Components/EditClient';
 import { Toaster, toast } from 'react-hot-toast';
@@ -21,8 +22,6 @@ const SearchClients = () => {
   const [showClientDetailsModal, setShowClientDetailsModal] = useState(false)
   const [showEditModal, setShowEditModal] = useState(false)
   const userID = useGetUserId();
-  const [ClosedUser, setClosedUser] = useState()
-
 
   //dynamic UI from useQuery output
 
@@ -68,6 +67,29 @@ const SearchClients = () => {
     </div>
   </section>
 
+  // const [ActiveClientsQuery,ClosedClientsQuery] = useQueries({
+  //   queries:[
+  //     {
+  //       queryKey: ['Open'],
+  //       queryFn: () =>
+  //         axios
+  //           .get(`https://e-money-lender-back.vercel.app/client/loadClients/${userID}`)
+  //           .then((res) => res.data),
+  //     },
+  //     {
+  //       queryKey: ['Closed'],
+  //       queryFn: () =>
+  //         axios
+  //           .get(`https://e-money-lender-back.vercel.app/client/loadClosedClients/${userID}`)
+  //           .then((res) => res.data),
+  //     },
+  //   ]
+  // })
+
+  // // console.log(ActiveClientsQuery);
+  // console.log(ClosedClientsQuery);
+
+
   // Functions
 
   const OpenUserDetails = (e) => {
@@ -82,68 +104,66 @@ const SearchClients = () => {
   }
 
   const CloseAccount = async (e) => {
-
-    toast.loading('Deleting Client', {
-      duration: 1000,
-    });
+    // toast.loading('Deleting Client', {
+    //   duration: 1000,
+    // });
 
     const id = e.target.id;
+    const Client_To_Be_Closed = Data[id];
     window.localStorage.setItem("closedId", id);
 
-    ChangeStatus(id);
+    // ChangeStatus(Client_To_Be_Closed);
+    PatchClientData(Client_To_Be_Closed);
+    DeleteClient(id)
+    // // console.log(closed);
 
-    setTimeout(() => {
-      axios.get(`https://e-money-lender-back.vercel.app/client/searchbyid/${id}`)
-        .then(async (res) => {
-          setClosedUser(res.data);
-        }).then(
-          axios.post(`https://e-money-lender-back.vercel.app/client/closedAccounts`, {
+    // setTimeout(() => {
+    //   toast.success("deleted Successfully")
+    //   // window.location.reload();
 
-            clientId: ClosedUser._id,
-            name: ClosedUser.name,
-            fathername: ClosedUser.fathername,
-            gender: ClosedUser.gender,
-            phone: ClosedUser.phone,
-            adhaar: ClosedUser.adhaar,
-            PassportImage: ClosedUser.PassportImage,
-            loanamount: ClosedUser.loanamount,
-            Instalment: ClosedUser.Instalment,
-            InstalmentsDone: ClosedUser.InstalmentsDone,
-            remainingamount: ClosedUser.remainingamount,
-            totalAmount: ClosedUser.totalAmount,
-            LenderId: ClosedUser.LenderId,
-            InstallmentRecord: ClosedUser.InstallmentRecord,
-            isOpen: ClosedUser.isOpen,
-            certificateNumber: ClosedUser._id
-          })
-        )
-    }, 500);
+    //   window.open("https://e-money-lender.vercel.app/certificate");
+    //   clearTimeout()
+    // }, 1000);
 
-    console.log(closed);
-
-    setTimeout(() => {
-      toast.success("deleted Successfully")
-      // window.location.reload();
-      console.log(ClosedUser);
-      clearTimeout()
-    }, 1000);
-
-    window.open("https://e-money-lender.vercel.app/certificate");
   }
 
-  const ChangeStatus = async (id) => {
-    await axios.patch(`https://e-money-lender-back.vercel.app/client/removeClient/${id}`, { isOpen: false });
+  const PatchClientData = async (client) => {
+    await axios.post(`https://e-money-lender-back.vercel.app/client/closedAccounts`, {
+      clientId: client._id,
+      name: client.name,
+      fathername: client.fathername,
+      gender: client.gender,
+      phone: client.phone,
+      adhaar: client.adhaar,
+      PassportImage: client.PassportImage,
+      loanamount: client.loanamount,
+      Instalment: client.Instalment,
+      InstalmentsDone: client.InstalmentsDone,
+      remainingamount: client.remainingamount,
+      totalAmount: client.totalAmount,
+      LenderId: client.LenderId,
+      InstallmentRecord: client.InstallmentRecord,
+      isOpen: false,
+      certificateNumber: client._id,
+    }).then(res=>{console.log(res);})
   }
 
-  const ShowClosedAccounts = ()=>{
+  const DeleteClient = (id) =>{
+    axios.delete(`https://e-money-lender-back.vercel.app/client/removeClient/${id}`).then(res=>{
+      console.log(res);
+    }).catch(err=>{
+      console.log(err);
+    })
+    console.log(id);
+  }
+
+  const ShowClosedAccounts = () => {
     setActive(false)
   }
-  const ShowActiveAccounts = ()=>{
+
+  const ShowActiveAccounts = () => {
     setActive(true);
   }
-
-
-
 
   let ActivelenderClients = lenderClients?.filter((user) => user.isOpen === true);
   let ClosedlenderClients = lenderClients?.filter((user) => user.isOpen === false);
@@ -152,8 +172,8 @@ const SearchClients = () => {
   return (
     <div id='client' className='w-screen sm:w-[95vw] mx-auto'  >
       <div className='flex justify-center my-4'>
-        <button className=' border-b-2 p-2' style={{borderColor:Active?'greenYellow':'grey', transition:'1s'}} onClick={ShowActiveAccounts} >Active Accounts</button>
-        <button className=' border-b-2 p-2' style={{borderColor:Active?'grey':'red' ,transition:'1s'}} onClick={ShowClosedAccounts}>Closed Accounts</button>
+        <button className=' border-b-2 p-2' style={{ borderColor: Active ? 'greenYellow' : 'grey', transition: '1s' }} onClick={ShowActiveAccounts} >Active Accounts</button>
+        <button className=' border-b-2 p-2' style={{ borderColor: Active ? 'grey' : 'red', transition: '1s' }} onClick={ShowClosedAccounts}>Closed Accounts</button>
       </div>
 
       <div className="tabled  w-full overflow-scroll">
@@ -290,7 +310,7 @@ const SearchClients = () => {
                       {user.remainingamount > 0
                         ? <span onClick={() => OpenUserDetails(user.name)}
                           className="hover:text-lg" style={{ backgroundColor: "rgba(147, 209, 147, 0.359)" }}>Active</span>
-                        : <span className="hover:text-lg" style={{ backgroundColor: "rgba(241, 170, 170, 0.753)" }} id={user._id} onClick={(e) => CloseAccount(e)}>Close Account</span>
+                        : <span className="hover:text-lg" style={{ backgroundColor: "rgba(241, 170, 170, 0.753)" }} id={index} onClick={(e) => CloseAccount(e)}>Close Account</span>
                       }
                     </span>
                   </td>

@@ -81,7 +81,8 @@ const Form = () => {
                 InstalmentsDone: 0,
                 remainingamount: totalAmount,
                 totalAmount,
-                LenderId
+                LenderId,
+                isOpen : true
             });
             if (response.data.status === 400) {
                 toast(response.data.message, {
