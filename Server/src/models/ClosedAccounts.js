@@ -6,7 +6,7 @@ const ClosedAccountsSchema = new mongoose.Schema({
     name: { type: String, required: true, },
     fathername: { type: String, required: true, },
     gender: { type: String, required: true, },
-    phone: { type: Number, required: true},
+    phone: { type: Number, required: false},
     adhaar: { type: Number, required: true},
     PassportImage : String,
     loanamount: { type: Number, required: true, },
