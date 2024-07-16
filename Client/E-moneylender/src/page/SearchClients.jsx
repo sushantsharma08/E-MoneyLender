@@ -121,7 +121,7 @@ const SearchClients = () => {
   </section>
 
   // // console.log(ActiveClientsQuery);
-  console.log(ClosedClientsQuery);
+  // console.log(ClosedClientsQuery);
 
 
   // Functions
@@ -145,7 +145,7 @@ const SearchClients = () => {
     const id = e.target.id;
     const Client_To_Be_Closed = Data[id];
     const Id_Of_Client_To_Be_Closed = Data[id]._id;
-    console.log(Id_Of_Client_To_Be_Closed);
+    // console.log(Id_Of_Client_To_Be_Closed);
     window.localStorage.setItem("closedId", id);
 
     // ChangeStatus(Client_To_Be_Closed);
@@ -157,7 +157,7 @@ const SearchClients = () => {
     //   toast.success("deleted Successfully")
     //   // window.location.reload();
 
-    //   window.open("https://e-money-lender.vercel.app/certificate");
+      window.open("https://e-money-lender.vercel.app/certificate");
     //   clearTimeout()
     // }, 1000);
 
@@ -195,7 +195,7 @@ const SearchClients = () => {
     }).catch(err => {
       console.log(err);
     })
-    console.log(id);
+    // console.log(id);
   }
 
   const ShowClosedAccounts = () => {

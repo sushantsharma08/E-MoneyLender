@@ -24,7 +24,6 @@ function App() {
 
   return (
     <div className="App">
-
       <Router>
         <QueryClientProvider client={queryClient}>
           <ConditionalNav className="navbar">
