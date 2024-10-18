@@ -64,7 +64,7 @@ const Certificate = () => {
     }
 
     return (
-        <div className=' border-4 absolute left-0 top-0 m-6 mx-4 p-4 h-[95vh] h-min w-[97vw]' style={{}}>
+        <div className=' border-4 absolute left-0 top-0 m-6 mx-4 p-4 h-[95vh] h-min w-[97vw]'>
             <div className="flex lg:flex-1 justify-between items-center">
 
                 <span className="-m-1.5 p-1.5 mr-6">

@@ -23,9 +23,6 @@ const Popup = (props = { show: Boolean, clientName: String }) => {
 
     const deleteEntry = (e) => {
         setUpdatedInstalment(Data?.InstallmentRecord)
-        // console.log(e.target.id);
-        // console.log(UpdatedInstalment);
-        // console.log("before", UpdatedInstalment);
         setUpdatedInstalment(UpdatedInstalment.splice(e.target.id, 1))
         // console.log({ clientid: Data._id });
         updateRecord();

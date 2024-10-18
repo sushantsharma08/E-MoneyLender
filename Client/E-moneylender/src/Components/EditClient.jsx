@@ -418,61 +418,6 @@ const EditClient = (props = { show: Boolean, clientName: String }) => {
                                 </td>
 
                             </tr>
-
-
-                            {/* <tr className='border-b border-slate-800 '>
-                                <td
-                                    variant="small"
-                                    color="blue-gray"
-                                    className=" leading-none opacity-70 px-4"
-                                >
-                                    Total Amount
-                                </td>
-                                <td className={`${classes} border border-slate-800`}>
-                                    <span variant="small" color="blue-gray" className=" flex items-center">
-                                        {Data?.totalAmount}
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr className='border-b border-slate-800 '>
-                                <td
-                                    variant="small"
-                                    color="blue-gray"
-                                    className=" leading-none opacity-70 px-4"
-                                >
-                                    Monthly Instalment amount
-                                </td>
-                                <td className={`${classes} border border-slate-800`}>
-                                    <span variant="small" color="blue-gray" className=" flex items-center">{Data?.Instalment}</span>
-                                </td>
-                            </tr>
-                            <tr className='border-b border-slate-800 '>
-                                <td
-                                    variant="small"
-                                    color="blue-gray"
-                                    className=" leading-none opacity-70 px-4"
-                                >
-                                    Number of Instalments done
-                                </td>
-                                <td className={`${classes} border border-slate-800`}>
-                                    <span variant="small" color="blue-gray" className=" flex items-center">
-                                        {Data?.InstalmentsDone}</span>
-                                </td>
-                            </tr>
-                            <tr className='border-b border-slate-800 '>
-                                <td
-                                    variant="small"
-                                    color="blue-gray"
-                                    className=" leading-none opacity-70 px-4"
-                                >
-                                    Total Remaining Amount
-                                </td>
-                                <td className={`${classes} border border-slate-800`}>
-                                    <span variant="small" color="blue-gray" className=" flex items-center">
-                                        {Data?.remainingamount}
-                                    </span>
-                                </td>
-                            </tr> */}
                         </tbody>
                     </table>
                 </div>

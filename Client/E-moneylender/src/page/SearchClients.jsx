@@ -26,48 +26,6 @@ const SearchClients = () => {
 
   //dynamic UI from useQuery output
 
-  // let { isLoading, error, data: lenderClients } = useQuery({
-  //   queryKey: ['repoData'],
-  //   queryFn: () =>
-  //     fetch(`https://e-money-lender-back.vercel.app/client/loadClients/${userID}`).then(
-  //       // fetch(`http://localhost:3001/client/loadClients/${userID}`).then(
-  //       (res) => res.json()
-  //     )
-  // });
-
-  // if (isLoading) return (
-  //   <section id='client' style={{ position: "relative" }}>
-  //     <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", paddingTop: "100px" }}>
-  //       <div className="userdatadiv">
-  //         <div id="wifi-loader">
-  //           <svg className="circle-outer" viewBox="0 0 86 86">
-  //             <circle className="back" cx="43" cy="43" r="40"></circle>
-  //             <circle className="front" cx="43" cy="43" r="40"></circle>
-  //             <circle className="new" cx="43" cy="43" r="40"></circle>
-  //           </svg>
-  //           <svg className="circle-middle" viewBox="0 0 60 60">
-  //             <circle className="back" cx="30" cy="30" r="27"></circle>
-  //             <circle className="front" cx="30" cy="30" r="27"></circle>
-  //           </svg>
-  //           <svg className="circle-inner" viewBox="0 0 34 34">
-  //             <circle className="back" cx="17" cy="17" r="14"></circle>
-  //             <circle className="front" cx="17" cy="17" r="14"></circle>
-  //           </svg>
-  //           <div className="text" data-text="Loading..."></div>
-  //         </div>
-  //       </div>
-  //     </div>
-  //   </section>
-  // )
-
-  // if (error) return <section id='client' style={{ position: "relative" }}>
-  //   <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
-  //     <div className="userdatadiv">
-  //       <h2>An error has occurred: <b>{error.message}</b></h2>
-  //     </div>
-  //   </div>
-  // </section>
-
   const [ActiveClientsQuery, ClosedClientsQuery] = useQueries({
     queries: [
       {
@@ -133,7 +91,6 @@ const SearchClients = () => {
 
   const OpenClientEdit = (e) => {
     setSearchName(e);
-    // setSearchName(e);
     setShowEditModal(true)
   }
 
@@ -141,25 +98,13 @@ const SearchClients = () => {
     // toast.loading('Deleting Client', {
     //   duration: 1000,
     // });
-
     const id = e.target.id;
     const Client_To_Be_Closed = Data[id];
     const Id_Of_Client_To_Be_Closed = Data[id]._id;
     // console.log(Id_Of_Client_To_Be_Closed);
     window.localStorage.setItem("closedId", id);
-
-    // ChangeStatus(Client_To_Be_Closed);
     PatchClientData(Client_To_Be_Closed);
-    // DeleteClient(Id_Of_Client_To_Be_Closed);
-    // // console.log(closed);
-
-    // setTimeout(() => {
-    //   toast.success("deleted Successfully")
-    //   // window.location.reload();
-
-      window.open("https://e-money-lender.vercel.app/certificate");
-    //   clearTimeout()
-    // }, 1000);
+    window.open("https://e-money-lender.vercel.app/certificate");
 
   }
 
@@ -182,8 +127,8 @@ const SearchClients = () => {
       isOpen: false,
       certificateNumber: client._id,
     }).then(res => {
-      if(res.data.status==201){DeleteClient(client._id)}
-      else{
+      if (res.data.status == 201) { DeleteClient(client._id) }
+      else {
         console.log(res.data);
       }
     })
@@ -206,10 +151,7 @@ const SearchClients = () => {
     setActive(true);
   }
 
-  // let ActivelenderClients = lenderClients?.filter((user) => user.isOpen === true);
-  // let ClosedlenderClients = lenderClients?.filter((user) => user.isOpen === false);
-  // let Data = Active ? ActivelenderClients : ClosedlenderClients;
-
+  // determin which clients to show
   let Data = Active ? ActiveClientsQuery.data : ClosedClientsQuery.data;
 
   return (
@@ -350,7 +292,7 @@ const SearchClients = () => {
                   </td>
                   <td className={classes}>
                     <span variant="small" color="blue-gray" className="font-normal status w-20  h-9  " style={{ marginInline: "auto", color: user.remainingamount > 0 ? "green" : "red", textAlign: "center" }}>
-                      {(user.remainingamount > 0 && user.isOpen==true)
+                      {(user.remainingamount > 0 && user.isOpen == true)
                         ? <span onClick={() => OpenUserDetails(user.name)}
                           className="hover:text-lg" style={{ backgroundColor: "rgba(147, 209, 147, 0.359)" }}>Active</span>
                         : <span className="hover:text-lg" style={{ backgroundColor: "rgba(241, 170, 170, 0.753)" }} id={index} onClick={(e) => CloseAccount(e)}>Close Account</span>

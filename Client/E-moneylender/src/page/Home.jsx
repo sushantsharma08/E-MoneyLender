@@ -59,27 +59,7 @@ const Home = () => {
         'rgb(201, 203, 207)'
       ],
       borderWidth: 1,
-      // barThickness: 55,
-      // maxBarThickness: 100,
     },
-    // {
-    //   label: 'current Stats  ',
-    //   data: [PrincipleSum-90000, TotalSum-200000, TotalSum - PrincipleSum-20000],
-    //   backgroundColor: [
-    //     'rgba(54, 162, 235, 0.2)',
-    //     'rgba(153, 102, 255, 0.2)',
-    //     'rgba(201, 203, 207, 0.2)'
-    //   ],
-    //   borderColor: [
-    //     'rgb(54, 162, 235)',
-    //     'rgb(153, 102, 255)',
-    //     'rgb(201, 203, 20)'
-    //   ],
-      
-    //   borderWidth: 1,
-    //   barThickness: 55,
-    //   maxBarThickness: 100,
-    // }
   ],
   };
 
